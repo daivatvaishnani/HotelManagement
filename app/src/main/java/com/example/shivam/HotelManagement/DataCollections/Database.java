@@ -14,9 +14,18 @@ import java.util.List;
 
 public class Database
 {
-    public ArrayList<User> users;
+    ArrayList<User> users = new ArrayList<>();
 //    public List<User> users = new ArrayList<>();
-    public String singleRoomPrice, doubleRoomPrice, deluxeRoomPrice;
+    String singleRoomPrice, doubleRoomPrice, deluxeRoomPrice;
+    ArrayList<Item> items = new ArrayList<>();
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
 
     public ArrayList<User> getUsers() {
         return users;
@@ -97,7 +106,6 @@ public class Database
 
     public Database()
     {
-        this.users = new ArrayList<User>();
         // ADD USERS
         this.users.add(new User("manager@gmail.com","manager","1","manager","123123123123"));
         this.users.add(new User("supervisor1@gmail.com","supervisor1","2","supervisor1","123123"));
@@ -110,7 +118,19 @@ public class Database
         this.users.add(new User("fds1@gmail.com","fds1","4","fds1","12323521312312"));
         this.users.add(new User("fds2@gmail.com","fds2","4","fds2","123241111231123"));
         this.users.add(new User("fds3@gmail.com","fds3","4","fds3","123213231231"));
-
+        // ADD ITEMS
+        this.items.add(new Item("Shirt", "20"));
+        this.items.add(new Item("TShirt", "10"));
+        this.items.add(new Item("Trousers", "15"));
+        this.items.add(new Item("Jeans", "15"));
+        this.items.add(new Item("Shorts", "10"));
+        this.items.add(new Item("Towel", "20"));
+        this.items.add(new Item("Sweater", "20"));
+        this.items.add(new Item("Burger", "50"));
+        this.items.add(new Item("Chips", "40"));
+        this.items.add(new Item("Sandwich", "50"));
+        this.items.add(new Item("Veg-Thali", "100"));
+        this.items.add(new Item("NonVeg-Thali", "200"));
         // SET PRICES
         setSingleRoomPrice("NULL");
         setDoubleRoomPrice("NULL");

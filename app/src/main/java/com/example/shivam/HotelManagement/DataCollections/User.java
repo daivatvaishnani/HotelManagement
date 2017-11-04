@@ -5,14 +5,14 @@ package com.example.shivam.HotelManagement.DataCollections;
  */
 
 public class User {
-    public String emailId;
-    public String pwd;
-    public String userAccessLevel;
-    public String shift;
-    public String userName;
-    public String roomID;
-    public Bill bill;
-    public String phoneNo;
+    String emailId;
+    String pwd;
+    String userAccessLevel;
+    String shift;
+    String userName;
+    String roomID;
+    Bill bill = new Bill();
+    String phoneNo;
 
     public String getPhoneNo() {
         return phoneNo;

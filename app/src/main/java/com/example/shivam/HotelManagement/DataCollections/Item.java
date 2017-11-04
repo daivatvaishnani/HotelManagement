@@ -9,31 +9,28 @@ import java.util.Map;
  */
 
 public class Item {
-    HashMap<String, String> price;
 
-    public Item() {
-        this.price.put("Tshirt", "10");
-        this.price.put("Jeans", "10");
-        this.price.put("Shirt", "10");
-        this.price.put("Trouser", "10");
-        this.price.put("Shorts", "10");
-        this.price.put("Towel", "10");
-        this.price.put("Veg", "10");
-//        this.price.put("Tshirt", "10");
-//        this.price.put("Tshirt", "10");
-//        this.price.put("Tshirt", "10");
-//        this.price.put("Tshirt", "10");
-//        this.price.put("Tshirt", "10");
-//        this.price.put("Tshirt", "10");
-//        this.price.put("Tshirt", "10");
+    String itemName;
+    String itemPrice;
+
+    public String getItemName() {
+        return itemName;
     }
 
-    public HashMap<String, String> getPrice() {
-
-        return price;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public void setPrice(HashMap<String, String> price) {
-        this.price = price;
+    public String getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(String itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public Item(String itemName, String itemPrice) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
     }
 }

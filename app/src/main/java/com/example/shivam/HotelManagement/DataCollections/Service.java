@@ -7,9 +7,18 @@ import java.util.ArrayList;
  */
 
 public class Service {
-    public String serviceType;
-    public ArrayList<Item> items = new ArrayList<>();
-    public String amount;
+    String serviceType;
+    ArrayList<Item> items = new ArrayList<>();
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
+
+    String amount;
 
     public Service(String serviceType, String amount) {
         this.serviceType = serviceType;

@@ -7,7 +7,16 @@ import java.util.ArrayList;
  */
 
 public class Bill {
-    public ArrayList<Service> services = new ArrayList<>();
+    ArrayList<Service> services = new ArrayList<>();
+    String amount;
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
 
     public ArrayList<Service> getServices() {
         return services;
