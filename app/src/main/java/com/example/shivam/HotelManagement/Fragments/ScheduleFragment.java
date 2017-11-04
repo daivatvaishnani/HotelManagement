@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,17 +36,27 @@ public class ScheduleFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        //String[] employees = {"emp1","emp2","emp3","emp4","emp5","emp6"};
         View rootView = inflater.inflate(R.layout.activity_scheduling,container,false);
-
-        ListView listviewemp;
-
+        //String ual = new String("1");
         final ArrayList<User> users = MainActivity.db.getUsers();
+//        String[] employees = users.toArray(new String[0]);
+        ArrayList<String> employees = new ArrayList<>();
+        for(User u : users) {
+            employees.add(u.getUserName());
+        }
+
+        ListView listView = (ListView) rootView.findViewById(R.id.EmployeeList);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees);
+        listView.setAdapter(listViewAdapter);
 
 
-        CustomAdapter adapter = new CustomAdapter(getActivity(),users);
+
+
+        //CustomAdapter adapter = new CustomAdapter(getActivity(),users);
 
         Button b = (Button) rootView.findViewById(R.id.buttonemp);
-        listviewemp = (ListView) rootView.findViewById(R.id.listviewitem);
+        //listviewemp = (ListView) rootView.findViewById(R.id.listviewitem);
 
 
        // listviewemp.setAdapter(adapter);
