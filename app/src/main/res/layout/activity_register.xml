@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.example.shivam.HotelManagement.Activity.RegisterActivity">
+
+    <EditText
+        android:id="@+id/rname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Username"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="97dp"
+        android:layout_above="@+id/remail"
+        android:layout_alignStart="@+id/remail"
+        android:layout_marginBottom="39dp" />
+
+    <EditText
+        android:id="@+id/remail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:hint="Email"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="154dp"
+        android:layout_above="@+id/rpassword"
+        android:layout_alignStart="@+id/rpassword"
+        android:layout_marginBottom="31dp" />
+
+    <EditText
+        android:id="@+id/rpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="password"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="267dp"
+        android:layout_above="@+id/rphone"
+        android:layout_alignStart="@+id/rphone"
+        android:layout_marginBottom="35dp" />
+
+    <Button
+        android:id="@+id/rregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:background="#E0F7FA"
+        tools:layout_editor_absoluteY="336dp"
+        tools:layout_editor_absoluteX="148dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="118dp" />
+
+    <EditText
+        android:id="@+id/rphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        android:inputType="phone"
+        android:hint="Phone No"
+        tools:layout_editor_absoluteY="212dp"
+        tools:layout_editor_absoluteX="85dp"
+        android:layout_above="@+id/rregister"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="42dp" />
+</RelativeLayout>

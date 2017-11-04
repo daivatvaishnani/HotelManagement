@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.shivam.HotelManagement.Guestactivity"
+    tools:showIn="@layout/app_bar_guestactivity">
+
+    <EditText
+        android:id="@+id/usernoguest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:background="@drawable/input_background"
+        android:inputType="phone"
+        android:hint="Guests"
+        tools:layout_editor_absoluteY="91dp"
+        tools:layout_editor_absoluteX="74dp" />
+
+    <CheckBox
+        android:id="@+id/usersingleroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Single"
+        tools:layout_editor_absoluteY="136dp"
+        tools:layout_editor_absoluteX="31dp" />
+
+    <CheckBox
+        android:id="@+id/userdoubleroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Double"
+        tools:layout_editor_absoluteY="136dp"
+        tools:layout_editor_absoluteX="145dp" />
+
+    <CheckBox
+        android:id="@+id/userdeluxeroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deluxe"
+        tools:layout_editor_absoluteY="136dp"
+        tools:layout_editor_absoluteX="257dp" />
+
+    <Button
+        android:id="@+id/available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#E0F7FA"
+        android:text="Check Availability"
+        tools:layout_editor_absoluteY="261dp"
+        tools:layout_editor_absoluteX="110dp" />
+
+    <EditText
+        android:id="@+id/checkin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:gravity="center"
+        android:background="@drawable/input_background"
+        android:inputType="textPersonName"
+        android:hint="check-in"
+        tools:layout_editor_absoluteY="36dp"
+        tools:layout_editor_absoluteX="78dp" />
+
+    <EditText
+        android:id="@+id/checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:gravity="center"
+        android:background="@drawable/input_background"
+        android:inputType="textPersonName"
+        android:hint="check-out"
+        tools:layout_editor_absoluteY="36dp"
+        tools:layout_editor_absoluteX="210dp" />
+
+    <EditText
+        android:id="@+id/singleno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="number"
+        android:gravity="center"
+        android:background="@drawable/input_background"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="194dp" />
+
+    <EditText
+        android:id="@+id/doubleno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:gravity="center"
+        android:hint="number"
+        android:background="@drawable/input_background"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="194dp" />
+
+    <EditText
+        android:id="@+id/deluxeno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="number"
+        android:gravity="center"
+        android:background="@drawable/input_background"
+        tools:layout_editor_absoluteX="257dp"
+        tools:layout_editor_absoluteY="194dp" />
+
+
+</android.support.constraint.ConstraintLayout>

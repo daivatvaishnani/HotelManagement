@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.example.shivam.HotelManagement.employeedetails">
+
+
+        <!--<LinearLayout
+            android:id="@+id/first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_background"
+                android:hint="search for staff"
+                android:gravity="center"/>
+            <Button
+                android:id="@+id/searchgo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Go"/>
+        </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first"
+        android:orientation="vertical">
+        <ListView
+            android:id="@+id/slist"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        </ListView>
+        <TextView
+            android:id="@+id/editid"
+            android:layout_marginTop="20dp"
+            android:text="hello there"
+            android:textColor="#ECEFF1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:padding="10dp"
+            />
+        <TextView
+            android:id="@+id/editname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:text="hello there"
+            android:textColor="#ECEFF1"
+            android:padding="10dp"
+            />
+        <TextView
+            android:id="@+id/editpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:text="hello there"
+            android:textColor="#ECEFF1"
+            android:padding="10dp"
+            />
+        <!--<TextView
+            android:id="@+id/editaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:text="hello there"
+            android:textColor="#ECEFF1"
+            android:padding="10dp"
+            />-->
+        <TextView
+            android:id="@+id/edittype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="hello there"
+            android:textColor="#ECEFF1"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            />
+        <TextView
+            android:id="@+id/editphno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="hello there"
+            android:textColor="#ECEFF1"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            />
+        <Button
+            android:id="@+id/setedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="set changes"
+            android:background="#BBDEFB"
+            android:visibility="gone"
+            android:padding="10dp"/>
+    </LinearLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <!--<android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="#9E9E9E"
+        android:layout_margin="@dimen/fab_margin"
+         />
+
+
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_employeedetails" />
+
+</android.support.design.widget.CoordinatorLayout>

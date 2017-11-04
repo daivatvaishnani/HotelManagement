@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.example.shivam.HotelManagement.Addstaff">
+
+    <!--<Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_background"
+        tools:layout_editor_absoluteX="0dp" />-->
+
+    <EditText
+        android:id="@+id/sname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Username"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="113dp" />
+
+    <EditText
+        android:id="@+id/semail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:hint="Email"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="172dp" />
+
+    <EditText
+        android:id="@+id/spassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="password"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="299dp" />
+
+    <Button
+        android:id="@+id/sadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:background="#E0F7FA"
+        tools:layout_editor_absoluteY="371dp"
+        tools:layout_editor_absoluteX="148dp" />
+
+    <EditText
+        android:id="@+id/sphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        android:inputType="phone"
+        android:hint="Phone No"
+        tools:layout_editor_absoluteY="232dp"
+        tools:layout_editor_absoluteX="85dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="168dp"
+        tools:layout_editor_absoluteY="64dp"
+        />
+
+</android.support.constraint.ConstraintLayout>
