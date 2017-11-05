@@ -87,7 +87,7 @@ public class ScheduleFragment extends Fragment{
 
         //CustomAdapter adapter = new CustomAdapter(getActivity(),users);
 
-        Button b = (Button) rootView.findViewById(R.id.buttonemp);
+//        Button b = (Button) rootView.findViewById(R.id.buttonemp);
         //listviewemp = (ListView) rootView.findViewById(R.id.listviewitem);
 
 
@@ -96,13 +96,13 @@ public class ScheduleFragment extends Fragment{
 
 
 
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(),EmployeesListActivity.class);
-                startActivity(i);
-            }
-        });
+//        b.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(getActivity(),EmployeesListActivity.class);
+//                startActivity(i);
+//            }
+//        });
 
         return rootView;
     }
