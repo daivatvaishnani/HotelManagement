@@ -25,7 +25,8 @@
         <activity android:name=".Activity.ShiftsActivity" />
         <activity android:name=".Activity.SupervisorActivity" />
         <activity android:name=".Activity.RegisterActivity" />
-        <!--<activity android:name=".Activity.Guestactivity" />-->
+        <activity android:name=".Activity.LaundryActivity" />
+        <activity android:name=".Activity.Guestactivity" />
         <!--
         <activity
             android:name="com.example.shivam.Guestactivity"
@@ -42,10 +43,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.EmployeesListActivity" />
         <activity android:name=".Addstaff" />
-        <!--<activity
+        <activity
             android:name=".Guestactivity"
             android:label="@string/title_activity_guestactivity"
-            android:theme="@style/AppTheme.NoActionBar" />-->
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activity.LaundryActivity"></activity>
     </application>
 
 </manifest>
