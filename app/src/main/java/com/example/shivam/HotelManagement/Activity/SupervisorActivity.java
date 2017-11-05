@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.example.shivam.HotelManagement.Fragments.SimpleFragmentPagerAdapter;
+import com.example.shivam.HotelManagement.Fragments.SimpleFragmentPagerAdapterSup;
 import com.example.shivam.HotelManagement.R;
 
 public class SupervisorActivity extends AppCompatActivity {
@@ -17,13 +18,13 @@ public class SupervisorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_supervisor);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagersup);
 
-        SimpleFragmentPagerAdapter simpleFragmentPagerAdapter = new SimpleFragmentPagerAdapter(this,getSupportFragmentManager());
+        SimpleFragmentPagerAdapterSup simpleFragmentPagerAdapter = new SimpleFragmentPagerAdapterSup(this,getSupportFragmentManager());
 
         viewPager.setAdapter(simpleFragmentPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_layouts);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_layouts_sup);
         tabLayout.setupWithViewPager(viewPager);
 
     }
