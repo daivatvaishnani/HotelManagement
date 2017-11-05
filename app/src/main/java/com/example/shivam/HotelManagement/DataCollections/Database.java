@@ -61,7 +61,7 @@ public class Database
 
     // GETS LIST OF EMP WITH GIVEN UAL
     public ArrayList<User> getUsers(String ual) {
-        ArrayList<User> userlist = new ArrayList<User>();
+        ArrayList<User> userlist = new ArrayList<>();
         for(User u : users) {
             if(u.getUserAccessLevel().equals(ual)) {
                 userlist.add(u);
@@ -80,7 +80,7 @@ public class Database
     }
 
     public ArrayList<User> getUser(String un, String dump) {
-        ArrayList<User> userlist = new ArrayList<User>();
+        ArrayList<User> userlist = new ArrayList<>();
         for(User u : users) {
             if(u.getUserName().equals(un)) {
                 userlist.add(u);
@@ -104,6 +104,17 @@ public class Database
         return 1;
     }
 
+    //serviceType : Laundry / Food
+    public ArrayList<Item> getItems(String serviceType) {
+        ArrayList<Item> itemList = new ArrayList<>();
+        for(Item i : this.items) {
+            if(i.getItemType().equals(serviceType)) {
+                itemList.add(i);
+            }
+        }
+        return itemList;
+    }
+
     public Database()
     {
         // ADD USERS
@@ -119,18 +130,18 @@ public class Database
         this.users.add(new User("fds2@gmail.com","fds2","4","fds2","123241111231123"));
         this.users.add(new User("fds3@gmail.com","fds3","4","fds3","123213231231"));
         // ADD ITEMS
-        this.items.add(new Item("Shirt", "20"));
-        this.items.add(new Item("TShirt", "10"));
-        this.items.add(new Item("Trousers", "15"));
-        this.items.add(new Item("Jeans", "15"));
-        this.items.add(new Item("Shorts", "10"));
-        this.items.add(new Item("Towel", "20"));
-        this.items.add(new Item("Sweater", "20"));
-        this.items.add(new Item("Burger", "50"));
-        this.items.add(new Item("Chips", "40"));
-        this.items.add(new Item("Sandwich", "50"));
-        this.items.add(new Item("Veg-Thali", "100"));
-        this.items.add(new Item("NonVeg-Thali", "200"));
+        this.items.add(new Item("Shirt", "20", "Laundry"));
+        this.items.add(new Item("TShirt", "10", "Laundry"));
+        this.items.add(new Item("Trousers", "15", "Laundry"));
+        this.items.add(new Item("Jeans", "15", "Laundry"));
+        this.items.add(new Item("Shorts", "10", "Laundry"));
+        this.items.add(new Item("Towel", "20", "Laundry"));
+        this.items.add(new Item("Sweater", "20", "Laundry"));
+        this.items.add(new Item("Burger", "50", "Food"));
+        this.items.add(new Item("Chips", "40", "Food"));
+        this.items.add(new Item("Sandwich", "50", "Food"));
+        this.items.add(new Item("Veg-Thali", "100", "Food"));
+        this.items.add(new Item("NonVeg-Thali", "200", "Food"));
         // SET PRICES
         setSingleRoomPrice("NULL");
         setDoubleRoomPrice("NULL");

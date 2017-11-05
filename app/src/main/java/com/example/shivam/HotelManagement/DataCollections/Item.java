@@ -12,6 +12,15 @@ public class Item {
 
     String itemName;
     String itemPrice;
+    String itemType;
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
 
     public String getItemName() {
         return itemName;
@@ -29,8 +38,10 @@ public class Item {
         this.itemPrice = itemPrice;
     }
 
-    public Item(String itemName, String itemPrice) {
+    public Item(String itemName, String itemPrice, String itemType) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
+        this.itemType = itemType;
     }
+
 }
