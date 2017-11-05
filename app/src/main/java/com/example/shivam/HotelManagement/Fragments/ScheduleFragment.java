@@ -7,20 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.Activity.EmployeesListActivity;
 import com.example.shivam.HotelManagement.Activity.MainActivity;
-import com.example.shivam.HotelManagement.Adapters.CustomAdapter;
 import com.example.shivam.HotelManagement.DataCollections.User;
 import com.example.shivam.HotelManagement.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -29,6 +26,7 @@ import java.util.ArrayList;
  */
 
 public class ScheduleFragment extends Fragment{
+    CheckBox shift1,shift2,shift3;
 
     final String[] employee = {"emp1","emp2","emp3","emp4","emp5","emp6"};
 
@@ -45,11 +43,45 @@ public class ScheduleFragment extends Fragment{
         for(User u : users) {
             employees.add(u.getUserName());
         }
+        shift1 = (CheckBox) rootView.findViewById(R.id.checkBox);
+        shift2 = (CheckBox) rootView.findViewById(R.id.checkBox6);
+        shift3 = (CheckBox) rootView.findViewById(R.id.checkBox3);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.EmployeeList);
+        final ListView listView = (ListView) rootView.findViewById(R.id.EmployeeList);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees);
         listView.setAdapter(listViewAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listView.setVisibility(View.GONE);
+                setvisible(shift1,shift2,shift3);
+                String s = listView.getItemAtPosition(position).toString();
+                if(shift1.isChecked()){
+                    //schedfule emp
+                    setgone(shift1,shift2,shift3);
+                    listView.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(),
+                            "shift 1 scheduled", Toast.LENGTH_LONG).show();
+                }
+                else if(shift2.isChecked()){
+                    //schedfule emp
+                    setgone(shift1,shift2,shift3);
+                    listView.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(),
+                            "shift 2 scheduled", Toast.LENGTH_LONG).show();
+                }
+                else if(shift3.isChecked()){
+                    //schedfule emp
+                    setgone(shift1,shift2,shift3);
+                    listView.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(),
+                            "shift 3 sheduled", Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
 
 
 
@@ -73,6 +105,16 @@ public class ScheduleFragment extends Fragment{
         });
 
         return rootView;
+    }
+    public void setgone(CheckBox c1 ,CheckBox c2,CheckBox c3){
+        c1.setVisibility(View.GONE);
+        c2.setVisibility(View.GONE);
+        c3.setVisibility(View.GONE);
+    }
+    public void setvisible(CheckBox c1 ,CheckBox c2,CheckBox c3){
+        c1.setVisibility(View.VISIBLE);
+        c2.setVisibility(View.VISIBLE);
+        c3.setVisibility(View.VISIBLE);
     }
 
     public ScheduleFragment()

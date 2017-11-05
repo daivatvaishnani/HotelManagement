@@ -33,7 +33,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //compile 'com.android.support:appcompat-v7:your_api_version_number.0.0'
-   // compile files('libs/mongo-java-driver-3.4.3.jar')
+    // compile files('libs/mongo-java-driver-3.4.3.jar')
     // compile 'com.google.android.gms:play-services-basement:11.0.4'
     //compile 'com.google.android.gms:play-services:10.0.1'
     //compile 'com.google.firebase:firebase-database:10.0.1'
@@ -50,6 +50,7 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
 
 
 

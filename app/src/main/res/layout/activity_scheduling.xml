@@ -20,19 +20,61 @@
 
     <ListView
         android:id="@+id/EmployeeList"
-        android:textColor="#D73B3E"
+        android:textColor="#ece3e3"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="471dp" />
 
-    <Button
+    <!--<Button
         android:id="@+id/buttonemp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:text="Set Schedule"
+        android:visibility="gone"
         android:textAllCaps="true"
-        android:textSize="20dp" />
+        android:textSize="20dp" />-->
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/checkBox6"
+        android:layout_alignStart="@+id/checkBox6"
+        android:layout_marginBottom="36dp"
+        android:text="SHIFT 1"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:visibility="gone"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="SHIFT 2"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:id="@+id/checkBox6"
+        android:layout_marginBottom="36dp"
+        android:layout_alignBottom="@+id/checkBox3"
+        android:layout_alignStart="@+id/checkBox3"
+        android:visibility="gone"/>
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="222dp"
+        android:layout_gravity="center"
+        android:text="SHIFT 3"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:visibility="gone"/>
 
 
 </LinearLayout>
