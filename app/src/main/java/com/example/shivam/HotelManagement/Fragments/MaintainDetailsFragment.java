@@ -78,7 +78,7 @@ public class MaintainDetailsFragment extends Fragment{
         editid.setVisibility(View.VISIBLE);
         editname.setVisibility(View.VISIBLE);
         editpassword.setVisibility(View.VISIBLE);
-        editphno.setVisibility(View.VISIBLE);
+        editphno.setVisibility(View.VISIBLE);git
         edittype.setVisibility(View.VISIBLE);
         setedit.setVisibility(View.VISIBLE);
     }
