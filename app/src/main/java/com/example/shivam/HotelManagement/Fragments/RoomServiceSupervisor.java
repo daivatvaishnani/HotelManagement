@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.shivam.HotelManagement.Activity.FoodActivity;
 import com.example.shivam.HotelManagement.Activity.LaundryActivity;
 import com.example.shivam.HotelManagement.R;
 
@@ -34,7 +35,16 @@ public class RoomServiceSupervisor extends Fragment {
 
         });
 
+        Button foodbutton = (Button) rootView.findViewById(R.id.foodbutton);
+        foodbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getActivity(), FoodActivity.class);
+                in.putExtra("Some" , "Some Data");
+                startActivity(in);
+            }
 
+        });
         return rootView;
     }
 }

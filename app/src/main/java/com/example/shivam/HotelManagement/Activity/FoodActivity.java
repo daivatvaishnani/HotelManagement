@@ -1,44 +1,45 @@
 package com.example.shivam.HotelManagement.Activity;
 
-
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.example.shivam.HotelManagement.DataCollections.Item;
-import com.example.shivam.HotelManagement.DataCollections.User;
-import com.example.shivam.HotelManagement.ListItemModel;
 import com.example.shivam.HotelManagement.Adapters.CustomListAdapter;
+import com.example.shivam.HotelManagement.DataCollections.Item;
+import com.example.shivam.HotelManagement.ListItemModel;
 import com.example.shivam.HotelManagement.R;
 
 import java.util.ArrayList;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
 
+/**
+ * Created by yagyansh on 11/6/17.
+ */
 
-public class LaundryActivity extends AppCompatActivity {
+public class FoodActivity extends AppCompatActivity {
 
-    ArrayList<ListItemModel> arrayList;
+    ArrayList<ListItemModel> arrayListf;
 
-    ExpandableListView elv;
-    CustomListAdapter adapter;
+    ExpandableListView elvf;
+    CustomListAdapter adapterf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_laundry);
+        setContentView(R.layout.activity_food);
         // To get all items pass no parameter
-        ArrayList<Item> itemsList = MainActivity.db.getItems("Laundry");
+        ArrayList<Item> itemsList = MainActivity.db.getItems("Food");
         // To retrieve Food items list pass the parameter "Food"
-        arrayList = new ArrayList<>();
+        arrayListf = new ArrayList<>();
         //String[] items = itemsList.toArray(new String[0]);
         for(Item i : itemsList) {
-            arrayList.add(new ListItemModel(i.getItemName() + '\n' + "Rs." + i.getItemPrice()));
+            arrayListf.add(new ListItemModel(i.getItemName() + '\n' + "Rs." + i.getItemPrice()));
         }
 //        arrayList.add(new ListItemModel("Jeans\nRs10"));
 //        arrayList.add(new ListItemModel("Shirt\nRs10"));
@@ -51,22 +52,22 @@ public class LaundryActivity extends AppCompatActivity {
 //        arrayList.add(new ListItemModel("Blah.3\nRs10"));
         //arrayList.add(new ListItemModel("Title 10"));
 
-        elv = (ExpandableListView)findViewById(R.id.listview);
-        adapter = new CustomListAdapter(LaundryActivity.this, arrayList);
-        adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
-        elv.setAdapter(adapter);
+        elvf = (ExpandableListView)findViewById(R.id.listviewfood);
+        adapterf = new CustomListAdapter(FoodActivity.this, arrayListf);
+        adapterf.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
+        elvf.setAdapter(adapterf);
 
-        Button btn = (Button)findViewById(R.id.show);
+        Button btn = (Button)findViewById(R.id.showfood);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String all="";
-                for (int i=0; i<arrayList.size(); i++){
-                    for (int j=0; j<arrayList.get(i).getArrayList().size(); j++) {
-                        all += arrayList.get(i).getArrayList().get(j).getValue() + "\n";
+                for (int i=0; i<arrayListf.size(); i++){
+                    for (int j=0; j<arrayListf.get(i).getArrayList().size(); j++) {
+                        all += arrayListf.get(i).getArrayList().get(j).getValue() + "\n";
                     }
                 }
-                Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
+                Toast.makeText(FoodActivity.this, all, Toast.LENGTH_LONG).show();
             }
         });
         //Bundle bundle = getIntent().getExtras();
@@ -81,7 +82,7 @@ public class LaundryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds groupItem to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main_food, menu);
         return true;
     }
 
@@ -93,7 +94,7 @@ public class LaundryActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings_food) {
             return true;
         }
 
