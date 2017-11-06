@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class SimpleFragmentPagerAdapterSup extends FragmentPagerAdapter {
 
-    private static String[] tabtitles = new String[] {"Services","Schedule","Details"};
+    private static String[] tabtitles = new String[] {"Register Services","Set Schedule","Manage Details"};
 
     private Context mContext;
 
