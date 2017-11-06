@@ -37,16 +37,18 @@ public class LaundryActivity extends AppCompatActivity {
         // To retrieve Food items list pass the parameter "Food"
         arrayList = new ArrayList<>();
         //String[] items = itemsList.toArray(new String[0]);
-
-        arrayList.add(new ListItemModel("Jeans\nRs10"));
-        arrayList.add(new ListItemModel("Shirt\nRs10"));
-        arrayList.add(new ListItemModel("T-Shirt\nRs10"));
-        arrayList.add(new ListItemModel("Trouser\nRs10"));
-        arrayList.add(new ListItemModel("Towel\nRs10"));
-        arrayList.add(new ListItemModel("Tux\nRs10"));
-        arrayList.add(new ListItemModel("Blah\nRs10"));
-        arrayList.add(new ListItemModel("Blah\nRs10"));
-        arrayList.add(new ListItemModel("Blah.3\nRs10"));
+        for(Item i : itemsList) {
+            arrayList.add(new ListItemModel(i.getItemName() + '\n' + i.getItemPrice()));
+        }
+//        arrayList.add(new ListItemModel("Jeans\nRs10"));
+//        arrayList.add(new ListItemModel("Shirt\nRs10"));
+//        arrayList.add(new ListItemModel("T-Shirt\nRs10"));
+//        arrayList.add(new ListItemModel("Trouser\nRs10"));
+//        arrayList.add(new ListItemModel("Towel\nRs10"));
+//        arrayList.add(new ListItemModel("Tux\nRs10"));
+//        arrayList.add(new ListItemModel("Blah\nRs10"));
+//        arrayList.add(new ListItemModel("Blah\nRs10"));
+//        arrayList.add(new ListItemModel("Blah.3\nRs10"));
         //arrayList.add(new ListItemModel("Title 10"));
 
         elv = (ExpandableListView)findViewById(R.id.listview);
