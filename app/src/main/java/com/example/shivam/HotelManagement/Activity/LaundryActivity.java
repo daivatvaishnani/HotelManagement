@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.example.shivam.HotelManagement.DataCollections.Item;
+import com.example.shivam.HotelManagement.DataCollections.User;
 import com.example.shivam.HotelManagement.ListItemModel;
 import com.example.shivam.HotelManagement.Adapters.CustomListAdapter;
 import com.example.shivam.HotelManagement.R;
@@ -30,8 +32,12 @@ public class LaundryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laundry);
-
+        // To get all items pass no parameter
+        ArrayList<Item> itemsList = MainActivity.db.getItems("Laundry");
+        // To retrieve Food items list pass the parameter "Food"
         arrayList = new ArrayList<>();
+        //String[] items = itemsList.toArray(new String[0]);
+
         arrayList.add(new ListItemModel("Jeans\nRs10"));
         arrayList.add(new ListItemModel("Shirt\nRs10"));
         arrayList.add(new ListItemModel("T-Shirt\nRs10"));
