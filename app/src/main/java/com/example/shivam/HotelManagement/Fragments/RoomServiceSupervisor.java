@@ -34,7 +34,16 @@ public class RoomServiceSupervisor extends Fragment {
 
         });
 
+        Button foodbutton = (Button) rootView.findViewById(R.id.foodbutton);
+        laundrybutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getActivity(), LaundryActivity.class);
+                in.putExtra("Some" , "Some Data");
+                startActivity(in);
+            }
 
+        });
         return rootView;
     }
 }
