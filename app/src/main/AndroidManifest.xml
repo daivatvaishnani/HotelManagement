@@ -25,6 +25,7 @@
         <activity android:name=".Activity.ShiftsActivity" />
         <activity android:name=".Activity.SupervisorActivity" />
         <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.FoodActivity" />
         <activity android:name=".Activity.LaundryActivity" />
         <activity android:name=".Activity.Guestactivity" />
         <!--
@@ -47,7 +48,7 @@
             android:name=".Guestactivity"
             android:label="@string/title_activity_guestactivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activity.LaundryActivity"></activity>
+        <!--activity android:name=".Activity.LaundryActivity"--><!--/activity-->
     </application>
 
 </manifest>
