@@ -1,6 +1,7 @@
 package com.example.shivam.HotelManagement.Activity;
 
 
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -56,12 +57,22 @@ public class LaundryActivity extends AppCompatActivity {
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         elv.setAdapter(adapter);
 
-        Button btn = (Button)findViewById(R.id.show);
+        //final long mLastClickTime = 0;
+        final Button btn = (Button)findViewById(R.id.show);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //btn.setEnabled(false);
+                // mis-clicking prevention, using threshold of 1000 ms
+                /*if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime(); */
+
+                // do your magic here
+
                 String all="";
-                for (int i=0; i<arrayList.size(); i++){
+                for(int i=0; i<arrayList.size(); i++){
                     for (int j=0; j<arrayList.get(i).getArrayList().size(); j++) {
                         all += arrayList.get(i).getArrayList().get(j).getValue() + "\n";
                     }
@@ -69,6 +80,7 @@ public class LaundryActivity extends AppCompatActivity {
                 Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
             }
         });
+
         //Bundle bundle = getIntent().getExtras();
         /*if(bundle!=null){
             if( bundle.getString("some") !=  null){
@@ -81,6 +93,7 @@ public class LaundryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds groupItem to the action bar if it is present.
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

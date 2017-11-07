@@ -19,14 +19,46 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.ManagerActivity" />
+        <activity android:name=".Activity.ManagerActivity"
+                    android:label="@string/title_activity_manager" />
+        <!--activity
+            android:name=".Activity.ManagerActivity"
+            android:label="@string/title_activity_manager"
+            android:parentActivityName=".Activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivam.HotelManagement.Activity.MainActivity"/>
+        </activity-->
         <activity android:name=".Activity.DateActivity" />
         <activity android:name=".Activity.CustomerActivity" />
         <activity android:name=".Activity.ShiftsActivity" />
-        <activity android:name=".Activity.SupervisorActivity" />
-        <activity android:name=".Activity.RegisterActivity" />
-        <activity android:name=".Activity.FoodActivity" />
-        <activity android:name=".Activity.LaundryActivity" />
+        <activity android:name=".Activity.SupervisorActivity"
+            android:label="@string/title_activity_supervisor" />
+        <!--activity android:name=".Activity.RegisterActivity" /-->
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:parentActivityName=".Activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivam.HotelManagement.Activity.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".Activity.FoodActivity"
+            android:label="@string/title_activity_food"
+            android:parentActivityName=".Activity.ManagerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivam.HotelManagement.Activity.ManagerActivity"/>
+        </activity>
+
+        <activity
+            android:name=".Activity.LaundryActivity"
+            android:label="@string/title_activity_laundry"
+            android:parentActivityName=".Activity.ManagerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivam.HotelManagement.Activity.ManagerActivity"/>
+        </activity>
         <activity android:name=".Activity.Guestactivity" />
         <!--
         <activity

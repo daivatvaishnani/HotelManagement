@@ -7,6 +7,10 @@
 
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
+    <string name="title_activity_laundry">Laundry Service</string>
+    <string name="title_activity_food">Food Service</string>
+    <string name="title_activity_manager">Welcome, Manager!</string>
+    <string name="title_activity_supervisor">Welcome, Supervisor!</string>
     <string name="title_activity_guestactivity">guestactivity</string>
     <!--<string name="title_activity_employeedetails">employeedetails</string>-->
     <string name="large_text">

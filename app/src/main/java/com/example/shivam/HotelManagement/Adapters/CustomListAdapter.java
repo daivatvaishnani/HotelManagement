@@ -92,9 +92,12 @@ public class CustomListAdapter extends BaseExpandableListAdapter {
         groupViewHolder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 groupItem.get(groupPosition).getArrayList().add(new EdittextValues(""));
+                groupViewHolder.btnAdd.setEnabled(false);
                 getChildrenCount(groupPosition);
                 notifyDataSetChanged();
+
             }
         });
 
