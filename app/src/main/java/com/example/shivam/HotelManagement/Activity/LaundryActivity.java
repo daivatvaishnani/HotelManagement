@@ -90,7 +90,7 @@ public class LaundryActivity extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds groupItem to the action bar if it is present.
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -111,5 +111,5 @@ public class LaundryActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

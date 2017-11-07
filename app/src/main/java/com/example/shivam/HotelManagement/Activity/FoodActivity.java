@@ -79,7 +79,7 @@ public class FoodActivity extends AppCompatActivity {
 
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds groupItem to the action bar if it is present.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,7 +87,7 @@ public class FoodActivity extends AppCompatActivity {
         return true;
     }
 
-/*    @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

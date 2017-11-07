@@ -32,6 +32,7 @@
         <activity android:name=".Activity.DateActivity" />
         <activity android:name=".Activity.CustomerActivity" />
         <activity android:name=".Activity.ShiftsActivity" />
+        <activity android:name=".Activity.ChangeDetailsActivity" />
         <activity android:name=".Activity.SupervisorActivity"
             android:label="@string/title_activity_supervisor" />
         <!--activity android:name=".Activity.RegisterActivity" /-->

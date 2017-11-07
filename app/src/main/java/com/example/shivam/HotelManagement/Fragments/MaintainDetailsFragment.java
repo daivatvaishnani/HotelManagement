@@ -45,7 +45,7 @@ public class MaintainDetailsFragment extends Fragment{
         for(User u : users) {
             employees.add(u.getUserName());
         }
-        final ListView listView = (ListView) rootView.findViewById(R.id.EmployeeList);
+        final ListView listView = (ListView) rootView.findViewById(R.id.slist);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees);
         listView.setAdapter(listViewAdapter);
 
