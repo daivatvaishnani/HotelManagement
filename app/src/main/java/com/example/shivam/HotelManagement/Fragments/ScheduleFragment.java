@@ -40,8 +40,10 @@ public class ScheduleFragment extends Fragment{
         final ArrayList<User> users = MainActivity.db.getUsers();
 //        String[] employees = users.toArray(new String[0]);
         ArrayList<String> employees = new ArrayList<>();
+        final ArrayList<String> employeeEmails = new ArrayList<>();
         for(User u : users) {
             employees.add(u.getUserName());
+            employeeEmails.add(u.getEmailId());
         }
         shift1 = (CheckBox) rootView.findViewById(R.id.checkBox);
         shift2 = (CheckBox) rootView.findViewById(R.id.checkBox6);
@@ -56,9 +58,11 @@ public class ScheduleFragment extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listView.setVisibility(View.GONE);
                 setvisible(shift1,shift2,shift3);
-                String s = listView.getItemAtPosition(position).toString();
+                String employeeEmail = employeeEmails.get(position);
+                String employeeShift = "";
                 if(shift1.isChecked()){
                     //schedfule emp
+                    employeeShift = "1";
                     setgone(shift1,shift2,shift3);
                     listView.setVisibility(View.VISIBLE);
                     Toast.makeText(getActivity(),
@@ -66,6 +70,7 @@ public class ScheduleFragment extends Fragment{
                 }
                 else if(shift2.isChecked()){
                     //schedfule emp
+                    employeeShift = "2";
                     setgone(shift1,shift2,shift3);
                     listView.setVisibility(View.VISIBLE);
                     Toast.makeText(getActivity(),
@@ -73,13 +78,13 @@ public class ScheduleFragment extends Fragment{
                 }
                 else if(shift3.isChecked()){
                     //schedfule emp
+                    employeeShift = "3";
                     setgone(shift1,shift2,shift3);
                     listView.setVisibility(View.VISIBLE);
                     Toast.makeText(getActivity(),
                             "shift 3 sheduled", Toast.LENGTH_LONG).show();
                 }
-
-
+                setEmployeeShift(employeeEmail, employeeShift);
             }
         });
 
@@ -115,6 +120,10 @@ public class ScheduleFragment extends Fragment{
         c1.setVisibility(View.VISIBLE);
         c2.setVisibility(View.VISIBLE);
         c3.setVisibility(View.VISIBLE);
+    }
+
+    public void setEmployeeShift(String employeeEmail, String employeeShift) {
+        MainActivity.db.getUser(employeeEmail).setShift(employeeShift);
     }
 
     public ScheduleFragment()
