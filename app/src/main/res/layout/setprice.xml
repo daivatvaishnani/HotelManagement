@@ -103,14 +103,14 @@
         android:layout_below="@+id/Deluxe"
         android:layout_centerHorizontal="true" />
 
-    <Button
+    <!--Button
         android:id="@+id/logOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Signout"
         android:layout_marginTop="56dp"
         android:layout_below="@+id/price"
-        android:layout_alignEnd="@+id/price" />
+        android:layout_alignEnd="@+id/price" /-->
 
 
     <!--<LinearLayout

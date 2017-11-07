@@ -72,7 +72,7 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
         });
 
 
-        Button logOut = (Button) rootView.findViewById(R.id.logOut);
+        //Button logOut = (Button) rootView.findViewById(R.id.logOut);
         Button setPrice = (Button) rootView.findViewById(R.id.price);
         final EditText singleP = (EditText) rootView.findViewById(R.id.singleprice);
         final EditText doubleP = (EditText) rootView.findViewById(R.id.doubleprice);
@@ -89,12 +89,12 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
             }
         });
 
-        logOut.setOnClickListener(new View.OnClickListener() {
+        /*logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
             }
-        });
+        });*/
 
         return rootView;
     }

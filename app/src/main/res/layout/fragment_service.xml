@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:weightSum="1">
 
     <Button
         android:id="@+id/laundrybutton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Laundry Service" />
+        android:text="Laundry Service"
+        android:layout_marginTop="178dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/housebutton" />
 
     <Button
         android:id="@+id/foodbutton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Food Service" />
+        android:text="Food Service"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/laundrybutton"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/housebutton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="House Keeping" />
+        android:text="House Keeping"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/foodbutton"
+        android:layout_centerHorizontal="true" />
 
-</LinearLayout>
+</RelativeLayout>
