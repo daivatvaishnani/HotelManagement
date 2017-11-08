@@ -84,4 +84,5 @@
         <!--activity android:name=".Activity.LaundryActivity"--><!--/activity-->
     </application>
 
+
 </manifest>

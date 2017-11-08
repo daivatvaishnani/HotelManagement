@@ -3,14 +3,12 @@ package com.example.shivam.HotelManagement.Activity;
 
         import android.app.AlertDialog;
         import android.content.DialogInterface;
-        import android.graphics.drawable.Drawable;
         import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
-        import android.widget.ImageView;
         import android.widget.TextView;
         import android.widget.Toast;
 
@@ -40,6 +38,12 @@ public class ChangeDetailsActivity extends AppCompatActivity {
         textInfo = (TextView) findViewById(R.id.info);
 
         final ArrayList<User> users = MainActivity.db.getUsers();
+        ArrayList<String> employees = new ArrayList<>();
+        final ArrayList<String> employeeEmails = new ArrayList<>();
+        for(User u : users) {
+            employees.add(u.getUserName());
+            employeeEmails.add(u.getEmailId());
+        }
 
         btnUsername.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +82,7 @@ public class ChangeDetailsActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (key == 1) { //Username
             builder.setTitle("Change Username");
-            builder.setMessage("Current Username");
+            builder.setMessage("Current Username" + " : " + activeUser.getUserName());
             builder.setView(subView);
             AlertDialog alertDialog = builder.create();
 
@@ -100,7 +104,7 @@ public class ChangeDetailsActivity extends AppCompatActivity {
         }
         else if (key == 2) { //Password
             builder.setTitle("Change Password");
-            builder.setMessage("Current Password: Blah");
+            builder.setMessage("Current Password : " + activeUser.getPwd());
             builder.setView(subView);
             AlertDialog alertDialog = builder.create();
 
@@ -122,7 +126,7 @@ public class ChangeDetailsActivity extends AppCompatActivity {
         }
         else if (key == 3) { //Email
             builder.setTitle("Change Email");
-            builder.setMessage("Current Email: Blah");
+            builder.setMessage("Current Email : " + activeUser.getEmailId());
             builder.setView(subView);
             AlertDialog alertDialog = builder.create();
 
@@ -144,7 +148,7 @@ public class ChangeDetailsActivity extends AppCompatActivity {
         }
         else if (key == 4) { //PhoneNumber
             builder.setTitle("Change Phone Number");
-            builder.setMessage("Current Phone Number: Blah");
+            builder.setMessage("Current Phone Number : " + activeUser.getPhoneNo());
             builder.setView(subView);
             AlertDialog alertDialog = builder.create();
 
