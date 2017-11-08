@@ -22,6 +22,7 @@ public class ChangeDetailsActivity extends AppCompatActivity {
     Button btnUsername,btnPassword,btnEmail,btnPhoneNumber;
     TextView textInfo;
     User activeUser;
+    String newUsername, newEmail, newPwd, newPhno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class ChangeDetailsActivity extends AppCompatActivity {
 
         // Getting active user
         activeUser = MainActivity.db.getActiveSession().getActiveUser();
+
+
 
         btnUsername = (Button) findViewById(R.id.username);
         btnEmail = (Button) findViewById(R.id.email);
@@ -90,6 +93,8 @@ public class ChangeDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     textInfo.setText(subEditText.getText().toString());
+                    newUsername = subEditText.getText().toString();
+                    MainActivity.db.setActiveUserUserName(newUsername);
                 }
             });
 
@@ -112,6 +117,8 @@ public class ChangeDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     textInfo.setText(subEditText.getText().toString());
+                    newPwd = subEditText.getText().toString();
+                    MainActivity.db.setActiveUserPwd(newPwd);
                 }
             });
 
@@ -134,6 +141,8 @@ public class ChangeDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     textInfo.setText(subEditText.getText().toString());
+                    newEmail = subEditText.getText().toString();
+                    MainActivity.db.setActiveUserEmailID(newEmail);
                 }
             });
 
@@ -156,6 +165,8 @@ public class ChangeDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     textInfo.setText(subEditText.getText().toString());
+                    newPhno = subEditText.getText().toString();
+                    MainActivity.db.setActiveUserPwd(newPwd);
                 }
             });
 

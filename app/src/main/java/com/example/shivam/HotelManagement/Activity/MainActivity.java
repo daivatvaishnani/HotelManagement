@@ -172,16 +172,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startSignIn() {
-        final String email = user.getText().toString();
+        final String username = user.getText().toString();
         final String pwd = pwrd.getText().toString();
 
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(pwd)) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
             Toast.makeText(MainActivity.this, "field empty", Toast.LENGTH_SHORT).show();
         }
         else {
             progressDialog.setMessage("Logging in User...");
             progressDialog.show();
-            User u = db.getUser(email);
+            User u = db.getUser(username, "");
             if (u == null) {
                 Toast.makeText(MainActivity.this, "USER DOESN'T EXIST", Toast.LENGTH_SHORT).show();
             }

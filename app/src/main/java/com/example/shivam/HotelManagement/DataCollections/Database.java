@@ -89,23 +89,62 @@ public class Database
         return null;
     }
 
-    public ArrayList<User> getUser(String un, String dump) {
-        ArrayList<User> userlist = new ArrayList<>();
+    public User getUser(String un, String dump) {
         for(User u : users) {
-            if(u.getUserName().equals(un)) {
-                userlist.add(u);
+            if (u.getUserName().equals(un)) {
+                return u;
             }
         }
-        return userlist;
+        return null;
     }
 
     public void addUser(User u) {
         this.users.add(u);
     }
 
+    public void setActiveUserUserName(String newUserName) {
+        String username = activeSession.getActiveUser().getUserName();
+        for(User u : users) {
+            if(u.getUserName().equals(username)) {
+                u.setUserName(newUserName);
+            }
+        }
+        activeSession.getActiveUser().setUserName(newUserName);
+    }
+
+    public void setActiveUserEmailID(String newUserEmail) {
+        String username = activeSession.getActiveUser().getUserName();
+        for(User u : users) {
+            if(u.getUserName().equals(username)) {
+                u.setEmailId(newUserEmail);
+            }
+        }
+        activeSession.getActiveUser().setEmailId(newUserEmail);
+    }
+
+    public void setActiveUserPwd(String newUserPwd) {
+        String username = activeSession.getActiveUser().getUserName();
+        for(User u : users) {
+            if(u.getUserName().equals(username)) {
+                u.setPwd(newUserPwd);
+            }
+        }
+        activeSession.getActiveUser().setPwd(newUserPwd);
+    }
+
+    public void setActiveUserPhno(String newUserPhno) {
+        String username = activeSession.getActiveUser().getUserName();
+        for(User u : users) {
+            if(u.getUserName().equals(username)) {
+                u.setPhoneNo(newUserPhno);
+            }
+        }
+        activeSession.getActiveUser().setPhoneNo(newUserPhno);
+    }
+
     public int registerUser(String e, String p, String ual, String un, String pn) {
         for(User u : users) {
-            if(u.getEmailId().equals(e)) {
+            if(u.getEmailId().equals(e) || u.getUserName().equals(un)) {
                 return 0;
             }
         }
