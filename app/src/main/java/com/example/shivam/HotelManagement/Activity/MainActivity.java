@@ -186,6 +186,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "USER DOESN'T EXIST", Toast.LENGTH_SHORT).show();
             }
             else if (u.getPwd().equals(pwd)) {
+                // Set active session
+                db.setActiveSession(new Session("active", u));
                 if (u.getUserAccessLevel().equals("1")) {
                     Toast.makeText(MainActivity.this, "YOU ARE MANAGER", Toast.LENGTH_SHORT).show();
                     // MANAGER ACTIVITY

@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 
 public class Bill {
-    ArrayList<Service> services = new ArrayList<>();
-    String amount;
+    private ArrayList<Service> services = new ArrayList<>();
+    private String amount;
 
     public String getAmount() {
         return amount;

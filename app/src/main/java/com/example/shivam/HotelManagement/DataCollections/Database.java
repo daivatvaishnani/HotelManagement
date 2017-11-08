@@ -14,10 +14,20 @@ import java.util.List;
 
 public class Database
 {
-    ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
 //    public List<User> users = new ArrayList<>();
-    String singleRoomPrice, doubleRoomPrice, deluxeRoomPrice;
-    ArrayList<Item> items = new ArrayList<>();
+    private String singleRoomPrice, doubleRoomPrice, deluxeRoomPrice;
+    private ArrayList<Item> items = new ArrayList<>();
+
+    private Session activeSession = new Session(null, null);
+
+    public Session getActiveSession() {
+        return activeSession;
+    }
+
+    public void setActiveSession(Session activeSession) {
+        this.activeSession = activeSession;
+    }
 
     public ArrayList<Item> getItems() {
         return items;

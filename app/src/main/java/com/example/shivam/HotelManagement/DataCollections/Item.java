@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Item {
 
-    String itemName;
-    String itemPrice;
-    String itemType;
+    private String itemName;
+    private String itemPrice;
+    private String itemType;
 
     public String getItemType() {
         return itemType;
