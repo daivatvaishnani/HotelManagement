@@ -1,5 +1,6 @@
 package com.example.shivam.HotelManagement.Fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -55,32 +56,32 @@ public class MaintainDetailsFragment extends Fragment{
         editphno = (TextView) rootView.findViewById(R.id.editphno);
         setedit = (Button) rootView.findViewById(R.id.setedit);
 
+       /* dialog = new AlertDialog.Builder(this).create();
+        edittext = new EditText(this);*/
+        dialog.setTitle("Edit The text");
+        dialog.setView(edittext);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
- //               dialog = new AlertDialog.Builder(this).create();
-//        edittext = new EditText(this);
-//
-//        dialog.setTitle("Edit The text");
-//        dialog.setView(edittext);
-//
-//        dialog.setButton(DialogInterface.BUTTON_POSITIVE,"Save Changes", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                if(editvalue == 1)
-//                    editid.setText(edittext.getText());
-//                else if(editvalue == 2)
-//                    editname.setText(edittext.getText());
-//                else if(editvalue == 3)
-//                    editpassword.setText(edittext.getText());
-//                else if(editvalue == 4)
-//                    edittype.setText(edittext.getText());
-//                else if(editvalue == 5)
-//                    editphno.setText(edittext.getText());
-//            }
-//        });
+
+               /* dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save Changes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (editvalue == 1)
+                            editid.setText(edittext.getText());
+                        else if (editvalue == 2)
+                            editname.setText(edittext.getText());
+                        else if (editvalue == 3)
+                            editpassword.setText(edittext.getText());
+                        else if (editvalue == 4)
+                            edittype.setText(edittext.getText());
+                        else if (editvalue == 5)
+                            editphno.setText(edittext.getText());
+                    }
+                });
                 listView.setVisibility(View.GONE);
-                setvisible(editid,editname,editpassword,editphno,edittype,setedit);
+                setvisible(editid, editname, editpassword, editphno, edittype, setedit);
                 String s = listView.getItemAtPosition(position).toString();
                 // retrieve the details of emp of name "s"
 //                editid.setText(user.getId());
@@ -89,68 +90,69 @@ public class MaintainDetailsFragment extends Fragment{
 //                edittype.setText(user.getType());
 //                editphno.setText(user.getPhno());
 
- //               editid.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                editvalue = 1;
-//                edittext.setText(editid.getText());
-//                dialog.show();
-//            }
-//        });
+          *//*      editid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editvalue = 1;
+                edittext.setText(editid.getText());
+                dialog.show();
+            }
+        });*//*
 //
-//        editid.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                editvalue = 1;
-//                edittext.setText(editid.getText());
-//                dialog.show();
-//            }
-//        });
-//
-//        editname.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                editvalue = 2;
-//                edittext.setText(editname.getText());
-//                dialog.show();
-//            }
-//        });
-//
-//        editpassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                editvalue = 3;
-//                edittext.setText(editpassword.getText());
-//                dialog.show();
-//            }
-//        });
-//
-//        edittype.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                editvalue = 4;
-//                edittext.setText(edittype.getText());
-//                dialog.show();
-//            }
-//        });
-//
-//        editphno.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                editvalue = 5;
-//                edittext.setText(editphno.getText());
-//                dialog.show();
-//            }
-//        });
- //               setedit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //run query for setting changes
-//                Toast.makeText(getApplicationContext(),"Confirmed set",Toast.LENGTH_SHORT).show();
-//            setgone(editid,editname,editpassword,editphno,edittype,setedit);
-//                listView.setVisibility(View.VISIBLE);
-//
-//        });
+        *//*editid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editvalue = 1;
+                edittext.setText(editid.getText());
+                dialog.show();
+            }
+        });*//*
+
+       *//* editname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editvalue = 2;
+                edittext.setText(editname.getText());
+                dialog.show();
+            }
+        });*//*
+
+        *//*editpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editvalue = 3;
+                edittext.setText(editpassword.getText());
+                dialog.show();
+            }
+        });*//*
+
+        *//*edittype.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editvalue = 4;
+                edittext.setText(edittype.getText());
+                dialog.show();
+            }
+        });*//*
+
+        *//*editphno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editvalue = 5;
+                edittext.setText(editphno.getText());
+                dialog.show();
+            }
+        });*//*
+
+            setedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //run query for setting changes
+                Toast.makeText(getContext(),"Confirmed set",Toast.LENGTH_SHORT).show();
+                setgone(editid,editname,editpassword,editphno,edittype,setedit);
+                listView.setVisibility(View.VISIBLE);
+
+        });*/
 
             }
         });
