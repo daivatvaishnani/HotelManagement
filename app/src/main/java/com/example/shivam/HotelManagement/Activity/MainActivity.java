@@ -192,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 if (u.getUserAccessLevel().equals("1")) {
                     Toast.makeText(MainActivity.this, "YOU ARE MANAGER", Toast.LENGTH_SHORT).show();
                     // MANAGER ACTIVITY
+                    finish();
                     startActivity(new Intent(MainActivity.this, ManagerActivity.class));
                 }
                 if (u.getUserAccessLevel().equals("2")) {
