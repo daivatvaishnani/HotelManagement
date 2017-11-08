@@ -167,7 +167,7 @@ public class Database
     public Database()
     {
         // ADD USERS
-        this.users.add(new User("manager@gmail.com","manager","1","manager","123123123123"));
+        this.users.add(new User("manager@gmail.com","manager","1","manager","8696078312"));
         this.users.add(new User("supervisor1@gmail.com","supervisor1","2","supervisor1","123123"));
         this.users.add(new User("supervisor2@gmail.com","supervisor2","2","supervisor2","213123"));
         this.users.add(new User("supervisor3@gmail.com","supervisor3","2","supervisor3","1223231123"));

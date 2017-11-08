@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 
 public class ScheduleFragment extends Fragment{
     CheckBox shift1,shift2,shift3;
+    Button send;
 
     final String[] employee = {"emp1","emp2","emp3","emp4","emp5","emp6"};
 
@@ -49,6 +51,8 @@ public class ScheduleFragment extends Fragment{
         shift2 = (CheckBox) rootView.findViewById(R.id.checkBox6);
         shift3 = (CheckBox) rootView.findViewById(R.id.checkBox3);
 
+        send = (Button) rootView.findViewById(R.id.send);
+
         final ListView listView = (ListView) rootView.findViewById(R.id.EmployeeList);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees);
         listView.setAdapter(listViewAdapter);
@@ -57,34 +61,56 @@ public class ScheduleFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listView.setVisibility(View.GONE);
-                setvisible(shift1,shift2,shift3);
-                String employeeEmail = employeeEmails.get(position);
-                String employeeShift = "";
-                if(shift1.isChecked()){
-                    //schedfule emp
-                    employeeShift = "1";
-                    setgone(shift1,shift2,shift3);
-                    listView.setVisibility(View.VISIBLE);
-                    Toast.makeText(getActivity(),
-                            "shift 1 scheduled", Toast.LENGTH_LONG).show();
-                }
-                else if(shift2.isChecked()){
-                    //schedfule emp
-                    employeeShift = "2";
-                    setgone(shift1,shift2,shift3);
-                    listView.setVisibility(View.VISIBLE);
-                    Toast.makeText(getActivity(),
-                            "shift 2 scheduled", Toast.LENGTH_LONG).show();
-                }
-                else if(shift3.isChecked()){
-                    //schedfule emp
-                    employeeShift = "3";
-                    setgone(shift1,shift2,shift3);
-                    listView.setVisibility(View.VISIBLE);
-                    Toast.makeText(getActivity(),
-                            "shift 3 sheduled", Toast.LENGTH_LONG).show();
-                }
-                setEmployeeShift(employeeEmail, employeeShift);
+                setvisible(shift1,shift2,shift3,send);
+                final String employeeEmail = employeeEmails.get(position);
+                final String[] employeeShift = {""};
+                send.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SmsManager smsManager = SmsManager.getDefault();
+                        String phoneNo = MainActivity.db.getUser(employeeEmail).getPhoneNo();
+
+                        if(shift1.isChecked()){
+                            //schedfule emp
+                            employeeShift[0] = "1";
+                            String sms = "your new shift is 1";
+                            try{
+                                smsManager.sendTextMessage(phoneNo, null, sms, null, null);
+                            }catch(Exception e){}
+                            setgone(shift1,shift2,shift3,send);
+                            listView.setVisibility(View.VISIBLE);
+
+                            Toast.makeText(getActivity(),
+                                    "shift 1 scheduled", Toast.LENGTH_LONG).show();
+                        }
+                        else if(shift2.isChecked()){
+                            //schedfule emp
+                            employeeShift[0] = "2";
+                            String sms = "your new shift is 2";
+                            try{
+                                    smsManager.sendTextMessage(phoneNo, null, sms, null, null);
+                            }catch(Exception e){}
+                            setgone(shift1,shift2,shift3,send);
+                            listView.setVisibility(View.VISIBLE);
+                            Toast.makeText(getActivity(),
+                                    "shift 2 scheduled", Toast.LENGTH_LONG).show();
+                        }
+                        else if(shift3.isChecked()){
+                            //schedfule emp
+                            employeeShift[0] = "3";
+                            String sms = "your new shift is 3";
+                            try{
+                                    smsManager.sendTextMessage(phoneNo, null, sms, null, null);
+                            }catch(Exception e){}
+                            setgone(shift1,shift2,shift3,send);
+                            listView.setVisibility(View.VISIBLE);
+                            Toast.makeText(getActivity(),
+                                    "shift 3 sheduled", Toast.LENGTH_LONG).show();
+                        }
+                        setEmployeeShift(employeeEmail, employeeShift[0]);
+                    }
+                });
+
             }
         });
 
@@ -111,15 +137,17 @@ public class ScheduleFragment extends Fragment{
 
         return rootView;
     }
-    public void setgone(CheckBox c1 ,CheckBox c2,CheckBox c3){
+    public void setgone(CheckBox c1 ,CheckBox c2,CheckBox c3,Button b){
         c1.setVisibility(View.GONE);
         c2.setVisibility(View.GONE);
         c3.setVisibility(View.GONE);
+        b.setVisibility(View.GONE);
     }
-    public void setvisible(CheckBox c1 ,CheckBox c2,CheckBox c3){
+    public void setvisible(CheckBox c1 ,CheckBox c2,CheckBox c3,Button b){
         c1.setVisibility(View.VISIBLE);
         c2.setVisibility(View.VISIBLE);
         c3.setVisibility(View.VISIBLE);
+        b.setVisibility(View.VISIBLE);
     }
 
     public void setEmployeeShift(String employeeEmail, String employeeShift) {
