@@ -10,6 +10,7 @@ public class Session {
 
     public void clearSession() {
         this.isActive = false;
+        this.activeUser = null;
     }
 
     public boolean isActive() {
