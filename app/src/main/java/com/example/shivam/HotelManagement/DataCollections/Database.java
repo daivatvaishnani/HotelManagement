@@ -101,7 +101,7 @@ public class Database
     public void addUser(User u) {
         this.users.add(u);
     }
-
+    
     public void setActiveUserUserName(String newUserName) {
         String username = activeSession.getActiveUser().getUserName();
         for(User u : users) {

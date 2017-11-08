@@ -8,6 +8,10 @@ public class Session {
     private User activeUser;
     private boolean isActive = false;
 
+    public void clearSession() {
+        this.isActive = false;
+    }
+
     public boolean isActive() {
         return isActive;
     }
@@ -18,6 +22,7 @@ public class Session {
 
     public Session(User activeUser) {
         this.activeUser = activeUser;
+        this.isActive = true;
     }
 
     public User getActiveUser() {

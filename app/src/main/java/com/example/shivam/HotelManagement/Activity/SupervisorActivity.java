@@ -48,6 +48,7 @@ public class SupervisorActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
+            MainActivity.db.getActiveSession().clearSession();
             startActivity(new Intent(SupervisorActivity.this, MainActivity.class));
             return true;
         }

@@ -63,15 +63,16 @@ public class ScheduleFragment extends Fragment{
                 listView.setVisibility(View.GONE);
                 setvisible(shift1,shift2,shift3,send);
                 final String employeeEmail = employeeEmails.get(position);
+                final User employee = MainActivity.db.getUser(employeeEmail);
                 final String[] employeeShift = {""};
                 send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         SmsManager smsManager = SmsManager.getDefault();
-                        String phoneNo = MainActivity.db.getUser(employeeEmail).getPhoneNo();
-
+                        String phoneNo = employee.getPhoneNo();
                         if(shift1.isChecked()){
                             //schedfule emp
+                            MainActivity.db.getUser(employeeEmail).setShift("1");
                             employeeShift[0] = "1";
                             String sms = "your new shift is 1";
                             try{
@@ -85,6 +86,7 @@ public class ScheduleFragment extends Fragment{
                         }
                         else if(shift2.isChecked()){
                             //schedfule emp
+                            MainActivity.db.getUser(employeeEmail).setShift("2");
                             employeeShift[0] = "2";
                             String sms = "your new shift is 2";
                             try{
@@ -97,6 +99,7 @@ public class ScheduleFragment extends Fragment{
                         }
                         else if(shift3.isChecked()){
                             //schedfule emp
+                            MainActivity.db.getUser(employeeEmail).setShift("3");
                             employeeShift[0] = "3";
                             String sms = "your new shift is 3";
                             try{

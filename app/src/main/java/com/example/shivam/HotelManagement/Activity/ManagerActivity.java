@@ -69,6 +69,7 @@ public class ManagerActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
+            MainActivity.db.getActiveSession().clearSession();
             startActivity(new Intent(ManagerActivity.this, MainActivity.class));
             return true;
         }

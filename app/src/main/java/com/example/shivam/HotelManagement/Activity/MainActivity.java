@@ -48,6 +48,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        User ActiveUser = db.getActiveSession().getActiveUser();
+        if(ActiveUser != null) {
+            String ual = ActiveUser.getUserAccessLevel();
+            if(ual.equals("1")) {
+                //Manager
+                startActivity(new Intent(MainActivity.this, ManagerActivity.class));
+            }
+            else if(ual.equals("2")) {
+                //Supervisor
+                startActivity(new Intent(MainActivity.this, SupervisorActivity.class));
+            }
+            else if(ual.equals("3")) {
+                //Guest
+            }
+            else if(ual.equals("4")) {
+                //FDS
+            }
+        }
         try {
             db.initialize();
         }
