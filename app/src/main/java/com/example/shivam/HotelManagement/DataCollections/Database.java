@@ -19,7 +19,7 @@ public class Database
     private String singleRoomPrice, doubleRoomPrice, deluxeRoomPrice;
     private ArrayList<Item> items = new ArrayList<>();
 
-    private Session activeSession = new Session(null, null);
+    private Session activeSession = new Session(null);
 
     public Session getActiveSession() {
         return activeSession;

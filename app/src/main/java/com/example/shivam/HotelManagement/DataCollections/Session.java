@@ -5,20 +5,19 @@ package com.example.shivam.HotelManagement.DataCollections;
  */
 
 public class Session {
-    private String sessionStatus;
     private User activeUser;
+    private boolean isActive = false;
 
-    public Session(String sessionStatus, User activeUser) {
-        this.sessionStatus = sessionStatus;
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public Session(User activeUser) {
         this.activeUser = activeUser;
-    }
-
-    public String getSessionStatus() {
-        return sessionStatus;
-    }
-
-    public void setSessionStatus(String sessionStatus) {
-        this.sessionStatus = sessionStatus;
     }
 
     public User getActiveUser() {

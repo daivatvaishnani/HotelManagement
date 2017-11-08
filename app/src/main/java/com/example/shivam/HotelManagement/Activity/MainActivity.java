@@ -187,7 +187,8 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (u.getPwd().equals(pwd)) {
                 // Set active session
-                db.setActiveSession(new Session("active", u));
+                if(!db.getActiveSession().isActive())
+                    db.setActiveSession(new Session(u));
                 if (u.getUserAccessLevel().equals("1")) {
                     Toast.makeText(MainActivity.this, "YOU ARE MANAGER", Toast.LENGTH_SHORT).show();
                     // MANAGER ACTIVITY
