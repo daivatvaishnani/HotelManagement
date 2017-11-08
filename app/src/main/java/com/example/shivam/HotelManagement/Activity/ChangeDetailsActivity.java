@@ -23,11 +23,15 @@ public class ChangeDetailsActivity extends AppCompatActivity {
 
     Button btnUsername,btnPassword,btnEmail,btnPhoneNumber;
     TextView textInfo;
+    User activeUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changedetails);
+
+        // Getting active user
+        activeUser = MainActivity.db.getActiveSession().getActiveUser();
 
         btnUsername = (Button) findViewById(R.id.username);
         btnEmail = (Button) findViewById(R.id.email);
