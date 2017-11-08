@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         final String pwd = pwrd.getText().toString();
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
-            Toast.makeText(MainActivity.this, "field empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Field Empty", Toast.LENGTH_SHORT).show();
         }
         else {
             progressDialog.setMessage("Logging in User...");
