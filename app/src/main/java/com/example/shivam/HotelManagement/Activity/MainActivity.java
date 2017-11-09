@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (u.getUserAccessLevel().equals("2")) {
                     Toast.makeText(MainActivity.this, "YOU ARE SUPERVISOR", Toast.LENGTH_SHORT).show();
+                    finish();
                     startActivity(new Intent(MainActivity.this, SupervisorActivity.class));
 
                 }

@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+
+import com.example.shivam.HotelManagement.Activity.ManagerActivity;
 import com.example.shivam.HotelManagement.DataCollections.*;
 
 import android.view.WindowManager;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 //import com.example.shivam.HotelManagement.Database.Dbhelper;
 
+import com.example.shivam.HotelManagement.Fragments.MaintainDetailsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -61,17 +64,14 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
 
         spinner.setAdapter(dataAdapter);
 
-        final String sname = username.getText().toString();
-        final String spwd = password.getText().toString();
-        final String semail = email.getText().toString();
-        final String snumber = phno.getText().toString();
-        
-
-        final ProgressDialog progressDialog = new ProgressDialog(this);
-
-        /*add.setOnClickListener( new View.OnClickListener(){
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                final String sname = username.getText().toString();
+                final String spwd = password.getText().toString();
+                final String semail = email.getText().toString();
+                final String snumber = phno.getText().toString();
+
                 if(TextUtils.isEmpty(sname)){
                     Toast.makeText(Addstaff.this, "Please enter username", Toast.LENGTH_SHORT).show();
                     return;
@@ -92,6 +92,30 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                     Toast.makeText(Addstaff.this, "Please enter phone no", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(stafftype == "FDS"){
+                    //add fds to database
+                }
+                else {
+                    //add supervisor to datbase
+                }
+
+                Toast.makeText(Addstaff.this, "staff has been added", Toast.LENGTH_SHORT).show();
+
+                finish();
+                startActivity(new Intent(Addstaff.this, ManagerActivity.class));
+
+            }
+        });
+
+
+        
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+
+        /*add.setOnClickListener( new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
 
                 progressDialog.setMessage("Adding");
                 progressDialog.show();

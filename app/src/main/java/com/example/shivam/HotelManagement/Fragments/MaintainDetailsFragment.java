@@ -1,8 +1,10 @@
 package com.example.shivam.HotelManagement.Fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.Activity.MainActivity;
+import com.example.shivam.HotelManagement.Addstaff;
 import com.example.shivam.HotelManagement.DataCollections.User;
 import com.example.shivam.HotelManagement.R;
 
@@ -61,6 +64,16 @@ public class MaintainDetailsFragment extends Fragment{
 
         dialog.setTitle("Edit The text");
         dialog.setView(edittext);
+
+        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Click action
+                Intent intent = new Intent(getActivity(), Addstaff.class);
+                startActivity(intent);
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -79,7 +79,8 @@
             android:label="@string/title_activity_employeedetails"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.EmployeesListActivity" />
-        <activity android:name=".Addstaff" />
+        <activity android:name=".Addstaff"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".Guestactivity"
             android:label="@string/title_activity_guestactivity"

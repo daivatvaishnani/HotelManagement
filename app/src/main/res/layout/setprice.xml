@@ -72,6 +72,7 @@
         android:id="@+id/singleprice"
         android:hint="Enter Price"
         android:gravity="center"
+        android:focusableInTouchMode="true"
         android:background="@drawable/input_background"
         android:layout_alignTop="@+id/Deluxe"
         android:layout_alignStart="@+id/doubleprice" />
@@ -80,6 +81,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter Price"
         android:gravity="center"
+        android:focusableInTouchMode="true"
         android:background="@drawable/input_background"
         android:id="@+id/doubleprice"
         android:layout_alignTop="@+id/Double"
@@ -89,6 +91,7 @@
         android:layout_height="wrap_content"
         android:hint="Enter Price"
         android:gravity="center"
+        android:focusableInTouchMode="true"
         android:background="@drawable/input_background"
         android:id="@+id/deluxeprice"
         android:layout_alignBottom="@+id/Single"
