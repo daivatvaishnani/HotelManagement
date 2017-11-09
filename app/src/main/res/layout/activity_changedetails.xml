@@ -21,7 +21,7 @@
         android:id="@+id/username"
         android:layout_width="200dp"
         android:layout_gravity="center"
-        android:background="#E0F7FA"
+        android:background="@drawable/btn_background_2"
         android:layout_marginTop="65dp"
         android:layout_height="wrap_content"
         android:text="Change Username"/>
@@ -30,7 +30,7 @@
         android:id="@+id/passwordc"
         android:layout_width="200dp"
         android:layout_gravity="center"
-        android:background="#E0F7FA"
+        android:background="@drawable/btn_background_2"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:text="Change Password"/>
@@ -39,7 +39,7 @@
         android:id="@+id/email"
         android:layout_width="200dp"
         android:layout_gravity="center"
-        android:background="#E0F7FA"
+        android:background="@drawable/btn_background_2"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:text="Change Email"/>
@@ -48,7 +48,7 @@
         android:id="@+id/phoneno"
         android:layout_width="200dp"
         android:layout_gravity="center"
-        android:background="#E0F7FA"
+        android:background="@drawable/btn_background_2"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:text="Change Phone Number"/>

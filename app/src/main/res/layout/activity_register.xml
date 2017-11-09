@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:background="#E0F7FA"
+        android:background="@drawable/btn_background_2"
         tools:layout_editor_absoluteY="336dp"
         tools:layout_editor_absoluteX="148dp"
         android:layout_alignParentBottom="true"

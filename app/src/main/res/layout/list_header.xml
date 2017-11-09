@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+"
+        android:background="@drawable/btn_background_2"
         android:layout_alignTop="@+id/title"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         app:backgroundTint="#9E9E9E"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_margin="14dp"
          />
 
 

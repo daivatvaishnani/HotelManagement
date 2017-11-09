@@ -49,7 +49,7 @@
         android:id="@+id/available"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#E0F7FA"
+        android:background="@drawable/btn_background_2"
         android:text="Check Availability"
         tools:layout_editor_absoluteY="261dp"
         tools:layout_editor_absoluteX="110dp" />
