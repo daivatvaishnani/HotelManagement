@@ -103,11 +103,9 @@ public class MaintainDetailsFragment extends Fragment{
                 editname.setText(user.getUserName());
                 editpassword.setText(user.getPwd());
                 edittype.setText(user.getUserAccessLevel());
-                editphno.setText(user.getPhoneNo());
+                editphno.setText(user.getPhoneNo();
 
-                System.out.println(editid.getText());
-                System.out.println("helloooooooooooooooo");
-                System.out.println("helooooooooooo");
+
 
                 dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save Changes", new DialogInterface.OnClickListener() {
                     @Override
@@ -187,6 +185,13 @@ public class MaintainDetailsFragment extends Fragment{
                 Toast.makeText(getContext(), "Confirmed set", Toast.LENGTH_SHORT).show();
                 setgone(editid, editname, editpassword, editphno, edittype, setedit);
                 listView.setVisibility(View.VISIBLE);
+
+                String name = editname.getText().toString();
+                String id = editid.getText().toString();
+                String pno = editphno.getText().toString();
+                String type = edittype.getText().toString();
+                String pwd = editpassword.getText().toString();
+                //add new details to database
             }
 
         });
