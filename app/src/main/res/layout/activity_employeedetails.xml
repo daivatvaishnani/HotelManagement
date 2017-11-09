@@ -110,6 +110,7 @@
             android:background="#BBDEFB"
             android:visibility="gone"
             android:padding="10dp"/>
+
     </LinearLayout>
 
     <android.support.design.widget.AppBarLayout
@@ -126,14 +127,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<android.support.design.widget.FloatingActionButton
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:backgroundTint="#9E9E9E"
+        app:backgroundTint="#9E9E9E"
         android:layout_margin="@dimen/fab_margin"
-         />-->
+         />
 
 
 
