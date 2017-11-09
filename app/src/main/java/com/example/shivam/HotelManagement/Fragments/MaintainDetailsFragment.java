@@ -91,11 +91,11 @@ public class MaintainDetailsFragment extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 listView.setVisibility(View.GONE);
-                String s = listView.getItemAtPosition(position).toString();
+               final String s = listView.getItemAtPosition(position).toString();
 
                 setvisible(editid, editname, editpassword, editphno, edittype, setedit);
 
-                User user = MainActivity.db.getActiveSession().getActiveUser();
+                User user = MainActivity.db.getUser(s,"qwe");
 
                 // retrieve the details of emp of name "s"
                 //MainActivity.db.
@@ -105,9 +105,7 @@ public class MaintainDetailsFragment extends Fragment{
                 edittype.setText(user.getUserAccessLevel());
                 editphno.setText(user.getPhoneNo());
 
-                System.out.println(editid.getText());
-                System.out.println("helloooooooooooooooo");
-                System.out.println("helooooooooooo");
+
 
                 dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save Changes", new DialogInterface.OnClickListener() {
                     @Override
@@ -187,6 +185,14 @@ public class MaintainDetailsFragment extends Fragment{
                 Toast.makeText(getContext(), "Confirmed set", Toast.LENGTH_SHORT).show();
                 setgone(editid, editname, editpassword, editphno, edittype, setedit);
                 listView.setVisibility(View.VISIBLE);
+
+                String name = editname.getText().toString();
+                String id = editid.getText().toString();
+                String pno = editphno.getText().toString();
+                String type = edittype.getText().toString();
+                String pwd = editpassword.getText().toString();
+
+                setchanges(s,id,name,pwd,pno,type);
             }
 
         });
@@ -212,5 +218,13 @@ public class MaintainDetailsFragment extends Fragment{
         editphno.setVisibility(View.VISIBLE);
         edittype.setVisibility(View.VISIBLE);
         setedit.setVisibility(View.VISIBLE);
+    }
+    public void setchanges(String s,String editid,String editname,String editpassword,
+                           String editphno,String edittype){
+        MainActivity.db.getUser(s,"qwe").setEmailId(editid);
+        MainActivity.db.getUser(s,"qwe").setUserName(editname);
+        MainActivity.db.getUser(s,"qwe").setPwd(editpassword);
+        MainActivity.db.getUser(s,"qwe").setPhoneNo(editphno);
+        MainActivity.db.getUser(s,"qwe").setUserAccessLevel(edittype);
     }
 }
