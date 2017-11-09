@@ -37,19 +37,18 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-
-
     @Override
     protected void onStop() {
         super.onStop();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        User ActiveUser = db.getActiveSession().getActiveUser();
-        if(ActiveUser != null) {
+        if(db.getActiveSession().isActive()) {
+            final User ActiveUser = db.getActiveSession().getActiveUser();
             String ual = ActiveUser.getUserAccessLevel();
             if(ual.equals("1")) {
                 //Manager

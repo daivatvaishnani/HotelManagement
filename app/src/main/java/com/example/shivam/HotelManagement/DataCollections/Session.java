@@ -6,24 +6,22 @@ package com.example.shivam.HotelManagement.DataCollections;
 
 public class Session {
     private User activeUser;
-    private boolean isActive = false;
 
     public void clearSession() {
-        this.isActive = false;
         this.activeUser = null;
     }
 
     public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
+        if(this.activeUser == null) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     public Session(User activeUser) {
         this.activeUser = activeUser;
-        this.isActive = true;
     }
 
     public User getActiveUser() {
