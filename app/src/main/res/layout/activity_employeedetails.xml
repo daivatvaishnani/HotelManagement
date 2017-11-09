@@ -8,24 +8,7 @@
     tools:context="com.example.shivam.HotelManagement.employeedetails">
 
 
-        <!--<LinearLayout
-            android:id="@+id/first"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/search"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/input_background"
-                android:hint="search for staff"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/searchgo"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Go"/>
-        </LinearLayout>-->
+
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -41,7 +24,7 @@
         </ListView>
         <TextView
             android:id="@+id/editid"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="100dp"
             android:text="hello there"
             android:textColor="#ECEFF1"
             android:layout_width="wrap_content"

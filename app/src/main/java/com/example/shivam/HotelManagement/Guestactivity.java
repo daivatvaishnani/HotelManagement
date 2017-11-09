@@ -48,8 +48,10 @@ public class Guestactivity extends AppCompatActivity
         usernavname = (TextView)findViewById(R.id.usernavname);
         usernavid = (TextView)findViewById(R.id.usernavid);
 
-       /* usernavname.setText("Guest 1");
-        usernavid.setText("guest1@gmail.com");*/
+        User user = MainActivity.db.getActiveSession().getActiveUser();
+
+        usernavname.setText(user.getUserName());
+        usernavid.setText(user.getEmailId());
 
         checkin = (EditText) findViewById(R.id.checkin);
         checkout = (EditText) findViewById(R.id.checkout);

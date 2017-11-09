@@ -54,6 +54,7 @@ public class MaintainDetailsFragment extends Fragment{
         listView.setAdapter(listViewAdapter);
 
         editid = (TextView) rootView.findViewById(R.id.editid);
+        editname = (TextView) rootView.findViewById(R.id.editname);
         editpassword = (TextView) rootView.findViewById(R.id.editpassword);
         edittype = (TextView) rootView.findViewById(R.id.edittype);
         editphno = (TextView) rootView.findViewById(R.id.editphno);
@@ -75,6 +76,16 @@ public class MaintainDetailsFragment extends Fragment{
             }
         });
 
+        /*editid.setText("hello");
+        editname.setText("shivam");
+        editpassword.setText("sdsq");
+        edittype.setText("fds");
+        editphno.setText("95587");
+
+        System.out.println(editid.getText());
+        System.out.println("helloooooooooooooooo");
+        System.out.println("helooooooooooo");*/
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,13 +95,19 @@ public class MaintainDetailsFragment extends Fragment{
 
                 setvisible(editid, editname, editpassword, editphno, edittype, setedit);
 
+                User user = MainActivity.db.getActiveSession().getActiveUser();
+
                 // retrieve the details of emp of name "s"
                 //MainActivity.db.
-                editid.setText("hello");
-                editname.setText("shivam");
-                editpassword.setText("sdsq");
-                edittype.setText("fds");
-                editphno.setText("95587");
+                editid.setText(user.getEmailId());
+                editname.setText(user.getUserName());
+                editpassword.setText(user.getPwd());
+                edittype.setText(user.getUserAccessLevel());
+                editphno.setText(user.getPhoneNo());
+
+                System.out.println(editid.getText());
+                System.out.println("helloooooooooooooooo");
+                System.out.println("helooooooooooo");
 
                 dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Save Changes", new DialogInterface.OnClickListener() {
                     @Override
@@ -173,7 +190,6 @@ public class MaintainDetailsFragment extends Fragment{
             }
 
         });
-
             }
         });
 
