@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.DataCollections.*;
 //import com.example.shivam.HotelManagement.Guestactivity;
+import com.example.shivam.HotelManagement.Guestactivity;
 import com.example.shivam.HotelManagement.R;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -220,7 +221,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (u.getUserAccessLevel().equals("3")) {
                     Toast.makeText(MainActivity.this, "YOU ARE GUEST", Toast.LENGTH_SHORT).show();
-                    // GUEST ACTIVITY
+                    startActivity(new Intent(MainActivity.this, Guestactivity.class));
+
 
                 }
                 if (u.getUserAccessLevel().equals("4")) {

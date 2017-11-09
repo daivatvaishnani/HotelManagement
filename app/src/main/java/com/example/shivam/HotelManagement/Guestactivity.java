@@ -1,4 +1,3 @@
-/*
 package com.example.shivam.HotelManagement;
 
 import android.app.ProgressDialog;
@@ -43,14 +42,14 @@ public class Guestactivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Bundle extras = getIntent().getExtras();
-        User user = extras.getParcelable("user");
+        /*Bundle extras = getIntent().getExtras();
+        User user = extras.getParcelable("user");*/
 
         usernavname = (TextView)findViewById(R.id.usernavname);
         usernavid = (TextView)findViewById(R.id.usernavid);
 
-        usernavname.setText(user.getName());
-        usernavid.setText(user.getId());
+       /* usernavname.setText("Guest 1");
+        usernavid.setText("guest1@gmail.com");*/
 
         checkin = (EditText) findViewById(R.id.checkin);
         checkout = (EditText) findViewById(R.id.checkout);
@@ -91,18 +90,21 @@ public class Guestactivity extends AppCompatActivity
             }
         });
 
-        String rooms = noofrooms.getText().toString().trim();
-        String guest = noofguest.getText().toString().trim();
 
-        String nosingle = singleno.getText().toString().trim();
-        String nodouble = doubleno.getText().toString().trim();
-        String nodeluxe = deluxeno.getText().toString().trim();
 
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressdialog.setMessage("checking availability");
                 progressdialog.show();
+
+                String rooms = noofrooms.getText().toString().trim();
+                String guest = noofguest.getText().toString().trim();
+
+                String nosingle = singleno.getText().toString().trim();
+                String nodouble = doubleno.getText().toString().trim();
+                String nodeluxe = deluxeno.getText().toString().trim();
+
                 //query for availability
                 boolean avialable = true;
                 if(avialable){
@@ -194,4 +196,3 @@ public class Guestactivity extends AppCompatActivity
         return true;
     }
 }
-*/
