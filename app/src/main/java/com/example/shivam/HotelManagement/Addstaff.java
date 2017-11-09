@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.example.shivam.HotelManagement.Activity.MainActivity;
 import com.example.shivam.HotelManagement.Activity.ManagerActivity;
+import com.example.shivam.HotelManagement.Activity.RegisterActivity;
 import com.example.shivam.HotelManagement.DataCollections.*;
 
 import android.view.WindowManager;
@@ -67,6 +69,7 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int status;
                 final String sname = username.getText().toString();
                 final String spwd = password.getText().toString();
                 final String semail = email.getText().toString();
@@ -78,6 +81,10 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                 }
                 if(TextUtils.isEmpty(semail)){
                     Toast.makeText(Addstaff.this, "Please enter email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!semail.contains("@")) {
+                    Toast.makeText(Addstaff.this, "Invalid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(TextUtils.isEmpty(spwd)){
@@ -94,12 +101,18 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                 }
                 if(stafftype == "FDS"){
                     //add fds to database
+                    status = MainActivity.db.registerUser(semail, spwd, "4", sname, snumber);
                 }
                 else {
+                    status = MainActivity.db.registerUser(semail, spwd, "2", sname, snumber);
                     //add supervisor to datbase
                 }
-
-                Toast.makeText(Addstaff.this, "staff has been added", Toast.LENGTH_SHORT).show();
+                if(status == 0) {
+                    Toast.makeText(Addstaff.this, "User already exists", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(Addstaff.this, "staff has been added", Toast.LENGTH_SHORT).show();
+                }
 
                 finish();
                 startActivity(new Intent(Addstaff.this, ManagerActivity.class));
