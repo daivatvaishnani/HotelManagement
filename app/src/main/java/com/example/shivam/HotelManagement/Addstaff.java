@@ -54,17 +54,25 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
-        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        String access =  MainActivity.db.getActiveSession().getActiveUser().getUserAccessLevel();
 
-        List<String> categories = new ArrayList<String>();
-        categories.add("FDS");
-        categories.add("Supervisor");
+        if(access.equals("1")){
+            spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+            List<String> categories = new ArrayList<String>();
+            categories.add("FDS");
+            categories.add("Supervisor");
 
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
-        spinner.setAdapter(dataAdapter);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            spinner.setAdapter(dataAdapter);
+        }
+        else{
+            spinner.setVisibility(View.GONE);
+        }
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
