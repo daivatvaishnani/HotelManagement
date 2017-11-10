@@ -98,8 +98,8 @@ public class GuestActivity extends AppCompatActivity
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*progressdialog.setMessage("checking availability");
-                progressdialog.show();*/
+                progressdialog.setMessage("checking availability");
+                progressdialog.show();
 
                 String rooms = noofrooms.getText().toString().trim();
                 String guest = noofguest.getText().toString().trim();

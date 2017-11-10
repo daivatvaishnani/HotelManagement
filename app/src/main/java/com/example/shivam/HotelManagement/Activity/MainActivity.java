@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(ual.equals("3")) {
                 //Guest
+                startActivity(new Intent(MainActivity.this, GuestActivity.class));
             }
             else if(ual.equals("4")) {
                 //FDS
