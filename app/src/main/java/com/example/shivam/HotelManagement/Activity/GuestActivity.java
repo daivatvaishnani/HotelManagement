@@ -1,6 +1,7 @@
 package com.example.shivam.HotelManagement.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -98,7 +99,7 @@ public class GuestActivity extends AppCompatActivity
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressdialog.setMessage("checking availability");
+                progressdialog.setMessage("Checking Availability");
                 progressdialog.show();
 
                 String rooms = noofrooms.getText().toString().trim();
@@ -156,8 +157,8 @@ public class GuestActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.guestactivity, menu);
+        // Inflate the menu; this adds groupItem to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
         return true;
     }
 
@@ -169,12 +170,22 @@ public class GuestActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            MainActivity.db.getActiveSession().clearSession();
+            startActivity(new Intent(GuestActivity.this, MainActivity.class));
+            return true;
+        }
+
         if (id == R.id.action_settings) {
+            startActivity(new Intent(GuestActivity.this, ChangeDetailsActivity.class));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

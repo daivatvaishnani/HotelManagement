@@ -2,6 +2,7 @@ package com.example.shivam.HotelManagement.Fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -50,7 +51,22 @@ public class MaintainDetailsFragment extends Fragment{
             employees.add(u.getUserName());
         }
         final ListView listView = (ListView) rootView.findViewById(R.id.slist);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees){
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view =super.getView(position, convertView, parent);
+
+                TextView textView=(TextView) view.findViewById(android.R.id.text1);
+
+            /*YOUR CHOICE OF COLOR*/
+                textView.setTextColor(Color.WHITE);
+
+                return view;
+            }
+        };
+
+        /*SET THE ADAPTER TO LISTVIEW*/
         listView.setAdapter(listViewAdapter);
 
         editid = (TextView) rootView.findViewById(R.id.editid);
