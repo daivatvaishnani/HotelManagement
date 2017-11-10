@@ -3,27 +3,18 @@ package com.example.shivam.HotelManagement.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.DataCollections.*;
-//import com.example.shivam.HotelManagement.Guestactivity;
-import com.example.shivam.HotelManagement.Guestactivity;
+//import com.example.shivam.HotelManagement.Activity.GuestActivity;
 import com.example.shivam.HotelManagement.R;
 import com.firebase.client.Firebase;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -144,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 //                            else if(type == "Guest"){
 //                                progressdialog.dismiss();
 //                                finish();
-//                                Intent in = new Intent(MainActivity.this,Guestactivity.class);
+//                                Intent in = new Intent(MainActivity.this,GuestActivity.class);
 //                                //run query fetch user details
 //                                User user = new User();
 //                                in.putExtra("user", (Parcelable) user);
@@ -221,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (u.getUserAccessLevel().equals("3")) {
                     Toast.makeText(MainActivity.this, "YOU ARE GUEST", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, Guestactivity.class));
+                    startActivity(new Intent(MainActivity.this, GuestActivity.class));
 
 
                 }

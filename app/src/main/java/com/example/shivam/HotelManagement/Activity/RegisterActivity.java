@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//import com.example.shivam.HotelManagement.Guestactivity;
+//import com.example.shivam.HotelManagement.GuestActivity;
 import com.example.shivam.HotelManagement.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -139,7 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 } else {
 
                                     boolean stat = Dbhelper.add_guest(user);
-                                    if(stat == true){startActivity(new Intent(RegisterActivity.this, Guestactivity.class));
+                                    if(stat == true){startActivity(new Intent(RegisterActivity.this, GuestActivity.class));
                                         finish();
                                     }
                                     else {

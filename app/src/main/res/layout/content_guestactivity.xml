@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.shivam.HotelManagement.Guestactivity"
+    tools:context="com.example.shivam.HotelManagement.Activity.GuestActivity"
     tools:showIn="@layout/app_bar_guestactivity">
 
     <EditText

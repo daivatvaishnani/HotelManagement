@@ -63,10 +63,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.shivam.HotelManagement.Activity.ManagerActivity"/>
         </activity>
-        <activity android:name=".Activity.Guestactivity" />
+        <!--activity android:name=".Activity.GuestActivity" /-->
         <!--
         <activity
-            android:name="com.example.shivam.Guestactivity"
+            android:name="com.example.shiGuestActivityvity"
             android:label="@string/title_activity_guest"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -82,7 +82,7 @@
         <activity android:name=".Addstaff"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
-            android:name=".Guestactivity"
+            android:name=".Activity.GuestActivity"
             android:label="@string/title_activity_guestactivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--activity android:name=".Activity.LaundryActivity"--><!--/activity-->

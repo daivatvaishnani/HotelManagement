@@ -1,4 +1,4 @@
-package com.example.shivam.HotelManagement;
+package com.example.shivam.HotelManagement.Activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -22,8 +22,10 @@ import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.Activity.MainActivity;
 import com.example.shivam.HotelManagement.DataCollections.*;
+import com.example.shivam.HotelManagement.DateDialog;
+import com.example.shivam.HotelManagement.R;
 
-public class Guestactivity extends AppCompatActivity
+public class GuestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView usernavname,usernavid;
