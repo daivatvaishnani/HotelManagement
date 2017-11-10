@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,106 +10,121 @@
     tools:showIn="@layout/app_bar_guestactivity">
 
     <EditText
-        android:id="@+id/usernoguest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="center"
-        android:background="@drawable/input_background"
-        android:inputType="phone"
-        android:hint="Guests"
-        tools:layout_editor_absoluteY="91dp"
-        tools:layout_editor_absoluteX="74dp" />
-
-    <CheckBox
-        android:id="@+id/usersingleroom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Single"
-        tools:layout_editor_absoluteY="136dp"
-        tools:layout_editor_absoluteX="31dp" />
-
-    <CheckBox
-        android:id="@+id/userdoubleroom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Double"
-        tools:layout_editor_absoluteY="136dp"
-        tools:layout_editor_absoluteX="145dp" />
-
-    <CheckBox
-        android:id="@+id/userdeluxeroom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Deluxe"
-        tools:layout_editor_absoluteY="136dp"
-        tools:layout_editor_absoluteX="257dp" />
-
-    <Button
-        android:id="@+id/available"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_background_2"
-        android:text="Check Availability"
-        tools:layout_editor_absoluteY="261dp"
-        tools:layout_editor_absoluteX="110dp" />
-
-    <EditText
         android:id="@+id/checkin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="90dp"
         android:gravity="center"
-        android:background="@drawable/input_background"
-        android:inputType="textPersonName"
-        android:hint="check-in"
-        tools:layout_editor_absoluteY="36dp"
-        tools:layout_editor_absoluteX="78dp" />
+        android:clickable="true"
+        android:hint=" check-in"
+        android:textColorHint="#fff"
+        android:textColor="#fff"/>
 
     <EditText
         android:id="@+id/checkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/usernoguest"
+        android:layout_alignEnd="@+id/usernoguest"
         android:clickable="true"
         android:gravity="center"
-        android:background="@drawable/input_background"
-        android:inputType="textPersonName"
+        android:textColorHint="#fff"
         android:hint="check-out"
-        tools:layout_editor_absoluteY="36dp"
-        tools:layout_editor_absoluteX="210dp" />
+        android:textColor="#fff" />
+
+    <EditText
+        android:id="@+id/usernoguest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/checkin"
+        android:layout_below="@+id/checkin"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/input_background"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Guests"
+        android:inputType="phone" />
+
+    <CheckBox
+        android:id="@+id/usersingleroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernoguest"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="43dp"
+        android:textColor="#ffff"
+        android:layout_toStartOf="@+id/available"
+        android:text="Single" />
+
+    <CheckBox
+        android:id="@+id/userdoubleroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/usersingleroom"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffff"
+        android:text="Double" />
+
+    <CheckBox
+        android:id="@+id/userdeluxeroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/userdoubleroom"
+        android:layout_alignBottom="@+id/userdoubleroom"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="21dp"
+        android:textColor="#ffff"
+        android:text="Deluxe" />
 
     <EditText
         android:id="@+id/singleno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:hint="number"
-        android:gravity="center"
+        android:layout_alignEnd="@+id/usersingleroom"
+        android:layout_below="@+id/usersingleroom"
+        android:layout_marginTop="24dp"
         android:background="@drawable/input_background"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="194dp" />
+        android:gravity="center"
+        android:hint="number"
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/doubleno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
+        android:layout_alignBaseline="@+id/singleno"
+        android:layout_alignBottom="@+id/singleno"
+        android:layout_alignEnd="@+id/userdoubleroom"
+        android:background="@drawable/input_background"
         android:gravity="center"
         android:hint="number"
-        android:background="@drawable/input_background"
-        tools:layout_editor_absoluteX="145dp"
-        tools:layout_editor_absoluteY="194dp" />
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/deluxeno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:hint="number"
-        android:gravity="center"
+        android:layout_alignBaseline="@+id/doubleno"
+        android:layout_alignBottom="@+id/doubleno"
+        android:layout_alignEnd="@+id/userdeluxeroom"
         android:background="@drawable/input_background"
-        tools:layout_editor_absoluteX="257dp"
-        tools:layout_editor_absoluteY="194dp" />
+        android:gravity="center"
+        android:hint="number"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/doubleno"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:background="@drawable/btn_background_2"
+        android:text="Check Availability" />
 
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>
