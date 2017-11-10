@@ -45,13 +45,12 @@ public class Guestactivity extends AppCompatActivity
         /*Bundle extras = getIntent().getExtras();
         User user = extras.getParcelable("user");*/
 
-        usernavname = (TextView)findViewById(R.id.usernavname);
-        usernavid = (TextView)findViewById(R.id.usernavid);
+       /* usernavname = (TextView)findViewById(R.id.usernavname);
+        usernavid = (TextView)findViewById(R.id.usernavid);*/
 
         User user = MainActivity.db.getActiveSession().getActiveUser();
 
-        usernavname.setText(user.getUserName());
-        usernavid.setText(user.getEmailId());
+
 
         checkin = (EditText) findViewById(R.id.checkin);
         checkout = (EditText) findViewById(R.id.checkout);
@@ -137,6 +136,8 @@ public class Guestactivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
 
     }
