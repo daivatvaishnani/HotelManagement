@@ -52,8 +52,6 @@ public class GuestActivity extends AppCompatActivity
 
         User user = MainActivity.db.getActiveSession().getActiveUser();
 
-
-
         checkin = (EditText) findViewById(R.id.checkin);
         checkout = (EditText) findViewById(R.id.checkout);
 
@@ -62,6 +60,8 @@ public class GuestActivity extends AppCompatActivity
         singleno = (EditText) findViewById(R.id.singleno);
         doubleno = (EditText) findViewById(R.id.doubleno);
         deluxeno = (EditText) findViewById(R.id.deluxeno);
+
+        setgone(singleno,doubleno,deluxeno);
 
         checksingle = (CheckBox) findViewById(R.id.usersingleroom);
         checkdouble = (CheckBox) findViewById(R.id.userdoubleroom);
@@ -93,6 +93,15 @@ public class GuestActivity extends AppCompatActivity
             }
         });
 
+        if(checksingle.isChecked()){
+            singleno.setVisibility(View.VISIBLE);
+        }
+        if(checkdouble.isChecked()){
+            doubleno.setVisibility(View.VISIBLE);
+        }
+        if(checkdeluxe.isChecked()){
+            deluxeno.setVisibility(View.VISIBLE);
+        }
 
 
         checkavailable.setOnClickListener(new View.OnClickListener() {
@@ -108,15 +117,16 @@ public class GuestActivity extends AppCompatActivity
                 String nodouble = doubleno.getText().toString().trim();
                 String nodeluxe = deluxeno.getText().toString().trim();
 
+                
                 //query for availability
-                boolean avialable = true;
+               /* boolean avialable = true;
                 if(avialable){
                     //give him the required rooms
                 }
                 else {
                     progressdialog.setMessage("rooms not available");
                     progressdialog.dismiss();
-                }
+                }*/
             }
         });
 
@@ -199,5 +209,10 @@ public class GuestActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void setgone(EditText single,EditText doub,EditText deluxe){
+        single.setVisibility(View.GONE);
+        doub.setVisibility(View.GONE);
+        deluxe.setVisibility(View.GONE);
     }
 }
