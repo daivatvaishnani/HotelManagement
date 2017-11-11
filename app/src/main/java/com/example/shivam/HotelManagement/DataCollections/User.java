@@ -14,6 +14,7 @@ public class User {
     private String phoneNo;
     private String cardNo;
 
+
     public String getCardNo() {
         return cardNo;
     }

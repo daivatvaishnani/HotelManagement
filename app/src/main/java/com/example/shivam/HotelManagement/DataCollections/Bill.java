@@ -8,21 +8,14 @@ import java.util.ArrayList;
 
 public class Bill {
     private ArrayList<Service> services = new ArrayList<>();
-    private String billAmount;
+    private String billAmount = "0";
 
-    public String calculateBillAmount() {
+    public String getBillAmount() {
         int amt = 0;
         for(Service s : services) {
             amt += Integer.parseInt(s.getServiceAmount());
         }
-        return Integer.toString(amt);
-    }
-
-    public Bill() {
-        this.billAmount = "0";
-    }
-
-    public String getBillAmount() {
+        billAmount = Integer.toString(amt);
         return billAmount;
     }
 
@@ -36,5 +29,13 @@ public class Bill {
 
     public void setServices(ArrayList<Service> services) {
         this.services = services;
+    }
+
+    public void addServiceToBill(Service s) {
+        this.services.add(s);
+    }
+
+    public void addServiceToBill(String roomId, String serviceType) {
+        this.services.add(new Service(roomId, serviceType));
     }
 }
