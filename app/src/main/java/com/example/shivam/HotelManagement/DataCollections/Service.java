@@ -50,13 +50,16 @@ public class Service {
     }
 
     public void addItemToService(String itemName, String itemPrice, String itemType, String itemQuantity) {
-        this.items.add(new Item(itemName, itemPrice, itemType));
+        Item i = new Item(itemName, itemPrice, itemType);
+        i.setItemQuantity(itemQuantity);
+        this.items.add(i);
         serviceAmount = Integer.toString(Integer.parseInt(serviceAmount)
                                             + Integer.parseInt(itemPrice)*Integer.parseInt(itemQuantity)
                                         );
     }
 
     public void addItemToService(Item i, String itemQuantity) {
+        i.setItemQuantity(itemQuantity);
         this.items.add(i);
         serviceAmount = Integer.toString(Integer.parseInt(serviceAmount)
                                             + Integer.parseInt(i.getItemPrice())*Integer.parseInt(itemQuantity)
