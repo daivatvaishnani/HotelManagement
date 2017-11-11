@@ -10,17 +10,16 @@ public class User {
     private String userAccessLevel;
     private String shift;
     private String userName;
-    private String roomID;
-    private Bill bill = new Bill();
+    private Booking booking = new Booking();
     private String phoneNo;
-    private String card_no;
+    private String cardNo;
 
-    public String getCard_no() {
-        return card_no;
+    public String getCardNo() {
+        return cardNo;
     }
 
-    public void setCard_no(String card_no) {
-        this.card_no = card_no;
+    public void setCardNo(String cardNo) {
+        this.cardNo = cardNo;
     }
 
     public String getPhoneNo() {
@@ -29,22 +28,6 @@ public class User {
 
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
-    }
-
-    public String getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
-    }
-
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
     }
 
     public String getShift() {

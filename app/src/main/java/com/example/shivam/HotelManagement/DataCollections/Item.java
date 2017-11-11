@@ -13,6 +13,7 @@ public class Item {
     private String itemName;
     private String itemPrice;
     private String itemType;
+    private String itemQuantity = "0";
 
     public String getItemType() {
         return itemType;

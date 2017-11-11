@@ -8,14 +8,26 @@ import java.util.ArrayList;
 
 public class Bill {
     private ArrayList<Service> services = new ArrayList<>();
-    private String amount;
+    private String billAmount;
 
-    public String getAmount() {
-        return amount;
+    public String calculateBillAmount() {
+        int amt = 0;
+        for(Service s : services) {
+            amt += Integer.parseInt(s.getServiceAmount());
+        }
+        return Integer.toString(amt);
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public Bill() {
+        this.billAmount = "0";
+    }
+
+    public String getBillAmount() {
+        return billAmount;
+    }
+
+    public void setBillAmount(String amount) {
+        this.billAmount = amount;
     }
 
     public ArrayList<Service> getServices() {
