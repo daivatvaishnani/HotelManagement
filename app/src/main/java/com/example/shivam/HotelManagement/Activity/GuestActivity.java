@@ -42,7 +42,7 @@ public class GuestActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guestactivity);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+       // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -95,7 +95,7 @@ public class GuestActivity extends AppCompatActivity
             }
         });
 
-        if(checksingle.isChecked()){
+       /* if(checksingle.isChecked()){
             singleno.setVisibility(View.VISIBLE);
         }
         if(checkdouble.isChecked()){
@@ -103,26 +103,52 @@ public class GuestActivity extends AppCompatActivity
         }
         if(checkdeluxe.isChecked()){
             deluxeno.setVisibility(View.VISIBLE);
-        }
+        }*/
+
+        checksingle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checksingle.isChecked()){
+                    singleno.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        checkdouble.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkdouble.isChecked()){
+                    doubleno.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        checkdeluxe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkdeluxe.isChecked()){
+                    deluxeno.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
 
 
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { try{
+            public void onClick(View v) {
+
+                String guest = noofguest.getText().toString().trim();
+
+                String nosingle = singleno.getText().toString().trim();
+                String nodouble = doubleno.getText().toString().trim();
+                String nodeluxe = deluxeno.getText().toString().trim();
+
+                try{
                 progressdialog.setMessage("checking availability");
                 progressdialog.show();
                 Thread.sleep(2000);
                 progressdialog.dismiss();
 
             }catch(Exception e){}
-
-
-                String rooms = noofrooms.getText().toString().trim();
-                String guest = noofguest.getText().toString().trim();
-
-                String nosingle = singleno.getText().toString().trim();
-                String nodouble = doubleno.getText().toString().trim();
-                String nodeluxe = deluxeno.getText().toString().trim();
 
                 Toast.makeText(GuestActivity.this, "your rooms are ready", Toast.LENGTH_SHORT).show();
 

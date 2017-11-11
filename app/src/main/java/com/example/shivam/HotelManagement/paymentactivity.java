@@ -30,9 +30,9 @@ public class paymentactivity extends AppCompatActivity {
 
         String card = user.getCard_no();
 
-        if(card.isEmpty()){
+        /*if(!card.isEmpty()){
             cardno.setText(card);
-        }
+        }*/
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,9 +41,9 @@ public class paymentactivity extends AppCompatActivity {
                 String cvv_no = cvv.getText().toString();
                 String expire_date = expire.getText().toString();
 
-                if(cvv_no.isEmpty()){
+                /*if(cvv_no.isEmpty()){
 
-                }
+                }*/
 
             }
 
@@ -59,13 +59,13 @@ public class paymentactivity extends AppCompatActivity {
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+                finish();
             }
         });
         builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+                dialog.cancel();
             }
         });
         AlertDialog alertDialog = builder.create();

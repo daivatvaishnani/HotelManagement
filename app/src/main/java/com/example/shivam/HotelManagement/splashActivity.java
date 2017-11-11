@@ -21,12 +21,12 @@ public class splashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        welcome = (TextView)findViewById(R.id.welcome);
+        //welcome = (TextView)findViewById(R.id.welcome);
         skyline = (ImageView) findViewById(R.id.skyline);
 
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.mytransition);
 
-        welcome.startAnimation(myanim);
+       // welcome.startAnimation(myanim);
         skyline.startAnimation(myanim);
 
         final Intent i = new Intent(this, MainActivity.class);
@@ -34,7 +34,7 @@ public class splashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    sleep(5000);
+                    sleep(4000);
                 }catch(Exception e){}
                 finally{
                     startActivity(i);
