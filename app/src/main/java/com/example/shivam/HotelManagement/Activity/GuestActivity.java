@@ -1,6 +1,7 @@
 package com.example.shivam.HotelManagement.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,6 +25,7 @@ import com.example.shivam.HotelManagement.Activity.MainActivity;
 import com.example.shivam.HotelManagement.DataCollections.*;
 import com.example.shivam.HotelManagement.DateDialog;
 import com.example.shivam.HotelManagement.R;
+import com.example.shivam.HotelManagement.paymentactivity;
 
 public class GuestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -106,9 +108,14 @@ public class GuestActivity extends AppCompatActivity
 
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { try{
                 progressdialog.setMessage("checking availability");
                 progressdialog.show();
+                Thread.sleep(2000);
+                progressdialog.dismiss();
+
+            }catch(Exception e){}
+
 
                 String rooms = noofrooms.getText().toString().trim();
                 String guest = noofguest.getText().toString().trim();
@@ -117,7 +124,17 @@ public class GuestActivity extends AppCompatActivity
                 String nodouble = doubleno.getText().toString().trim();
                 String nodeluxe = deluxeno.getText().toString().trim();
 
-                
+                Toast.makeText(GuestActivity.this, "your rooms are ready", Toast.LENGTH_SHORT).show();
+
+                try{
+                    progressdialog.setMessage("proceding to payment");
+                    progressdialog.show();
+                    Thread.sleep(3000);
+                    progressdialog.dismiss();
+
+                }catch(Exception e){}
+
+                startActivity(new Intent(GuestActivity.this, paymentactivity.class));
                 //query for availability
                /* boolean avialable = true;
                 if(avialable){

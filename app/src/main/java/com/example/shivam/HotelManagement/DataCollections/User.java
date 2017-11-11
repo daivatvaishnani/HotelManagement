@@ -13,6 +13,15 @@ public class User {
     private String roomID;
     private Bill bill = new Bill();
     private String phoneNo;
+    private String card_no;
+
+    public String getCard_no() {
+        return card_no;
+    }
+
+    public void setCard_no(String card_no) {
+        this.card_no = card_no;
+    }
 
     public String getPhoneNo() {
         return phoneNo;
