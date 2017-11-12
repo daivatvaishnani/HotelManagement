@@ -41,7 +41,8 @@ public class ScheduleFragment extends Fragment{
         //String[] employees = {"emp1","emp2","emp3","emp4","emp5","emp6"};
         View rootView = inflater.inflate(R.layout.activity_scheduling,container,false);
         //String ual = new String("1");
-        final ArrayList<User> users = MainActivity.db.getUsers();
+        final User currentUser = MainActivity.db.getActiveSession().getActiveUser();
+        final ArrayList<User> users = MainActivity.db.getUsersUnder(currentUser.getUserAccessLevel());
 //        String[] employees = users.toArray(new String[0]);
         ArrayList<String> employees = new ArrayList<>();
         final ArrayList<String> employeeEmails = new ArrayList<>();

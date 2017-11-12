@@ -7,6 +7,16 @@ import java.util.ArrayList;
  */
 
 public class Booking {
+    private String bookingID;
+
+    public String getBookingID() {
+        return bookingID;
+    }
+
+    public void setBookingID(String bookingID) {
+        this.bookingID = bookingID;
+    }
+
     private ArrayList<Room> rooms = new ArrayList<>();
     private Bill bill = new Bill();
 

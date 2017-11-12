@@ -1,5 +1,6 @@
 package com.example.shivam.HotelManagement.DataCollections;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,19 +13,28 @@ public class User {
     private String userAccessLevel;
     private String shift;
     private String userName;
-    private Booking booking = new Booking();
     private String phoneNo;
     private String cardNo;
+    private ArrayList<Booking> bookings = new ArrayList<>();
+
+    public boolean hasABooking() {
+        if(bookings.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(ArrayList<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
     private Date checkInDate;
     private Date checkoutDate;
 
-    public Booking getBooking() {
-        return booking;
-    }
-
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
 
     public Date getCheckInDate() {
         return checkInDate;

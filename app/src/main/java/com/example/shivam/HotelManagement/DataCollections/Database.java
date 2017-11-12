@@ -82,6 +82,25 @@ public class Database
         return userlist;
     }
 
+    public ArrayList<User> getUsersUnder(String ual) {
+        int ulevel = Integer.parseInt(ual);
+        ArrayList<User> userlist = new ArrayList<>();
+        for(User u : users) {
+            int level = Integer.parseInt(u.getUserAccessLevel());
+            if(ulevel == 1) {
+                if(level == 2 || level == 4) {
+                    userlist.add(u);
+                }
+            }
+            if(ulevel == 2) {
+                if(level == 5) {
+                    userlist.add(u);
+                }
+            }
+        }
+        return userlist;
+    }
+
     public User getUser(String emailID) {
         for(User u : users) {
             if (u.getEmailId().equals(emailID)) {
@@ -191,6 +210,16 @@ public class Database
         this.users.add(new User("fds1@gmail.com","fds1","4","fds1","12323521312312"));
         this.users.add(new User("fds2@gmail.com","fds2","4","fds2","123241111231123"));
         this.users.add(new User("fds3@gmail.com","fds3","4","fds3","123213231231"));
+        this.users.add(new User("employee1@gmail.com", "employee1", "5", "employee1", "1231231232"));
+        this.users.add(new User("employee2@gmail.com", "employee2", "5", "employee2", "1231231232"));
+        this.users.add(new User("employee3@gmail.com", "employee3", "5", "employee3", "1231231232"));
+        this.users.add(new User("employee4@gmail.com", "employee4", "5", "employee4", "1231231232"));
+        this.users.add(new User("employee5@gmail.com", "employee5", "5", "employee5", "1231231232"));
+        this.users.add(new User("employee6@gmail.com", "employee6", "5", "employee6", "1231231232"));
+        this.users.add(new User("employee7@gmail.com", "employee7", "5", "employee7", "1231231232"));
+        this.users.add(new User("employee8@gmail.com", "employee8", "5", "employee8", "1231231232"));
+        this.users.add(new User("employee9@gmail.com", "employee9", "5", "employee9", "1231231232"));
+        this.users.add(new User("employee10@gmail.com", "employee10", "5", "employee10", "1231231232"));
         // ADD ITEMS
         this.items.add(new Item("Shirt", "20", "Laundry"));
         this.items.add(new Item("TShirt", "10", "Laundry"));

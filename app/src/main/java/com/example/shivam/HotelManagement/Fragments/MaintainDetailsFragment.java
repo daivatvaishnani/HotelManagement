@@ -43,8 +43,8 @@ public class MaintainDetailsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.activity_employeedetails,container,false);
-
-        final ArrayList<User> users = MainActivity.db.getUsers();
+        final User currentUser = MainActivity.db.getActiveSession().getActiveUser();
+        final ArrayList<User> users = MainActivity.db.getUsersUnder(currentUser.getUserAccessLevel());
 //        String[] employees = users.toArray(new String[0]);
         ArrayList<String> employees = new ArrayList<>();
         for(User u : users) {
