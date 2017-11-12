@@ -42,7 +42,8 @@ public class GuestActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guestactivity);
-       // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -71,7 +72,7 @@ public class GuestActivity extends AppCompatActivity
 
         checkavailable = (Button) findViewById(R.id.available);
 
-        checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+       /* checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
@@ -81,9 +82,29 @@ public class GuestActivity extends AppCompatActivity
 
                 }
             }
+        });*/
+
+       checkin.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+               DateDialog dialog = new DateDialog(v);
+               android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+               dialog.show(ft,"Datepicker");
+           }
+       });
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                DateDialog dialog = new DateDialog(v);
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialog.show(ft,"Datepicker");
+            }
         });
 
-        checkout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+       /* checkout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
@@ -93,7 +114,8 @@ public class GuestActivity extends AppCompatActivity
 
                 }
             }
-        });
+        });*/
+
 
        /* if(checksingle.isChecked()){
             singleno.setVisibility(View.VISIBLE);
@@ -147,7 +169,6 @@ public class GuestActivity extends AppCompatActivity
                 progressdialog.show();
                 Thread.sleep(2000);
                 progressdialog.dismiss();
-
             }catch(Exception e){}
 
                 Toast.makeText(GuestActivity.this, "your rooms are ready", Toast.LENGTH_SHORT).show();
@@ -157,7 +178,6 @@ public class GuestActivity extends AppCompatActivity
                     progressdialog.show();
                     Thread.sleep(3000);
                     progressdialog.dismiss();
-
                 }catch(Exception e){}
 
                 startActivity(new Intent(GuestActivity.this, paymentactivity.class));
@@ -254,8 +274,8 @@ public class GuestActivity extends AppCompatActivity
         return true;
     }
     public void setgone(EditText single,EditText doub,EditText deluxe){
-        single.setVisibility(View.GONE);
-        doub.setVisibility(View.GONE);
-        deluxe.setVisibility(View.GONE);
+        single.setVisibility(View.INVISIBLE);
+        doub.setVisibility(View.INVISIBLE);
+        deluxe.setVisibility(View.INVISIBLE);
     }
 }
