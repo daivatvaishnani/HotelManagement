@@ -28,7 +28,7 @@ public class paymentactivity extends AppCompatActivity {
 
         User user = MainActivity.db.getActiveSession().getActiveUser();
 
-        String card = user.getCard_no();
+        String card = user.getCardNo();
 
         /*if(!card.isEmpty()){
             cardno.setText(card);
