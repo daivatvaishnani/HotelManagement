@@ -1,5 +1,7 @@
 package com.example.shivam.HotelManagement.DataCollections;
 
+import java.util.Date;
+
 /**
  * Created by shivam on 1/11/17.
  */
@@ -13,7 +15,32 @@ public class User {
     private Booking booking = new Booking();
     private String phoneNo;
     private String cardNo;
+    private Date checkInDate;
+    private Date checkoutDate;
 
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public Date getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate) {
+        this.checkoutDate = checkoutDate;
+    }
 
     public String getCardNo() {
         return cardNo;

@@ -18,6 +18,7 @@ public class Database
 //    public List<User> users = new ArrayList<>();
     private String singleRoomPrice, doubleRoomPrice, deluxeRoomPrice;
     private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Room> rooms = new ArrayList<>();
 
     private Session activeSession = new Session(null);
 
@@ -191,6 +192,37 @@ public class Database
         this.items.add(new Item("Sandwich", "50", "Food"));
         this.items.add(new Item("Veg-Thali", "100", "Food"));
         this.items.add(new Item("NonVeg-Thali", "200", "Food"));
+        //ADD ROOMS
+        this.rooms.add(new Room("1", "singleRoom"));
+        this.rooms.add(new Room("2", "singleRoom"));
+        this.rooms.add(new Room("3", "singleRoom"));
+        this.rooms.add(new Room("4", "singleRoom"));
+        this.rooms.add(new Room("5", "singleRoom"));
+        this.rooms.add(new Room("6", "singleRoom"));
+        this.rooms.add(new Room("7", "singleRoom"));
+        this.rooms.add(new Room("8", "singleRoom"));
+        this.rooms.add(new Room("9", "singleRoom"));
+        this.rooms.add(new Room("10", "singleRoom"));
+        this.rooms.add(new Room("1", "doubleRoom"));
+        this.rooms.add(new Room("2", "doubleRoom"));
+        this.rooms.add(new Room("3", "doubleRoom"));
+        this.rooms.add(new Room("4", "doubleRoom"));
+        this.rooms.add(new Room("5", "doubleRoom"));
+        this.rooms.add(new Room("6", "doubleRoom"));
+        this.rooms.add(new Room("7", "doubleRoom"));
+        this.rooms.add(new Room("8", "doubleRoom"));
+        this.rooms.add(new Room("9", "doubleRoom"));
+        this.rooms.add(new Room("10", "doubleRoom"));
+        this.rooms.add(new Room("1", "deluxeRoom"));
+        this.rooms.add(new Room("2", "deluxeRoom"));
+        this.rooms.add(new Room("3", "deluxeRoom"));
+        this.rooms.add(new Room("4", "deluxeRoom"));
+        this.rooms.add(new Room("5", "deluxeRoom"));
+        this.rooms.add(new Room("6", "deluxeRoom"));
+        this.rooms.add(new Room("7", "deluxeRoom"));
+        this.rooms.add(new Room("8", "deluxeRoom"));
+        this.rooms.add(new Room("9", "deluxeRoom"));
+        this.rooms.add(new Room("10", "deluxeRoom"));
         // SET PRICES
         setSingleRoomPrice("NULL");
         setDoubleRoomPrice("NULL");
