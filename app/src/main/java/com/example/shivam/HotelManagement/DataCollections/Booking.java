@@ -25,4 +25,5 @@ public class Booking {
     public void setBill(Bill bill) {
         this.bill = bill;
     }
+
 }
