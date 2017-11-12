@@ -1,4 +1,4 @@
-package com.example.shivam.HotelManagement;
+package com.example.shivam.HotelManagement.Activity;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.shivam.HotelManagement.Activity.MainActivity;
 import com.example.shivam.HotelManagement.DataCollections.User;
+import com.example.shivam.HotelManagement.R;
 
-public class paymentactivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity {
     EditText cardno,cvv,expire;
     Button confirm;
 
@@ -53,8 +53,8 @@ public class paymentactivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        final AlertDialog.Builder builder = new AlertDialog.Builder(paymentactivity.this);
-        builder.setMessage("Are you sure you want to exit");
+        final AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
+        builder.setMessage("Are you sure you want to exit?");
         builder.setCancelable(true);
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
@@ -62,7 +62,7 @@ public class paymentactivity extends AppCompatActivity {
                 finish();
             }
         });
-        builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

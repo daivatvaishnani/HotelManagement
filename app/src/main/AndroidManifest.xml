@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name=".Activity.ManagerActivity"
-            android:label="@string/title_activity_manager" />
+            android:label="@string/title_activity_manager"
+            android:windowSoftInputMode="stateHidden"/>
         <!--
         activity
             android:name=".Activity.ManagerActivity"
@@ -90,10 +91,12 @@
         <activity
             android:name=".Activity.GuestActivity"
             android:label="@string/title_activity_guestactivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
         <!-- activity android:name=".Activity.LaundryActivity" -->
         <!-- /activity -->
-        <activity android:name=".paymentactivity" />
+        <activity
+            android:name=".Activity.PaymentActivity"/>
 
     </application>
 

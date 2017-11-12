@@ -21,11 +21,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shivam.HotelManagement.Activity.MainActivity;
 import com.example.shivam.HotelManagement.DataCollections.*;
 import com.example.shivam.HotelManagement.DateDialog;
 import com.example.shivam.HotelManagement.R;
-import com.example.shivam.HotelManagement.paymentactivity;
 
 public class GuestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,6 +41,7 @@ public class GuestActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guestactivity);
        // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -143,24 +142,24 @@ public class GuestActivity extends AppCompatActivity
                 String nodeluxe = deluxeno.getText().toString().trim();
 
                 try{
-                progressdialog.setMessage("checking availability");
+                progressdialog.setMessage("Checking Availability");
                 progressdialog.show();
                 Thread.sleep(2000);
                 progressdialog.dismiss();
 
             }catch(Exception e){}
 
-                Toast.makeText(GuestActivity.this, "your rooms are ready", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GuestActivity.this, "Room Are Available", Toast.LENGTH_SHORT).show();
 
                 try{
-                    progressdialog.setMessage("proceding to payment");
+                    progressdialog.setMessage("Proceeding to Payment Gateway");
                     progressdialog.show();
                     Thread.sleep(3000);
                     progressdialog.dismiss();
 
                 }catch(Exception e){}
 
-                startActivity(new Intent(GuestActivity.this, paymentactivity.class));
+                startActivity(new Intent(GuestActivity.this, PaymentActivity.class));
                 //query for availability
                /* boolean avialable = true;
                 if(avialable){
@@ -191,10 +190,6 @@ public class GuestActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-
-
     }
 
     @Override
