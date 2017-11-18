@@ -46,15 +46,8 @@ public class FDSActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fds);
         // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
-        /*Bundle extras = getIntent().getExtras();
-        User user = extras.getParcelable("user");*/
-
-       /* usernavname = (TextView)findViewById(R.id.usernavname);
-        usernavid = (TextView)findViewById(R.id.usernavid);*/
-
+        setgone(singleno,doubleno,deluxeno);
         User user = MainActivity.db.getActiveSession().getActiveUser();
 
         checkin = (EditText) findViewById(R.id.checkinfds);
@@ -97,16 +90,6 @@ public class FDSActivity extends AppCompatActivity {
             }
         });
 
-       /* if(checksingle.isChecked()){
-            singleno.setVisibility(View.VISIBLE);
-        }
-        if(checkdouble.isChecked()){
-            doubleno.setVisibility(View.VISIBLE);
-        }
-        if(checkdeluxe.isChecked()){
-            deluxeno.setVisibility(View.VISIBLE);
-        }*/
-
         checksingle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,8 +114,6 @@ public class FDSActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,41 +144,15 @@ public class FDSActivity extends AppCompatActivity {
                 }catch(Exception e){}
 
                 startActivity(new Intent(FDSActivity.this, PaymentActivity.class));
-                //query for availability
-               /* boolean avialable = true;
-                if(avialable){
-                    //give him the required rooms
-                }
-                else {
-                    progressdialog.setMessage("rooms not available");
-                    progressdialog.dismiss();
-                }*/
+
             }
         });
-
-
+    }
+    public void setgone(EditText single,EditText doub,EditText deluxe){
+        single.setVisibility(View.INVISIBLE);
+        doub.setVisibility(View.INVISIBLE);
+        deluxe.setVisibility(View.INVISIBLE);
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.guestactivity, menu);
-        return true;
-    }
-*/
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
 }
