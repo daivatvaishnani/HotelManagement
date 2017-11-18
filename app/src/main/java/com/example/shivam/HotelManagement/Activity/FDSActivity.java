@@ -36,7 +36,7 @@ public class FDSActivity extends AppCompatActivity {
     EditText singleno,doubleno,deluxeno;
     EditText checkin,checkout;
     CheckBox checksingle,checkdouble,checkdeluxe;
-    EditText noofguest,noofrooms;
+    EditText noofguest,noofrooms,guestname,guestemail,guestphone;
     Button laundry,food,house;
     private ProgressDialog progressdialog;
 
@@ -53,6 +53,9 @@ public class FDSActivity extends AppCompatActivity {
         checkin = (EditText) findViewById(R.id.checkinfds);
         checkout = (EditText) findViewById(R.id.checkoutfds);
 
+        guestname = (EditText) findViewById(R.id.guestname);
+        guestemail = (EditText) findViewById(R.id.guestemail);
+        guestphone = (EditText) findViewById(R.id.guestphone);
         noofguest = (EditText) findViewById(R.id.usernoguestfds);
 
         singleno = (EditText) findViewById(R.id.singlenofds);
@@ -130,6 +133,9 @@ public class FDSActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String guest = noofguest.getText().toString().trim();
+                String guestname = noofguest.getText().toString().trim();
+                String guestemail = noofguest.getText().toString().trim();
+                String guestphone = noofguest.getText().toString().trim();
 
                 String nosingle = singleno.getText().toString().trim();
                 String nodouble = doubleno.getText().toString().trim();
