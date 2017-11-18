@@ -13,6 +13,15 @@ public class Item {
     private String itemName;
     private String itemPrice;
     private String itemType;
+    private String itemQuantity = "0";
+
+    public String getItemQuantity() {
+        return itemQuantity;
+    }
+
+    public void setItemQuantity(String itemQuantity) {
+        this.itemQuantity = itemQuantity;
+    }
 
     public String getItemType() {
         return itemType;

@@ -1,6 +1,7 @@
 package com.example.shivam.HotelManagement.Fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.Activity.EmployeesListActivity;
@@ -39,7 +41,8 @@ public class ScheduleFragment extends Fragment{
         //String[] employees = {"emp1","emp2","emp3","emp4","emp5","emp6"};
         View rootView = inflater.inflate(R.layout.activity_scheduling,container,false);
         //String ual = new String("1");
-        final ArrayList<User> users = MainActivity.db.getUsers();
+        final User currentUser = MainActivity.db.getActiveSession().getActiveUser();
+        final ArrayList<User> users = MainActivity.db.getUsersUnder(currentUser.getUserAccessLevel());
 //        String[] employees = users.toArray(new String[0]);
         ArrayList<String> employees = new ArrayList<>();
         final ArrayList<String> employeeEmails = new ArrayList<>();
@@ -54,7 +57,21 @@ public class ScheduleFragment extends Fragment{
         send = (Button) rootView.findViewById(R.id.send);
 
         final ListView listView = (ListView) rootView.findViewById(R.id.EmployeeList);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees);
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees){
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view =super.getView(position, convertView, parent);
+
+                TextView textView=(TextView) view.findViewById(android.R.id.text1);
+
+            /*YOUR CHOICE OF COLOR*/
+                textView.setTextColor(Color.WHITE);
+
+                return view;
+            }
+        };
+
         listView.setAdapter(listViewAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

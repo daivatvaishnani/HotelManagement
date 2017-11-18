@@ -11,7 +11,7 @@
     <string name="title_activity_food">Food Service</string>
     <string name="title_activity_manager">Welcome, Manager!</string>
     <string name="title_activity_supervisor">Welcome, Supervisor!</string>
-    <string name="title_activity_guestactivity">guestactivity</string>
+    <string name="title_activity_guestactivity">Welcome, Guest!</string>
     <!--<string name="title_activity_employeedetails">employeedetails</string>-->
     <string name="large_text">
         "Material is the metaphor.\n\n"

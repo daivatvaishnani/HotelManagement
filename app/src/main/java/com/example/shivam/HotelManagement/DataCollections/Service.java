@@ -7,9 +7,18 @@ import java.util.ArrayList;
  */
 
 public class Service {
+    private String roomID;
     private String serviceType;
     private ArrayList<Item> items = new ArrayList<>();
-    private String amount;
+    private String serviceAmount = "0";
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
+    }
 
     public ArrayList<Item> getItems() {
         return items;
@@ -19,9 +28,9 @@ public class Service {
         this.items = items;
     }
 
-    public Service(String serviceType, String amount) {
+    public Service(String roomID, String serviceType) {
+        this.roomID = roomID;
         this.serviceType = serviceType;
-        this.amount = amount;
     }
 
     public String getServiceType() {
@@ -32,11 +41,29 @@ public class Service {
         this.serviceType = serviceType;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getServiceAmount() {
+        return serviceAmount;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setServiceAmount(String serviceAmount) {
+        this.serviceAmount = serviceAmount;
     }
+
+    public void addItemToService(String itemName, String itemPrice, String itemType, String itemQuantity) {
+        Item i = new Item(itemName, itemPrice, itemType);
+        i.setItemQuantity(itemQuantity);
+        this.items.add(i);
+        serviceAmount = Integer.toString(Integer.parseInt(serviceAmount)
+                                            + Integer.parseInt(itemPrice)*Integer.parseInt(itemQuantity)
+                                        );
+    }
+
+    public void addItemToService(Item i, String itemQuantity) {
+        i.setItemQuantity(itemQuantity);
+        this.items.add(i);
+        serviceAmount = Integer.toString(Integer.parseInt(serviceAmount)
+                                            + Integer.parseInt(i.getItemPrice())*Integer.parseInt(itemQuantity)
+                                        );
+    }
+
 }

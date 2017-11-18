@@ -1,5 +1,8 @@
 package com.example.shivam.HotelManagement.DataCollections;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Created by shivam on 1/11/17.
  */
@@ -10,17 +13,51 @@ public class User {
     private String userAccessLevel;
     private String shift;
     private String userName;
-    private String roomID;
-    private Bill bill = new Bill();
     private String phoneNo;
-    private String card_no;
+    private String cardNo;
+    private ArrayList<Booking> bookings = new ArrayList<>();
 
-    public String getCard_no() {
-        return card_no;
+    public boolean hasABooking() {
+        if(bookings.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
-    public void setCard_no(String card_no) {
-        this.card_no = card_no;
+    public ArrayList<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(ArrayList<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    private Date checkInDate;
+    private Date checkoutDate;
+
+
+    public Date getCheckInDate() {
+        return checkInDate;
+    }
+
+    public void setCheckInDate(Date checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public Date getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate) {
+        this.checkoutDate = checkoutDate;
+    }
+
+    public String getCardNo() {
+        return cardNo;
+    }
+
+    public void setCardNo(String cardNo) {
+        this.cardNo = cardNo;
     }
 
     public String getPhoneNo() {
@@ -29,22 +66,6 @@ public class User {
 
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
-    }
-
-    public String getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(String roomID) {
-        this.roomID = roomID;
-    }
-
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
     }
 
     public String getShift() {

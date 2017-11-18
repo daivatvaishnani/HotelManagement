@@ -6,6 +6,7 @@ import com.example.shivam.HotelManagement.Activity.MainActivity;
 import com.example.shivam.HotelManagement.Activity.RegisterActivity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class Database
 //    public List<User> users = new ArrayList<>();
     private String singleRoomPrice, doubleRoomPrice, deluxeRoomPrice;
     private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Room> rooms = new ArrayList<>();
 
     private Session activeSession = new Session(null);
 
@@ -75,6 +77,25 @@ public class Database
         for(User u : users) {
             if(u.getUserAccessLevel().equals(ual)) {
                 userlist.add(u);
+            }
+        }
+        return userlist;
+    }
+
+    public ArrayList<User> getUsersUnder(String ual) {
+        int ulevel = Integer.parseInt(ual);
+        ArrayList<User> userlist = new ArrayList<>();
+        for(User u : users) {
+            int level = Integer.parseInt(u.getUserAccessLevel());
+            if(ulevel == 1) {
+                if(level == 2 || level == 4) {
+                    userlist.add(u);
+                }
+            }
+            if(ulevel == 2) {
+                if(level == 5) {
+                    userlist.add(u);
+                }
             }
         }
         return userlist;
@@ -164,6 +185,17 @@ public class Database
         return itemList;
     }
 
+    public ArrayList<Room> getAvailableRooms(String roomType, Date checkInDate, Date checkOutDate) {
+        ArrayList<Room> returnList = new ArrayList<>();
+        for(Room r : rooms) {
+            if(r.isAvailabeFor(checkInDate, checkOutDate) && r.getRoomType().equals(roomType)) {
+                returnList.add(r);
+            }
+        }
+        return returnList;
+    }
+
+
     public Database()
     {
         // ADD USERS
@@ -178,6 +210,16 @@ public class Database
         this.users.add(new User("fds1@gmail.com","fds1","4","fds1","12323521312312"));
         this.users.add(new User("fds2@gmail.com","fds2","4","fds2","123241111231123"));
         this.users.add(new User("fds3@gmail.com","fds3","4","fds3","123213231231"));
+        this.users.add(new User("employee1@gmail.com", "employee1", "5", "employee1", "1231231232"));
+        this.users.add(new User("employee2@gmail.com", "employee2", "5", "employee2", "1231231232"));
+        this.users.add(new User("employee3@gmail.com", "employee3", "5", "employee3", "1231231232"));
+        this.users.add(new User("employee4@gmail.com", "employee4", "5", "employee4", "1231231232"));
+        this.users.add(new User("employee5@gmail.com", "employee5", "5", "employee5", "1231231232"));
+        this.users.add(new User("employee6@gmail.com", "employee6", "5", "employee6", "1231231232"));
+        this.users.add(new User("employee7@gmail.com", "employee7", "5", "employee7", "1231231232"));
+        this.users.add(new User("employee8@gmail.com", "employee8", "5", "employee8", "1231231232"));
+        this.users.add(new User("employee9@gmail.com", "employee9", "5", "employee9", "1231231232"));
+        this.users.add(new User("employee10@gmail.com", "employee10", "5", "employee10", "1231231232"));
         // ADD ITEMS
         this.items.add(new Item("Shirt", "20", "Laundry"));
         this.items.add(new Item("TShirt", "10", "Laundry"));
@@ -191,6 +233,37 @@ public class Database
         this.items.add(new Item("Sandwich", "50", "Food"));
         this.items.add(new Item("Veg-Thali", "100", "Food"));
         this.items.add(new Item("NonVeg-Thali", "200", "Food"));
+        //ADD ROOMS
+        this.rooms.add(new Room("1", "1"));
+        this.rooms.add(new Room("2", "1"));
+        this.rooms.add(new Room("3", "1"));
+        this.rooms.add(new Room("4", "1"));
+        this.rooms.add(new Room("5", "1"));
+        this.rooms.add(new Room("6", "1"));
+        this.rooms.add(new Room("7", "1"));
+        this.rooms.add(new Room("8", "1"));
+        this.rooms.add(new Room("9", "1"));
+        this.rooms.add(new Room("10", "1"));
+        this.rooms.add(new Room("1", "2"));
+        this.rooms.add(new Room("2", "2"));
+        this.rooms.add(new Room("3", "2"));
+        this.rooms.add(new Room("4", "2"));
+        this.rooms.add(new Room("5", "2"));
+        this.rooms.add(new Room("6", "2"));
+        this.rooms.add(new Room("7", "2"));
+        this.rooms.add(new Room("8", "2"));
+        this.rooms.add(new Room("9", "2"));
+        this.rooms.add(new Room("10", "2"));
+        this.rooms.add(new Room("1", "3"));
+        this.rooms.add(new Room("2", "3"));
+        this.rooms.add(new Room("3", "3"));
+        this.rooms.add(new Room("4", "3"));
+        this.rooms.add(new Room("5", "3"));
+        this.rooms.add(new Room("6", "3"));
+        this.rooms.add(new Room("7", "3"));
+        this.rooms.add(new Room("8", "3"));
+        this.rooms.add(new Room("9", "3"));
+        this.rooms.add(new Room("10", "3"));
         // SET PRICES
         setSingleRoomPrice("NULL");
         setDoubleRoomPrice("NULL");
