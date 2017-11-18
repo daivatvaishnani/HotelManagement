@@ -47,7 +47,7 @@ public class FDSActivity extends AppCompatActivity {
         // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        setgone(singleno,doubleno,deluxeno);
+
         User user = MainActivity.db.getActiveSession().getActiveUser();
 
         checkin = (EditText) findViewById(R.id.checkinfds);
@@ -59,6 +59,7 @@ public class FDSActivity extends AppCompatActivity {
         doubleno = (EditText) findViewById(R.id.doublenofds);
         deluxeno = (EditText) findViewById(R.id.deluxenofds);
 
+        setgone(singleno,doubleno,deluxeno);
 
         checksingle = (CheckBox) findViewById(R.id.usersingleroomfds);
         checkdouble = (CheckBox) findViewById(R.id.userdoubleroomfds);
@@ -96,6 +97,9 @@ public class FDSActivity extends AppCompatActivity {
                 if(checksingle.isChecked()){
                     singleno.setVisibility(View.VISIBLE);
                 }
+                if(!checksingle.isChecked()){
+                    singleno.setVisibility(View.INVISIBLE);
+                }
             }
         });
         checkdouble.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +108,9 @@ public class FDSActivity extends AppCompatActivity {
                 if(checkdouble.isChecked()){
                     doubleno.setVisibility(View.VISIBLE);
                 }
+                if(!checkdouble.isChecked()){
+                    doubleno.setVisibility(View.INVISIBLE);
+                }
             }
         });
         checkdeluxe.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +118,9 @@ public class FDSActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkdeluxe.isChecked()){
                     deluxeno.setVisibility(View.VISIBLE);
+                }
+                if(!checkdeluxe.isChecked()){
+                    deluxeno.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -153,6 +163,4 @@ public class FDSActivity extends AppCompatActivity {
         doub.setVisibility(View.INVISIBLE);
         deluxe.setVisibility(View.INVISIBLE);
     }
-
-
 }
