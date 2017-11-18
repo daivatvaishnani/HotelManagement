@@ -34,6 +34,7 @@ public class GuestActivity extends AppCompatActivity
     EditText checkin,checkout;
     CheckBox checksingle,checkdouble,checkdeluxe;
     EditText noofguest,noofrooms;
+    Button laundry,food,house;
     private ProgressDialog progressdialog;
 
     @Override
@@ -69,6 +70,11 @@ public class GuestActivity extends AppCompatActivity
         checkdeluxe = (CheckBox) findViewById(R.id.userdeluxeroom);
 
         checkavailable = (Button) findViewById(R.id.available);
+
+        laundry = (Button) findViewById(R.id.laundrybutton);
+        food = (Button) findViewById(R.id.foodbutton);
+        house = (Button) findViewById(R.id.housebutton);
+        setgone(laundry,food,house);
 
         checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -231,7 +237,8 @@ public class GuestActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            // Handle the camera actionIN
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -252,5 +259,17 @@ public class GuestActivity extends AppCompatActivity
         single.setVisibility(View.GONE);
         doub.setVisibility(View.GONE);
         deluxe.setVisibility(View.GONE);
+    }
+
+    public void setgone(Button laundry, Button food, Button house){
+        laundry.setVisibility(View.GONE);
+        food.setVisibility(View.GONE);
+        house.setVisibility(View.GONE);
+    }
+
+    public void setvisible(Button laundry, Button food, Button house){
+        laundry.setVisibility(View.VISIBLE);
+        food.setVisibility(View.VISIBLE);
+        house.setVisibility(View.VISIBLE);
     }
 }

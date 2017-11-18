@@ -22,7 +22,8 @@
         android:clickable="true"
         android:hint=" check-in"
         android:textColorHint="#fff"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        />
 
     <EditText
         android:id="@+id/checkout"
@@ -35,7 +36,8 @@
         android:inputType="none"
         android:textColorHint="#fff"
         android:hint="check-out"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+       />
 
     <EditText
         android:id="@+id/usernoguest"
@@ -48,7 +50,8 @@
         android:ems="10"
         android:gravity="center"
         android:hint="Guests"
-        android:inputType="phone" />
+        android:inputType="phone"
+        />
 
     <CheckBox
         android:id="@+id/usersingleroom"
@@ -59,7 +62,8 @@
         android:layout_marginTop="43dp"
         android:textColor="#ffff"
         android:layout_toStartOf="@+id/available"
-        android:text="Single" />
+        android:text="Single"
+       />
 
     <CheckBox
         android:id="@+id/userdoubleroom"
@@ -68,7 +72,8 @@
         android:layout_alignTop="@+id/usersingleroom"
         android:layout_centerHorizontal="true"
         android:textColor="#ffff"
-        android:text="Double" />
+        android:text="Double"
+        />
 
     <CheckBox
         android:id="@+id/userdeluxeroom"
@@ -79,7 +84,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="21dp"
         android:textColor="#ffff"
-        android:text="Deluxe" />
+        android:text="Deluxe"
+        />
 
     <EditText
         android:id="@+id/singleno"
@@ -91,7 +97,8 @@
         android:background="@drawable/input_background"
         android:gravity="center"
         android:hint="number"
-        android:inputType="phone" />
+        android:inputType="phone"
+        />
 
     <EditText
         android:id="@+id/doubleno"
@@ -103,7 +110,8 @@
         android:background="@drawable/input_background"
         android:gravity="center"
         android:hint="number"
-        android:inputType="phone" />
+        android:inputType="phone"
+        />
 
     <EditText
         android:id="@+id/deluxeno"
@@ -115,7 +123,8 @@
         android:background="@drawable/input_background"
         android:gravity="center"
         android:hint="number"
-        android:inputType="phone" />
+        android:inputType="phone"
+        />
 
     <Button
         android:id="@+id/available"
@@ -125,8 +134,44 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="51dp"
         android:background="@drawable/btn_background_2"
-        android:text="Check Availability" />
+        android:text="Check Availability"
+        />
 
+    <Button
+        android:id="@+id/laundrybutton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Laundry Service"
+        android:background="@drawable/btn_background_2"
+        android:layout_marginTop="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/housebutton"
+        android:visibility="gone" />
 
+    <Button
+        android:id="@+id/foodbutton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Food Service"
+        android:background="@drawable/btn_background_2"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/laundrybutton"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/housebutton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="House Keeping"
+        android:background="@drawable/btn_background_2"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/foodbutton"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>
