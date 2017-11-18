@@ -274,6 +274,8 @@ public class GuestActivity extends AppCompatActivity
         if (id == R.id.nav_roomservice) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
                     ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
+
+
             setvisible(laundry,food,house);
 
         } else if (id == R.id.nav_gallery) {
