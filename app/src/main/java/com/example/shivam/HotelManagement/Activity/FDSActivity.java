@@ -37,7 +37,7 @@ public class FDSActivity extends AppCompatActivity {
     EditText checkin,checkout;
     CheckBox checksingle,checkdouble,checkdeluxe;
     EditText noofguest,noofrooms,guestname,guestemail,guestphone;
-    Button laundry,food,house;
+    //Button laundry,food,house;
     private ProgressDialog progressdialog;
 
     @Override
@@ -168,5 +168,26 @@ public class FDSActivity extends AppCompatActivity {
         single.setVisibility(View.INVISIBLE);
         doub.setVisibility(View.INVISIBLE);
         deluxe.setVisibility(View.INVISIBLE);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            MainActivity.db.getActiveSession().clearSession();
+            startActivity(new Intent(FDSActivity.this, MainActivity.class));
+            return true;
+        }
+
+        if (id == R.id.action_settings) {
+            startActivity(new Intent(FDSActivity.this, ChangeDetailsActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
