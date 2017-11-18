@@ -3,6 +3,7 @@ package com.example.shivam.HotelManagement.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -29,12 +30,13 @@ public class GuestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView usernavname,usernavid;
-    Button checkavailable;
+    Button checkavailable,bookroom;
     EditText singleno,doubleno,deluxeno;
     EditText checkin,checkout;
     CheckBox checksingle,checkdouble,checkdeluxe;
     EditText noofguest,noofrooms;
     Button laundry,food,house;
+    int roomstat = 0;
     private ProgressDialog progressdialog;
 
     @Override
@@ -46,11 +48,7 @@ public class GuestActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*Bundle extras = getIntent().getExtras();
-        User user = extras.getParcelable("user");*/
 
-       /* usernavname = (TextView)findViewById(R.id.usernavname);
-        usernavid = (TextView)findViewById(R.id.usernavid);*/
 
         User user = MainActivity.db.getActiveSession().getActiveUser();
 
@@ -70,12 +68,14 @@ public class GuestActivity extends AppCompatActivity
         checkdeluxe = (CheckBox) findViewById(R.id.userdeluxeroom);
 
         checkavailable = (Button) findViewById(R.id.available);
+        bookroom = (Button) findViewById(R.id.bookroom);
 
         laundry = (Button) findViewById(R.id.laundrybutton);
         food = (Button) findViewById(R.id.foodbutton);
         house = (Button) findViewById(R.id.housebutton);
 
         setgone(laundry,food,house);
+        bookroom.setVisibility(View.INVISIBLE);
 
         checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -101,21 +101,14 @@ public class GuestActivity extends AppCompatActivity
             }
         });
 
-       /* if(checksingle.isChecked()){
-            singleno.setVisibility(View.VISIBLE);
-        }
-        if(checkdouble.isChecked()){
-            doubleno.setVisibility(View.VISIBLE);
-        }
-        if(checkdeluxe.isChecked()){
-            deluxeno.setVisibility(View.VISIBLE);
-        }*/
-
-        checksingle.setOnClickListener(new View.OnClickListener() {
+        checksingle.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if(checksingle.isChecked()){
                     singleno.setVisibility(View.VISIBLE);
+                }
+                if(!checksingle.isChecked()){
+                    singleno.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -125,6 +118,9 @@ public class GuestActivity extends AppCompatActivity
                 if(checkdouble.isChecked()){
                     doubleno.setVisibility(View.VISIBLE);
                 }
+                if(!checkdouble.isChecked()){
+                    doubleno.setVisibility(View.INVISIBLE);
+                }
             }
         });
         checkdeluxe.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +128,9 @@ public class GuestActivity extends AppCompatActivity
             public void onClick(View v) {
                 if(checkdeluxe.isChecked()){
                     deluxeno.setVisibility(View.VISIBLE);
+                }
+                if(!checkdeluxe.isChecked()){
+                    deluxeno.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -141,6 +140,10 @@ public class GuestActivity extends AppCompatActivity
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressdialog = new ProgressDialog(v.getContext());
+                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressdialog.setMessage("Checking availability...");
+                progressdialog.show();
 
                 String guest = noofguest.getText().toString().trim();
 
@@ -148,34 +151,62 @@ public class GuestActivity extends AppCompatActivity
                 String nodouble = doubleno.getText().toString().trim();
                 String nodeluxe = deluxeno.getText().toString().trim();
 
-                try{
-                progressdialog.setMessage("Checking Availability");
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        progressdialog.dismiss();
+                        roomstat = 1;
+                    }
+                }).start();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        roomstat = 1;
+                        if(roomstat == 1){
+                            Toast.makeText(GuestActivity.this, "Rooms Are Available", Toast.LENGTH_SHORT).show();
+                            bookroom.setVisibility(View.VISIBLE);
+                        }
+                        else
+                            Toast.makeText(GuestActivity.this, "Sorry!!..Rooms Are not Available", Toast.LENGTH_SHORT).show();
+                    }
+                }, 3000);
+
+
+            }
+        });
+
+        bookroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressdialog = new ProgressDialog(v.getContext());
+                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressdialog.setMessage("proceeding to payment portal");
                 progressdialog.show();
-                Thread.sleep(2000);
-                progressdialog.dismiss();
 
-            }catch(Exception e){}
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        progressdialog.dismiss();
+                    }
+                }).start();
 
-                Toast.makeText(GuestActivity.this, "Room Are Available", Toast.LENGTH_SHORT).show();
-
-                try{
-                    progressdialog.setMessage("Proceeding to Payment Gateway");
-                    progressdialog.show();
-                    Thread.sleep(3000);
-                    progressdialog.dismiss();
-
-                }catch(Exception e){}
-
-                startActivity(new Intent(GuestActivity.this, PaymentActivity.class));
-                //query for availability
-               /* boolean avialable = true;
-                if(avialable){
-                    //give him the required rooms
-                }
-                else {
-                    progressdialog.setMessage("rooms not available");
-                    progressdialog.dismiss();
-                }*/
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(GuestActivity.this, PaymentActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }, 4000);
             }
         });
 
@@ -197,6 +228,9 @@ public class GuestActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        usernavname = (TextView)findViewById(R.id.usernavname);
+        usernavid = (TextView)findViewById(R.id.usernavid);
     }
 
     @Override
@@ -239,7 +273,7 @@ public class GuestActivity extends AppCompatActivity
 
         if (id == R.id.nav_roomservice) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
             setvisible(laundry,food,house);
 
         } else if (id == R.id.nav_gallery) {
@@ -253,7 +287,8 @@ public class GuestActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_bookroom){
             setvisible(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
+
             setgone(laundry,food,house);
             setgone(singleno,doubleno,deluxeno);
 
@@ -265,7 +300,7 @@ public class GuestActivity extends AppCompatActivity
     }
     public void setgone(EditText single,EditText doub,EditText deluxe,EditText checkin,EditText checkout,
                         EditText noguest,CheckBox checksingle,CheckBox checkdouble,CheckBox checkdeluxe
-            ,Button checkav){
+            ,Button checkav,Button book){
         single.setVisibility(View.GONE);
         doub.setVisibility(View.GONE);
         deluxe.setVisibility(View.GONE);
@@ -276,11 +311,12 @@ public class GuestActivity extends AppCompatActivity
         checkdouble.setVisibility(View.GONE);
         checkdeluxe.setVisibility(View.GONE);
         checkav.setVisibility(View.GONE);
+        book.setVisibility(View.GONE);
     }
 
     public void setvisible(EditText single,EditText doub,EditText deluxe,EditText checkin,EditText checkout,
                         EditText noguest,CheckBox checksingle,CheckBox checkdouble,CheckBox checkdeluxe
-            ,Button checkav){
+            ,Button checkav,Button book){
         single.setVisibility(View.VISIBLE);
         doub.setVisibility(View.VISIBLE);
         deluxe.setVisibility(View.VISIBLE);
@@ -291,6 +327,7 @@ public class GuestActivity extends AppCompatActivity
         checkdouble.setVisibility(View.VISIBLE);
         checkdeluxe.setVisibility(View.VISIBLE);
         checkav.setVisibility(View.VISIBLE);
+        book.setVisibility(View.INVISIBLE);
     }
     public void setgone(EditText single,EditText doub,EditText deluxe){
         single.setVisibility(View.INVISIBLE);

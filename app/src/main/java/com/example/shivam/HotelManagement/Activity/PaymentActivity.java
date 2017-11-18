@@ -1,6 +1,7 @@
 package com.example.shivam.HotelManagement.Activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,9 @@ public class PaymentActivity extends AppCompatActivity {
                 /*if(cvv_no.isEmpty()){
 
                 }*/
+                Intent i = new Intent(getApplicationContext(),
+                        GuestActivity.class);
+                          startActivity(i);
 
             }
 
