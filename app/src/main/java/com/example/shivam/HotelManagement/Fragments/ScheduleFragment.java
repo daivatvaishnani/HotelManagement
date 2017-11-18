@@ -25,7 +25,7 @@ import com.example.shivam.HotelManagement.R;
 import java.util.ArrayList;
 
 /**
- * Created by I_AM_SHIVANSH on 10/4/2017.
+ * Created by Yagyansh on 10/4/2017.
  */
 
 public class ScheduleFragment extends Fragment{
@@ -41,9 +41,8 @@ public class ScheduleFragment extends Fragment{
         //String[] employees = {"emp1","emp2","emp3","emp4","emp5","emp6"};
         View rootView = inflater.inflate(R.layout.activity_scheduling,container,false);
         //String ual = new String("1");
-        final User currentUser = MainActivity.db.getActiveSession().getActiveUser();
-        final ArrayList<User> users = MainActivity.db.getUsersUnder(currentUser.getUserAccessLevel());
-//        String[] employees = users.toArray(new String[0]);
+        final ArrayList<User> users = MainActivity.db.getUsers();
+        //String[] employees = users.toArray(new String[0]);
         ArrayList<String> employees = new ArrayList<>();
         final ArrayList<String> employeeEmails = new ArrayList<>();
         for(User u : users) {
