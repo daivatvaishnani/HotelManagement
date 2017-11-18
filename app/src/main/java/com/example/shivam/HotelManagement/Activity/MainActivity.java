@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(ual.equals("4")) {
                 //FDS
+                startActivity(new Intent(MainActivity.this, FDSActivity.class));
             }
         }
         try {
@@ -219,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (u.getUserAccessLevel().equals("4")) {
                     Toast.makeText(MainActivity.this, "YOU ARE FDS", Toast.LENGTH_SHORT).show();
-                    // FDS ACTIVITY
+                    startActivity(new Intent(MainActivity.this, FDSActivity.class));
                 }
             }
             else {
