@@ -34,6 +34,7 @@ public class GuestActivity extends AppCompatActivity
     EditText checkin,checkout;
     CheckBox checksingle,checkdouble,checkdeluxe;
     EditText noofguest,noofrooms;
+    Button laundry,food,house;
     private ProgressDialog progressdialog;
 
     @Override
@@ -69,6 +70,12 @@ public class GuestActivity extends AppCompatActivity
         checkdeluxe = (CheckBox) findViewById(R.id.userdeluxeroom);
 
         checkavailable = (Button) findViewById(R.id.available);
+
+        laundry = (Button) findViewById(R.id.laundrybutton);
+        food = (Button) findViewById(R.id.foodbutton);
+        house = (Button) findViewById(R.id.housebutton);
+
+        setgone(laundry,food,house);
 
         checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -231,6 +238,9 @@ public class GuestActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_roomservice) {
+            setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable);
+            setvisible(laundry,food,house);
 
         } else if (id == R.id.nav_gallery) {
 
@@ -241,14 +251,62 @@ public class GuestActivity extends AppCompatActivity
         } else if (id == R.id.nav_feedback) {
 
         }
+        else if(id == R.id.nav_bookroom){
+            setvisible(singleno,doubleno,deluxeno,checkin,checkout,noofguest
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable);
+            setgone(laundry,food,house);
+            setgone(singleno,doubleno,deluxeno);
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void setgone(EditText single,EditText doub,EditText deluxe){
+    public void setgone(EditText single,EditText doub,EditText deluxe,EditText checkin,EditText checkout,
+                        EditText noguest,CheckBox checksingle,CheckBox checkdouble,CheckBox checkdeluxe
+            ,Button checkav){
         single.setVisibility(View.GONE);
         doub.setVisibility(View.GONE);
         deluxe.setVisibility(View.GONE);
+        checkin.setVisibility(View.GONE);
+        checkout.setVisibility(View.GONE);
+        noguest.setVisibility(View.GONE);
+        checksingle.setVisibility(View.GONE);
+        checkdouble.setVisibility(View.GONE);
+        checkdeluxe.setVisibility(View.GONE);
+        checkav.setVisibility(View.GONE);
+    }
+
+    public void setvisible(EditText single,EditText doub,EditText deluxe,EditText checkin,EditText checkout,
+                        EditText noguest,CheckBox checksingle,CheckBox checkdouble,CheckBox checkdeluxe
+            ,Button checkav){
+        single.setVisibility(View.VISIBLE);
+        doub.setVisibility(View.VISIBLE);
+        deluxe.setVisibility(View.VISIBLE);
+        checkin.setVisibility(View.VISIBLE);
+        checkout.setVisibility(View.VISIBLE);
+        noguest.setVisibility(View.VISIBLE);
+        checksingle.setVisibility(View.VISIBLE);
+        checkdouble.setVisibility(View.VISIBLE);
+        checkdeluxe.setVisibility(View.VISIBLE);
+        checkav.setVisibility(View.VISIBLE);
+    }
+    public void setgone(EditText single,EditText doub,EditText deluxe){
+        single.setVisibility(View.INVISIBLE);
+        doub.setVisibility(View.INVISIBLE);
+        deluxe.setVisibility(View.INVISIBLE);
+    }
+
+    public void setgone(Button laundry, Button food, Button house){
+        laundry.setVisibility(View.GONE);
+        food.setVisibility(View.GONE);
+        house.setVisibility(View.GONE);
+    }
+
+    public void setvisible(Button laundry, Button food, Button house){
+        laundry.setVisibility(View.VISIBLE);
+        food.setVisibility(View.VISIBLE);
+        house.setVisibility(View.VISIBLE);
     }
 }
