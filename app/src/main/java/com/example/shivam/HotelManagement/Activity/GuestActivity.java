@@ -231,6 +231,7 @@ public class GuestActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_roomservice) {
+            
 
         } else if (id == R.id.nav_gallery) {
 
