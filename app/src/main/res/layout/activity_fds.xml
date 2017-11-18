@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.shivam.HotelManagement.Activity.FDSActivity"
+   >
+
+    <EditText
+        android:id="@+id/checkinfds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="37dp"
+        android:layout_toStartOf="@+id/userdoubleroomfds"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:hint="Check-In"
+        android:textColor="#fff"
+        android:textColorHint="#fff" />
+
+
+    <EditText
+        android:id="@+id/checkoutfds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/checkinfds"
+        android:layout_alignBottom="@+id/checkinfds"
+        android:layout_toStartOf="@+id/deluxenofds"
+        android:clickable="true"
+        android:gravity="center"
+        android:hint="Check-Out"
+        android:textColor="#fff"
+        android:textColorHint="#fff" />
+
+    <EditText
+        android:id="@+id/guestname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/checkinfds"
+        android:layout_below="@+id/checkoutfds"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/input_background"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Name"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/guestemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/checkinfds"
+        android:layout_below="@+id/guestname"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/input_background"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Email"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/guestphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/usernoguestfds"
+        android:layout_below="@+id/guestemail"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/input_background"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Phone Number"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/usernoguestfds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/guestphone"
+        android:layout_marginTop="26dp"
+        android:layout_toStartOf="@+id/userdeluxeroomfds"
+        android:background="@drawable/input_background"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Number of People"
+        android:inputType="phone" />
+
+    <CheckBox
+        android:id="@+id/usersingleroomfds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/usernoguestfds"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="28dp"
+        android:layout_toStartOf="@+id/availablefds"
+        android:text="Single"
+        android:textColor="#ffff" />
+
+    <CheckBox
+        android:id="@+id/userdoubleroomfds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/usersingleroomfds"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffff"
+        android:text="Double" />
+
+    <CheckBox
+        android:id="@+id/userdeluxeroomfds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/userdoubleroomfds"
+        android:layout_alignBottom="@+id/userdoubleroomfds"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="21dp"
+        android:textColor="#ffff"
+        android:text="Deluxe" />
+
+    <EditText
+        android:id="@+id/singlenofds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/usersingleroomfds"
+        android:layout_below="@+id/usersingleroomfds"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        android:hint="number"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/doublenofds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/singlenofds"
+        android:layout_alignBottom="@+id/singlenofds"
+        android:layout_alignEnd="@+id/userdoubleroomfds"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        android:hint="number"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/deluxenofds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/doublenofds"
+        android:layout_alignBottom="@+id/doublenofds"
+        android:layout_alignEnd="@+id/userdeluxeroomfds"
+        android:background="@drawable/input_background"
+        android:gravity="center"
+        android:hint="number"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/availablefds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/doublenofds"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/btn_background_2"
+        android:text="Check Availability" />
+
+</RelativeLayout>
