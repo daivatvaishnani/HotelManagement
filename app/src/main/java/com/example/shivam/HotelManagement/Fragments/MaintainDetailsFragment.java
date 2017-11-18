@@ -92,16 +92,6 @@ public class MaintainDetailsFragment extends Fragment{
             }
         });
 
-        /*editid.setText("hello");
-        editname.setText("shivam");
-        editpassword.setText("sdsq");
-        edittype.setText("fds");
-        editphno.setText("95587");
-
-        System.out.println(editid.getText());
-        System.out.println("helloooooooooooooooo");
-        System.out.println("helooooooooooo");*/
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

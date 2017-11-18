@@ -78,6 +78,45 @@ public class ScheduleFragment extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listView.setVisibility(View.GONE);
                 setvisible(shift1,shift2,shift3,send);
+                shift1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(shift1.isChecked()){
+                            shift2.setVisibility(View.INVISIBLE);
+                            shift3.setVisibility(View.INVISIBLE);
+                        }
+                        else if(!shift1.isChecked()){
+                            shift2.setVisibility(View.VISIBLE);
+                            shift3.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+                shift2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(shift2.isChecked()){
+                            shift1.setVisibility(View.INVISIBLE);
+                            shift3.setVisibility(View.INVISIBLE);
+                        }
+                        else if(!shift2.isChecked()){
+                            shift1.setVisibility(View.VISIBLE);
+                            shift3.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+                shift3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(shift3.isChecked()){
+                            shift2.setVisibility(View.INVISIBLE);
+                            shift1.setVisibility(View.INVISIBLE);
+                        }
+                        else if(!shift3.isChecked()){
+                            shift2.setVisibility(View.VISIBLE);
+                            shift1.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
                 final String employeeEmail = employeeEmails.get(position);
                 final User employee = MainActivity.db.getUser(employeeEmail);
                 final String[] employeeShift = {""};
