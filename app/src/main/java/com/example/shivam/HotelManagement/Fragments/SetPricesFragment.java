@@ -39,7 +39,7 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.setprice,container,false);
-      //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
 
@@ -80,15 +80,27 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
         final EditText singleP = (EditText) rootView.findViewById(R.id.singleprice);
         final EditText doubleP = (EditText) rootView.findViewById(R.id.doubleprice);
         final EditText deluxeP = (EditText) rootView.findViewById(R.id.deluxeprice);
+        final EditText discount = (EditText) rootView.findViewById(R.id.discount);
 
         setPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.db.setSingleRoomPrice(singleP.getText().toString());
-                MainActivity.db.setDoubleRoomPrice(doubleP.getText().toString());
-                MainActivity.db.setDeluxeRoomPrice(deluxeP.getText().toString());
+                if(singleP.getText().toString().equals("")){
+                    Toast.makeText(getActivity().getApplicationContext(), "enter price for single room", Toast.LENGTH_SHORT).show();
+                }
+                else if(doubleP.getText().toString().equals("")){
+                    Toast.makeText(getActivity().getApplicationContext(), "enter price for double room", Toast.LENGTH_SHORT).show();
+                }
+                else if(deluxeP.getText().toString().equals("")){
+                    Toast.makeText(getActivity().getApplicationContext(), "enter price for deluxe room", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    MainActivity.db.setSingleRoomPrice(singleP.getText().toString());
+                    MainActivity.db.setDoubleRoomPrice(doubleP.getText().toString());
+                    MainActivity.db.setDeluxeRoomPrice(deluxeP.getText().toString());
 
-                Toast.makeText(getActivity().getApplicationContext(), "Prices are set", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Prices are set", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
