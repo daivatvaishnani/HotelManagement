@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.DataCollections.Item;
 import com.example.shivam.HotelManagement.DataCollections.User;
+import com.example.shivam.HotelManagement.EdittextValues;
 import com.example.shivam.HotelManagement.ListItemModel;
 import com.example.shivam.HotelManagement.Adapters.CustomListAdapter;
 import com.example.shivam.HotelManagement.R;
@@ -34,7 +35,7 @@ public class LaundryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laundry);
         // To get all items pass no parameter
-        ArrayList<Item> itemsList = MainActivity.db.getItems("Laundry");
+        final ArrayList<Item> itemsList = MainActivity.db.getItems("Laundry");
         // To retrieve Food items list pass the parameter "Food"
         arrayList = new ArrayList<>();
         //String[] items = itemsList.toArray(new String[0]);
@@ -71,13 +72,24 @@ public class LaundryActivity extends AppCompatActivity {
 
                 // do your magic here
 
-                String all="";
-                for(int i=0; i<arrayList.size(); i++){
-                    for (int j=0; j<arrayList.get(i).getArrayList().size(); j++) {
-                        all += arrayList.get(i).getArrayList().get(j).getValue() + "\n";
+                ArrayList<String> quantityOfItems = new ArrayList<>();
+                for(ListItemModel m : arrayList) {
+                    ArrayList<EdittextValues> modelList = m.getArrayList();
+                    if(modelList.isEmpty()) {
+                        quantityOfItems.add("0");
+                    }
+                    else {
+                        quantityOfItems.add(modelList.get(0).getValue());
                     }
                 }
-                Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
+
+                String all="";
+//                for(int i=0; i<arrayList.size(); i++){
+//                    for (int j=0; j<arrayList.get(i).getArrayList().size(); j++) {
+//                        all += arrayList.get(i).getArrayList().get(j).getValue() + "\n";
+//                    }
+//                }
+//                Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
             }
         });
 
