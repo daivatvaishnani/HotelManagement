@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -39,8 +40,11 @@ public class FDSActivity extends AppCompatActivity {
     EditText checkin,checkout;
     CheckBox checksingle,checkdouble,checkdeluxe;
     EditText noofguest,noofrooms,guestname,guestemail,guestphone;
-    //Button laundry,food,house;
+    Button bookroom;
+    int roomstat = 0;
     private ProgressDialog progressdialog;
+    static int indate,inmonth,inyear;
+    static int outdate,outmonth,outyear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class FDSActivity extends AppCompatActivity {
         checkdeluxe = (CheckBox) findViewById(R.id.userdeluxeroomfds);
 
         checkavailable = (Button) findViewById(R.id.availablefds);
+        bookroom = (Button) findViewById(R.id.bookroom);
 
         /*checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -152,34 +157,92 @@ public class FDSActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 String guest = noofguest.getText().toString().trim();
-                String guestname = noofguest.getText().toString().trim();
-                String guestemail = noofguest.getText().toString().trim();
-                String guestphone = noofguest.getText().toString().trim();
-
+                String in = checkin.getText().toString();
+                String out = checkout.getText().toString();
                 String nosingle = singleno.getText().toString().trim();
                 String nodouble = doubleno.getText().toString().trim();
                 String nodeluxe = deluxeno.getText().toString().trim();
 
-                try{
-                    progressdialog.setMessage("Checking Availability");
+
+                Boolean datestat = checkdate(in,out);
+                if(!datestat){
+                    Toast.makeText(FDSActivity.this, "enter dates correctly", Toast.LENGTH_SHORT).show();
+                }
+                else if(in.equals("")){
+                    Toast.makeText(FDSActivity.this, "enter check-in date", Toast.LENGTH_SHORT).show();
+                }
+                else if(out.equals("")){
+                    Toast.makeText(FDSActivity.this, "enter check-out date", Toast.LENGTH_SHORT).show();
+                }
+                else if(guest.equals("")){
+                    Toast.makeText(FDSActivity.this, "enter number of guests", Toast.LENGTH_SHORT).show();
+                }
+                else if(nosingle.equals("") && nodouble.equals("") && nodeluxe.equals("") ){
+                    Toast.makeText(FDSActivity.this, "enter number of rooms", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    progressdialog = new ProgressDialog(v.getContext());
+                    progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressdialog.setMessage("Checking Availability...");
                     progressdialog.show();
-                    Thread.sleep(2000);
-                    progressdialog.dismiss();
 
-                }catch(Exception e){}
+                    new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            progressdialog.dismiss();
+                            roomstat = 1;
+                        }
+                    }).start();
 
-                Toast.makeText(FDSActivity.this, "Room Are Available", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            roomstat = 1;
+                            if (roomstat == 1) {
+                                Toast.makeText(FDSActivity.this, "Rooms Are Available", Toast.LENGTH_SHORT).show();
+                                bookroom.setVisibility(View.VISIBLE);
+                            } else
+                                Toast.makeText(FDSActivity.this, "Sorry!!..Rooms Are not Available", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 3000);
+                }
 
-                try{
-                    progressdialog.setMessage("Proceeding to Payment Gateway");
-                    progressdialog.show();
-                    Thread.sleep(3000);
-                    progressdialog.dismiss();
 
-                }catch(Exception e){}
+            }
+        });
 
-                startActivity(new Intent(FDSActivity.this, PaymentActivity.class));
+        bookroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressdialog = new ProgressDialog(v.getContext());
+                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressdialog.setMessage("Proceeding to Payment Portal");
+                progressdialog.show();
 
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        progressdialog.dismiss();
+                    }
+                }).start();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(FDSActivity.this, PaymentActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }, 4000);
             }
         });
     }
@@ -188,35 +251,8 @@ public class FDSActivity extends AppCompatActivity {
         doub.setVisibility(View.INVISIBLE);
         deluxe.setVisibility(View.INVISIBLE);
     }
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-            MainActivity.db.getActiveSession().clearSession();
-            startActivity(new Intent(FDSActivity.this, MainActivity.class));
-            return true;
-        }
-
-        if (id == R.id.action_settings) {
-            startActivity(new Intent(FDSActivity.this, ChangeDetailsActivity.class));
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
     @Override
     public void onBackPressed() {
-        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }*/
         final AlertDialog.Builder builder = new AlertDialog.Builder(FDSActivity.this);
         builder.setMessage("Are you sure you want to Log Out?");
         builder.setCancelable(true);
@@ -236,5 +272,43 @@ public class FDSActivity extends AppCompatActivity {
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    Boolean checkdate(String in, String out){
+        int flag = 0;
+        if(in.length()==10){
+            inyear = Integer.parseInt(in.substring(6,10));
+            indate = Integer.parseInt(in.substring(0,2));
+            inmonth = Integer.parseInt(in.substring(3,5));
+        }
+        if(in.length()==9){
+            indate = Integer.parseInt(in.substring(0,1));
+            inmonth = Integer.parseInt(in.substring(2,4));
+            inyear = Integer.parseInt(in.substring(5,9));
+        }
+        if(out.length()==10){
+            outdate = Integer.parseInt(out.substring(0,2));
+            outmonth = Integer.parseInt(out.substring(3,5));
+            outyear = Integer.parseInt(out.substring(6,10));
+        }
+        if(out.length()==9){
+            outdate = Integer.parseInt(out.substring(0,1));
+            outmonth = Integer.parseInt(out.substring(2,4));
+            outyear = Integer.parseInt(out.substring(5,9));
+        }
+        System.out.println(indate + " " + inmonth + " " + inyear);
+        System.out.println(outdate + " " + outmonth + " " + outyear);
+
+       if(outyear>inyear) flag = 1;
+       else if(outyear==inyear){
+           if(outmonth>inmonth) flag=1;
+           else if(outmonth==inmonth){
+               if(outdate>=indate) flag=1;
+           }
+       }
+        System.out.println(flag);
+        if(flag == 1) return true;
+        else
+            return false;
     }
 }

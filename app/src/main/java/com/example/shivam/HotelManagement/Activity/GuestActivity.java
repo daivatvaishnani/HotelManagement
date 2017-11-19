@@ -434,10 +434,11 @@ public class GuestActivity extends AppCompatActivity
         System.out.println(indate + " " + inmonth + " " + inyear);
         System.out.println(outdate + " " + outmonth + " " + outyear);
 
-        if(outyear >= inyear){
-            if(outmonth >= inmonth  ){
-                if(outdate >= indate)
-                    flag = 1;
+        if(outyear>inyear) flag = 1;
+        else if(outyear==inyear){
+            if(outmonth>inmonth) flag=1;
+            else if(outmonth==inmonth){
+                if(outdate>=indate) flag=1;
             }
         }
         System.out.println(flag);

@@ -41,8 +41,6 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
         View rootView = inflater.inflate(R.layout.setprice,container,false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-
-
         start = (TextView) rootView.findViewById(R.id.startdate);
         end =  (TextView) rootView.findViewById(R.id.enddate);
 
