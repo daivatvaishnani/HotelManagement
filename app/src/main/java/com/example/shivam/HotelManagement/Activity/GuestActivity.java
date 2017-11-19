@@ -288,6 +288,11 @@ public class GuestActivity extends AppCompatActivity
                 String noSingle = singleno.getText().toString();
                 String noDouble = doubleno.getText().toString();
                 String noDeluxe = deluxeno.getText().toString();
+
+                if(noSingle.length() < 1) {noSingle = "0";}
+                if(noDouble.length() < 1) {noDouble = "0";}
+                if(noDeluxe.length() < 1) {noDeluxe = "0";}
+
                 MainActivity.db.doBooking(user.getUserName(), checkInDate, checkOutDate, noSingle, noDouble, noDeluxe);
 
                 Booking b = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0);

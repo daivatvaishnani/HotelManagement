@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Service {
     private String roomID;
+    private String roomType;
     private String serviceType;
     private ArrayList<Item> items = new ArrayList<>();
     private String serviceAmount = "0";
@@ -28,8 +29,17 @@ public class Service {
         this.items = items;
     }
 
-    public Service(String roomID, String serviceType) {
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public Service(String roomID, String roomtType, String serviceType) {
         this.roomID = roomID;
+        this.roomType = roomtType;
         this.serviceType = serviceType;
     }
 

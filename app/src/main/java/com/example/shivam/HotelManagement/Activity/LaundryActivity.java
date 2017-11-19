@@ -11,6 +11,7 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.DataCollections.Item;
+import com.example.shivam.HotelManagement.DataCollections.Service;
 import com.example.shivam.HotelManagement.DataCollections.User;
 import com.example.shivam.HotelManagement.EdittextValues;
 import com.example.shivam.HotelManagement.ListItemModel;
@@ -71,7 +72,6 @@ public class LaundryActivity extends AppCompatActivity {
                 mLastClickTime = SystemClock.elapsedRealtime(); */
 
                 // do your magic here
-
                 ArrayList<String> quantityOfItems = new ArrayList<>();
                 for(ListItemModel m : arrayList) {
                     ArrayList<EdittextValues> modelList = m.getArrayList();
@@ -82,8 +82,20 @@ public class LaundryActivity extends AppCompatActivity {
                         quantityOfItems.add(modelList.get(0).getValue());
                     }
                 }
-
-                String all="";
+                Toast.makeText(LaundryActivity.this, Integer.toString(quantityOfItems.size()), Toast.LENGTH_SHORT);
+//                String all = "";
+//                for(int i = 0; i < quantityOfItems.size(); ++i) {
+//                    all += "ItemName : " + itemsList.get(i).getItemName() + " ItemQuantity : " + quantityOfItems.get(i);
+//                }
+//                String roomID = "1";
+//                String roomType = "1";
+//                MainActivity.db.addServiceToBill(roomID, roomType, "Laundry", itemsList, quantityOfItems);
+//                Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getServices().get(0);
+//                for(Item i : s.getItems()) {
+//                    all += "Item : " + i.getItemName() + " ItemQuantity : " + i.getItemQuantity() + "\n";
+//                }
+//                all += "Total Service Amount : " + s.getServiceAmount() + "\n";
+//                Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG);
 //                for(int i=0; i<arrayList.size(); i++){
 //                    for (int j=0; j<arrayList.get(i).getArrayList().size(); j++) {
 //                        all += arrayList.get(i).getArrayList().get(j).getValue() + "\n";

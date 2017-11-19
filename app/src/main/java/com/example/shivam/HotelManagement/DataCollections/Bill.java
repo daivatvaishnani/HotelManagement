@@ -35,7 +35,7 @@ public class Bill {
         this.services.add(s);
     }
 
-    public void addServiceToBill(String roomId, String serviceType) {
-        this.services.add(new Service(roomId, serviceType));
+    public void addServiceToBill(String roomId, String roomType, String serviceType) {
+        this.services.add(new Service(roomId, roomType, serviceType));
     }
 }

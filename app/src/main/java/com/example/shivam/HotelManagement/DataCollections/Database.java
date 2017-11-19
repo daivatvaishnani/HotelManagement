@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by shivam on 1/11/17.
  */
@@ -83,10 +85,10 @@ public class Database
     }
 
     public ArrayList<User> getUsersUnder(String ual) {
-        int ulevel = Integer.parseInt(ual);
+        int ulevel = parseInt(ual);
         ArrayList<User> userlist = new ArrayList<>();
         for(User u : users) {
-            int level = Integer.parseInt(u.getUserAccessLevel());
+            int level = parseInt(u.getUserAccessLevel());
             if(ulevel == 1) {
                 if(level == 2 || level == 4) {
                     userlist.add(u);
@@ -196,7 +198,7 @@ public class Database
 
     private ArrayList<Room> trybook(Date checkInDate, Date checkOutDate, ArrayList<Room> availableRooms, String noOfRoomsRequired, String roomType) {
         ArrayList<Room> roomsbooked = new ArrayList<>();
-        int noRequired = Integer.parseInt(noOfRoomsRequired);
+        int noRequired = parseInt(noOfRoomsRequired);
         if(availableRooms.size() > noRequired) {
             int booked = 0;
             while(booked < noRequired) {
@@ -222,15 +224,15 @@ public class Database
 
     public int checkAvailablity(Date checkInDate, Date checkOutDate, String noOfSingle, String noOfDouble, String noOfDeluxe) {
         ArrayList<Room> availableSingle = getAvailableRooms(checkInDate, checkOutDate, "1");
-        if(availableSingle.size() < Integer.parseInt(noOfSingle)) {
+        if(availableSingle.size() < parseInt(noOfSingle)) {
             return 1;
         }
         ArrayList<Room> availableDouble = getAvailableRooms(checkInDate, checkOutDate, "2");
-        if(availableDouble.size() < Integer.parseInt(noOfDouble)) {
+        if(availableDouble.size() < parseInt(noOfDouble)) {
             return 2;
         }
         ArrayList<Room> availableDeluxe = getAvailableRooms(checkInDate, checkOutDate, "3");
-        if(availableDeluxe.size() < Integer.parseInt(noOfDeluxe)) {
+        if(availableDeluxe.size() < parseInt(noOfDeluxe)) {
             return 3;
         }
         return 0;
@@ -257,6 +259,31 @@ public class Database
             booking.addRooms(bookedRooms);
             this.getUser(username, " ").getBookings().add(booking);
         }
+    }
+
+    public User getUserInRoom(String roomID, String roomType) {
+        for(User u : users) {
+            if(u.hasABooking()) {
+                for(Booking b : u.getBookings()) {
+                    for(Room r : b.getRooms()) {
+                        if(r.getRoomType().equals(roomType) && r.getRoomID().equals(roomID)) {
+                            return u;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public void addServiceToBill(String roomId, String roomType, String serviceType, ArrayList<Item> serviceItems, ArrayList<String> quantities) {
+        Service s = new Service(roomId, roomType, serviceType);
+        for(int i = 0; i < serviceItems.size(); ++i) {
+            if(Integer.parseInt(quantities.get(i)) > 0) {
+                s.addItemToService(serviceItems.get(i), quantities.get(i));
+            }
+        }
+        this.getUserInRoom(roomId, roomType).getBookings().get(0).getBill().addServiceToBill(s);
     }
 
     public Database()
