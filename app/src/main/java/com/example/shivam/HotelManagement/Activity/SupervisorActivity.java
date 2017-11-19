@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.Fragments.SimpleFragmentPagerAdapter;
 import com.example.shivam.HotelManagement.Fragments.SimpleFragmentPagerAdapterSup;
@@ -72,9 +73,9 @@ public class SupervisorActivity extends AppCompatActivity {
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
+                //finish();
             }
         });
         builder.setPositiveButton("No", new DialogInterface.OnClickListener() {

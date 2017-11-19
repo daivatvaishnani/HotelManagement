@@ -294,21 +294,19 @@ public class GuestActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
         final AlertDialog.Builder builder = new AlertDialog.Builder(GuestActivity.this);
         builder.setMessage("Are you sure you want to Log Out?");
         builder.setCancelable(true);
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
@@ -319,6 +317,13 @@ public class GuestActivity extends AppCompatActivity
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+       /* DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }*/
+
     }
 
 

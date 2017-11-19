@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class ScheduleFragment extends Fragment{
     CheckBox shift1,shift2,shift3;
-    Button send;
+    Button send,cancel;
 
     final String[] employee = {"emp1","emp2","emp3","emp4","emp5","emp6"};
 
@@ -54,6 +54,7 @@ public class ScheduleFragment extends Fragment{
         shift3 = (CheckBox) rootView.findViewById(R.id.checkBox3);
 
         send = (Button) rootView.findViewById(R.id.send);
+        cancel = (Button) rootView.findViewById(R.id.cancel);
 
         final ListView listView = (ListView) rootView.findViewById(R.id.EmployeeList);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,employees){
@@ -77,7 +78,7 @@ public class ScheduleFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 listView.setVisibility(View.GONE);
-                setvisible(shift1,shift2,shift3,send);
+                setvisible(shift1,shift2,shift3,send,cancel);
                 shift1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -133,7 +134,7 @@ public class ScheduleFragment extends Fragment{
                             try{
                                 smsManager.sendTextMessage(phoneNo, null, sms, null, null);
                             }catch(Exception e){}
-                            setgone(shift1,shift2,shift3,send);
+                            setgone(shift1,shift2,shift3,send,cancel);
                             listView.setVisibility(View.VISIBLE);
 
                             Toast.makeText(getActivity(),
@@ -147,7 +148,7 @@ public class ScheduleFragment extends Fragment{
                             try{
                                     smsManager.sendTextMessage(phoneNo, null, sms, null, null);
                             }catch(Exception e){}
-                            setgone(shift1,shift2,shift3,send);
+                            setgone(shift1,shift2,shift3,send,cancel);
                             listView.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(),
                                     "shift 2 scheduled", Toast.LENGTH_LONG).show();
@@ -160,12 +161,22 @@ public class ScheduleFragment extends Fragment{
                             try{
                                     smsManager.sendTextMessage(phoneNo, null, sms, null, null);
                             }catch(Exception e){}
-                            setgone(shift1,shift2,shift3,send);
+                            setgone(shift1,shift2,shift3,send,cancel);
                             listView.setVisibility(View.VISIBLE);
                             Toast.makeText(getActivity(),
                                     "shift 3 sheduled", Toast.LENGTH_LONG).show();
                         }
                         setEmployeeShift(employeeEmail, employeeShift[0]);
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listView.setVisibility(View.VISIBLE);
+                        setgone(shift1,shift2,shift3,send,cancel);
+                        shift1.setChecked(false);
+                        shift2.setChecked(false);
+                        shift3.setChecked(false);
                     }
                 });
 
@@ -195,17 +206,19 @@ public class ScheduleFragment extends Fragment{
 
         return rootView;
     }
-    public void setgone(CheckBox c1 ,CheckBox c2,CheckBox c3,Button b){
+    public void setgone(CheckBox c1 ,CheckBox c2,CheckBox c3,Button b,Button b2){
         c1.setVisibility(View.GONE);
         c2.setVisibility(View.GONE);
         c3.setVisibility(View.GONE);
         b.setVisibility(View.GONE);
+        b2.setVisibility(View.GONE);
     }
-    public void setvisible(CheckBox c1 ,CheckBox c2,CheckBox c3,Button b){
+    public void setvisible(CheckBox c1 ,CheckBox c2,CheckBox c3,Button b,Button b2){
         c1.setVisibility(View.VISIBLE);
         c2.setVisibility(View.VISIBLE);
         c3.setVisibility(View.VISIBLE);
         b.setVisibility(View.VISIBLE);
+        b2.setVisibility(View.VISIBLE);
     }
 
     public void setEmployeeShift(String employeeEmail, String employeeShift) {
