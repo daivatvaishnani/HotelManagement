@@ -92,7 +92,8 @@ public class GuestActivity extends AppCompatActivity
         setgone(laundry,food,house);
         bookroom.setVisibility(View.INVISIBLE);
 
-        checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        /*checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
@@ -114,7 +115,25 @@ public class GuestActivity extends AppCompatActivity
 
                 }
             }
-        });
+        });*/
+
+       checkin.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               DateDialog dialog = new DateDialog(v);
+               android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+               dialog.show(ft,"Datepicker");
+           }
+       });
+
+       checkout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               DateDialog dialog = new DateDialog(v);
+               android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+               dialog.show(ft,"Datepicker");
+           }
+       });
 
         checksingle.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -161,35 +180,46 @@ public class GuestActivity extends AppCompatActivity
                 progressdialog.show();
 
                 String guest = noofguest.getText().toString().trim();
-
+                String in = checkin.getText().toString();
+                String out = checkout.getText().toString();
                 String nosingle = singleno.getText().toString().trim();
                 String nodouble = doubleno.getText().toString().trim();
                 String nodeluxe = deluxeno.getText().toString().trim();
-
-                new Thread(new Runnable() {
-                    public void run() {
-                        try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+               // checkdate(in,out);
+                if(in.equals("")){
+                    Toast.makeText(GuestActivity.this, "enter check-in date", Toast.LENGTH_SHORT).show();
+                }
+                if(out.equals("")){
+                    Toast.makeText(GuestActivity.this, "enter check-out date", Toast.LENGTH_SHORT).show();
+                }
+                if(guest.equals("")){
+                    Toast.makeText(GuestActivity.this, "enter number of guests", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            progressdialog.dismiss();
+                            roomstat = 1;
                         }
-                        progressdialog.dismiss();
-                        roomstat = 1;
-                    }
-                }).start();
+                    }).start();
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        roomstat = 1;
-                        if(roomstat == 1){
-                            Toast.makeText(GuestActivity.this, "Rooms Are Available", Toast.LENGTH_SHORT).show();
-                            bookroom.setVisibility(View.VISIBLE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            roomstat = 1;
+                            if (roomstat == 1) {
+                                Toast.makeText(GuestActivity.this, "Rooms Are Available", Toast.LENGTH_SHORT).show();
+                                bookroom.setVisibility(View.VISIBLE);
+                            } else
+                                Toast.makeText(GuestActivity.this, "Sorry!!..Rooms Are not Available", Toast.LENGTH_SHORT).show();
                         }
-                        else
-                            Toast.makeText(GuestActivity.this, "Sorry!!..Rooms Are not Available", Toast.LENGTH_SHORT).show();
-                    }
-                }, 3000);
+                    }, 3000);
+                }
 
 
             }
@@ -268,18 +298,17 @@ public class GuestActivity extends AppCompatActivity
         if (id == R.id.nav_roomservice) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
                     ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
-
-
             setvisible(laundry,food,house);
 
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_feedback) {
-
+        }else if (id == R.id.nav_feedback) {
+            setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
+            setgone(laundry,food,house);
+            setgone(singleno,doubleno,deluxeno);
         }
         else if(id == R.id.nav_bookroom){
             setvisible(singleno,doubleno,deluxeno,checkin,checkout,noofguest
@@ -342,4 +371,5 @@ public class GuestActivity extends AppCompatActivity
         food.setVisibility(View.VISIBLE);
         house.setVisibility(View.VISIBLE);
     }
+    //Boolean checkdate(String in, String out){}
 }

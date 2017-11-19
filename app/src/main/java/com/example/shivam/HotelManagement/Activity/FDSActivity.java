@@ -70,7 +70,7 @@ public class FDSActivity extends AppCompatActivity {
 
         checkavailable = (Button) findViewById(R.id.availablefds);
 
-        checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        /*checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
@@ -91,6 +91,23 @@ public class FDSActivity extends AppCompatActivity {
                     dialog.show(ft,"Datepicker");
 
                 }
+            }
+        });*/
+        checkin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateDialog dialog = new DateDialog(v);
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialog.show(ft,"Datepicker");
+            }
+        });
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateDialog dialog = new DateDialog(v);
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                dialog.show(ft,"Datepicker");
             }
         });
 

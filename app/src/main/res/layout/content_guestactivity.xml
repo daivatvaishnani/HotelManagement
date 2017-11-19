@@ -24,6 +24,7 @@
         android:hint=" check-in"
         android:textColorHint="#fff"
         android:textColor="#fff"
+
         />
 
     <EditText
@@ -39,7 +40,7 @@
         android:textColorHint="#fff"
         android:hint="check-out"
         android:textColor="#fff"
-       />
+        />
 
     <EditText
         android:id="@+id/usernoguest"
@@ -65,7 +66,7 @@
         android:textColor="#ffff"
         android:layout_toStartOf="@+id/available"
         android:text="Single"
-       />
+        />
 
     <CheckBox
         android:id="@+id/userdoubleroom"
@@ -75,7 +76,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="#ffff"
         android:text="Double"
-        />
+       />
 
     <CheckBox
         android:id="@+id/userdeluxeroom"
@@ -148,7 +149,7 @@
         android:layout_marginTop="27dp"
         android:background="@drawable/btn_background_2"
         android:text="Book Room"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/laundrybutton"
@@ -184,7 +185,8 @@
         android:visibility="gone"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
+        android:background="#ffff"
         android:visibility="gone"/>
 
 </RelativeLayout>
