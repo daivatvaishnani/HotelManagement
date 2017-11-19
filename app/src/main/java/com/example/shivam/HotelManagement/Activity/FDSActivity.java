@@ -1,6 +1,7 @@
 package com.example.shivam.HotelManagement.Activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -186,7 +188,7 @@ public class FDSActivity extends AppCompatActivity {
         doub.setVisibility(View.INVISIBLE);
         deluxe.setVisibility(View.INVISIBLE);
     }
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -206,5 +208,33 @@ public class FDSActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }*/
+    @Override
+    public void onBackPressed() {
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }*/
+        final AlertDialog.Builder builder = new AlertDialog.Builder(FDSActivity.this);
+        builder.setMessage("Are you sure you want to Log Out?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(i);
+            }
+        });
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
