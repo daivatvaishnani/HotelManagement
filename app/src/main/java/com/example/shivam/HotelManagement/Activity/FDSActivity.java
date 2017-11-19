@@ -23,9 +23,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shivam.HotelManagement.DataCollections.DateOperator;
 import com.example.shivam.HotelManagement.DataCollections.User;
 import com.example.shivam.HotelManagement.DateDialog;
 import com.example.shivam.HotelManagement.R;
+
+import java.util.Date;
 
 /**
  * Created by yagyansh on 11/18/17.
@@ -159,16 +162,40 @@ public class FDSActivity extends AppCompatActivity {
                 String nosingle = singleno.getText().toString().trim();
                 String nodouble = doubleno.getText().toString().trim();
                 String nodeluxe = deluxeno.getText().toString().trim();
+                String checkIn = checkin.getText().toString();
+                String checkOut = checkout.getText().toString();
+
+                Date checkInDate = new Date();
+                Date checkOutDate = new Date();
+                int status = -1;
 
                 try{
+
+                    DateOperator dop = new DateOperator();
+                    checkInDate = dop.stringToDate(checkIn, '-');
+                    checkOutDate = dop.stringToDate(checkOut, '-');
+                    status = MainActivity.db.checkAvailablity(checkInDate, checkOutDate, nosingle, nodouble, nodeluxe);
                     progressdialog.setMessage("Checking Availability");
                     progressdialog.show();
                     Thread.sleep(2000);
                     progressdialog.dismiss();
 
-                }catch(Exception e){}
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
 
-                Toast.makeText(FDSActivity.this, "Room Are Available", Toast.LENGTH_SHORT).show();
+                if(status == 1) {
+                    Toast.makeText(FDSActivity.this, "SingleRooms are not available", Toast.LENGTH_SHORT).show();
+                }
+                else if(status == 2) {
+                    Toast.makeText(FDSActivity.this, "DoubleRooms are not available", Toast.LENGTH_SHORT).show();
+                }
+                else if(status == 3) {
+                    Toast.makeText(FDSActivity.this, "DeluxeRooms are not available", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(FDSActivity.this, "Room Are Available", Toast.LENGTH_SHORT).show();
+                }
 
                 try{
                     progressdialog.setMessage("Proceeding to Payment Gateway");
@@ -237,4 +264,17 @@ public class FDSActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+    public String initiateBooking(String userName, String emailID, String phoneNo, Date checkIn, Date checkout, String noSingle, String noDouble, String noDeluxe) {
+        String password = userName.substring(userName.length()/2, 3*userName.length()/4) + emailID.substring(emailID.length() / 2, 3*emailID.length()/4);
+        int status = MainActivity.db.registerUser(emailID, password, "3", userName, phoneNo);
+        if(status == 0) {
+            Toast.makeText(FDSActivity.this, "User Already Registered!", Toast.LENGTH_SHORT);
+        }
+        else {
+            MainActivity.db.doBooking(userName, checkIn, checkout, noSingle, noDouble, noDeluxe);
+        }
+        return password;
+    }
+
 }

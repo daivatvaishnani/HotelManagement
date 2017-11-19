@@ -289,6 +289,7 @@ public class GuestActivity extends AppCompatActivity
                 String noDouble = doubleno.getText().toString();
                 String noDeluxe = deluxeno.getText().toString();
                 MainActivity.db.doBooking(user.getUserName(), checkInDate, checkOutDate, noSingle, noDouble, noDeluxe);
+
                 Booking b = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0);
                 String info = "BookingID : " + b.getBookingID() + "\n";
                 ArrayList<Room> rooms = b.getRooms();
@@ -296,6 +297,7 @@ public class GuestActivity extends AppCompatActivity
                     info +=  "RoomID : " + r.getRoomID() + " RoomType : " + r.getRoomType() + "\n";
                 }
                 Toast.makeText(GuestActivity.this, info, Toast.LENGTH_LONG).show();
+//
 //                progressdialog = new ProgressDialog(v.getContext());
 //                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 //                progressdialog.setMessage("Proceeding to Payment Portal");
