@@ -28,6 +28,10 @@ import com.example.shivam.HotelManagement.DataCollections.*;
 import com.example.shivam.HotelManagement.DateDialog;
 import com.example.shivam.HotelManagement.R;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class GuestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -54,7 +58,7 @@ public class GuestActivity extends AppCompatActivity
 
 
 
-        User user = MainActivity.db.getActiveSession().getActiveUser();
+        final User user = MainActivity.db.getActiveSession().getActiveUser();
 
         checkin = (EditText) findViewById(R.id.checkin);
         checkout = (EditText) findViewById(R.id.checkout);
@@ -205,34 +209,62 @@ public class GuestActivity extends AppCompatActivity
                }
 
                 else {
-                    progressdialog = new ProgressDialog(v.getContext());
-                    progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressdialog.setMessage("Checking Availability...");
-                    progressdialog.show();
+                    DateOperator dop = new DateOperator();
+                    Date checkInDate = new Date();
+                    Date checkOutDate = new Date();
+                    try {
+                        checkInDate = dop.stringToDate(in, '-');
+                        checkOutDate = dop.stringToDate(out, '-');
+                    }
+                    catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(nosingle.length() < 1) {nosingle = "0";}
+                    if(nodouble.length() < 1) {nodouble = "0";}
+                    if(nodeluxe.length() < 1) {nodeluxe = "0";}
+                    int status = MainActivity.db.checkAvailablity(checkInDate, checkOutDate, nosingle, nodouble, nodeluxe);
+                    if(status == 1) {
+                        Toast.makeText(GuestActivity.this, "SingleRooms are  not Available",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(status == 2) {
+                       Toast.makeText(GuestActivity.this, "DoubleRooms are not Available",Toast.LENGTH_SHORT).show();
+                    }
+                    else if(status == 3) {
+                        Toast.makeText(GuestActivity.this, "DeluxeRooms are not Available",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(GuestActivity.this, "Rooms are Available",Toast.LENGTH_SHORT).show();
+                        bookroom.setVisibility(View.VISIBLE);
+                    }
 
-                    new Thread(new Runnable() {
-                        public void run() {
-                            try {
-                                Thread.sleep(3000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            progressdialog.dismiss();
-                            roomstat = 1;
-                        }
-                    }).start();
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            roomstat = 1;
-                            if (roomstat == 1) {
-                                Toast.makeText(GuestActivity.this, "Rooms Are Available", Toast.LENGTH_SHORT).show();
-                                bookroom.setVisibility(View.VISIBLE);
-                            } else
-                                Toast.makeText(GuestActivity.this, "Sorry!!..Rooms Are not Available", Toast.LENGTH_SHORT).show();
-                        }
-                    }, 3000);
+//                    progressdialog = new ProgressDialog(v.getContext());
+//                    progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//                    progressdialog.setMessage("Checking Availability...");
+//                    progressdialog.show();
+//
+//                    new Thread(new Runnable() {
+//                        public void run() {
+//                            try {
+//                                Thread.sleep(3000);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                            progressdialog.dismiss();
+//                            roomstat = 1;
+//                        }
+//                    }).start();
+//
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            roomstat = 1;
+//                            if (roomstat == 1) {
+//                                Toast.makeText(GuestActivity.this, "Rooms Are Available", Toast.LENGTH_SHORT).show();
+//                                bookroom.setVisibility(View.VISIBLE);
+//                            } else
+//                                Toast.makeText(GuestActivity.this, "Sorry!!..Rooms Are not Available", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }, 3000);
                 }
 
 
@@ -242,30 +274,52 @@ public class GuestActivity extends AppCompatActivity
         bookroom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressdialog = new ProgressDialog(v.getContext());
-                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressdialog.setMessage("Proceeding to Payment Portal");
-                progressdialog.show();
-
-                new Thread(new Runnable() {
-                    public void run() {
-                        try {
-                            Thread.sleep(4000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        progressdialog.dismiss();
-                    }
-                }).start();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent i = new Intent(GuestActivity.this, PaymentActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-                }, 4000);
+                DateOperator dop = new DateOperator();
+                String noOfGuest = noofguest.getText().toString();
+                Date checkInDate = new Date();
+                Date checkOutDate = new Date();
+                try {
+                    checkInDate = dop.stringToDate(checkin.getText().toString(), '-');
+                    checkOutDate = dop.stringToDate(checkout.getText().toString(), '-');
+                } catch (ParseException e) {
+                    Toast.makeText(GuestActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+                String noSingle = singleno.getText().toString();
+                String noDouble = doubleno.getText().toString();
+                String noDeluxe = deluxeno.getText().toString();
+                MainActivity.db.doBooking(user.getUserName(), checkInDate, checkOutDate, noSingle, noDouble, noDeluxe);
+                Booking b = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0);
+                String info = "BookingID : " + b.getBookingID() + "\n";
+                ArrayList<Room> rooms = b.getRooms();
+                for(Room r : rooms) {
+                    info +=  "RoomID : " + r.getRoomID() + " RoomType : " + r.getRoomType() + "\n";
+                }
+                Toast.makeText(GuestActivity.this, info, Toast.LENGTH_LONG).show();
+//                progressdialog = new ProgressDialog(v.getContext());
+//                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//                progressdialog.setMessage("Proceeding to Payment Portal");
+//                progressdialog.show();
+//
+//                new Thread(new Runnable() {
+//                    public void run() {
+//                        try {
+//                            Thread.sleep(4000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
+//                        progressdialog.dismiss();
+//                    }
+//                }).start();
+//
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Intent i = new Intent(GuestActivity.this, PaymentActivity.class);
+//                        startActivity(i);
+//                        finish();
+//                    }
+//                }, 4000);
             }
         });
 
@@ -450,7 +504,8 @@ public class GuestActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds groupItem to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_logoutguest, menu);
+        getMenuInflater().inflate(R.menu.
+                menu_logoutguest, menu);
         return true;
     }
 

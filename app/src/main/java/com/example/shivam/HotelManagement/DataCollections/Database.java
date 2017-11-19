@@ -185,16 +185,79 @@ public class Database
         return itemList;
     }
 
-    public ArrayList<Room> getAvailableRooms(String roomType, Date checkInDate, Date checkOutDate) {
+    public Room getRoom(String roomId, String roomType) {
+        for(Room r : rooms) {
+            if(r.getRoomID().equals(roomId) && r.getRoomType().equals(roomType)) {
+                return r;
+            }
+        }
+        return null;
+    }
+
+    private ArrayList<Room> trybook(Date checkInDate, Date checkOutDate, ArrayList<Room> availableRooms, String noOfRoomsRequired, String roomType) {
+        ArrayList<Room> roomsbooked = new ArrayList<>();
+        int noRequired = Integer.parseInt(noOfRoomsRequired);
+        if(availableRooms.size() > noRequired) {
+            int booked = 0;
+            while(booked < noRequired) {
+                this.getRoom(availableRooms.get(booked).getRoomID(), roomType).setBookedFromDate(checkInDate);
+                this.getRoom(availableRooms.get(booked).getRoomID(), roomType).setBookedTillDate(checkOutDate);
+                this.getRoom(availableRooms.get(booked).getRoomID(), roomType).setHasAdvancedBooking(true);
+                roomsbooked.add(availableRooms.get(booked));
+                booked = booked + 1;
+            }
+        }
+        return roomsbooked;
+    }
+
+    public ArrayList<Room> getAvailableRooms(Date checkInDate, Date checkOutDate, String roomType) {
         ArrayList<Room> returnList = new ArrayList<>();
         for(Room r : rooms) {
-            if(r.isAvailabeFor(checkInDate, checkOutDate) && r.getRoomType().equals(roomType)) {
+            if(r.getRoomType().equals(roomType) && r.isAvailabeFor(checkInDate, checkOutDate)) {
                 returnList.add(r);
             }
         }
         return returnList;
     }
 
+    public int checkAvailablity(Date checkInDate, Date checkOutDate, String noOfSingle, String noOfDouble, String noOfDeluxe) {
+        ArrayList<Room> availableSingle = getAvailableRooms(checkInDate, checkOutDate, "1");
+        if(availableSingle.size() < Integer.parseInt(noOfSingle)) {
+            return 1;
+        }
+        ArrayList<Room> availableDouble = getAvailableRooms(checkInDate, checkOutDate, "2");
+        if(availableDouble.size() < Integer.parseInt(noOfDouble)) {
+            return 2;
+        }
+        ArrayList<Room> availableDeluxe = getAvailableRooms(checkInDate, checkOutDate, "3");
+        if(availableDeluxe.size() < Integer.parseInt(noOfDeluxe)) {
+            return 3;
+        }
+        return 0;
+    }
+
+    public void doBooking(String username, Date checkInDate, Date checkOutDate, String noOfSingle, String noOfDouble, String noOfDeluxe) {
+        int status = checkAvailablity(checkInDate, checkOutDate, noOfSingle, noOfDouble, noOfDeluxe);
+        if(status == 0) {
+            ArrayList<Room> availableSingle = getAvailableRooms(checkInDate, checkOutDate, "1");
+            ArrayList<Room> availableDouble = getAvailableRooms(checkInDate, checkOutDate, "2");
+            ArrayList<Room> availableDeluxe = getAvailableRooms(checkInDate, checkOutDate, "3");
+
+            ArrayList<Room> singleRooms = trybook(checkInDate, checkOutDate, availableSingle, noOfSingle, "1");
+            ArrayList<Room> doubleRooms = trybook(checkInDate, checkOutDate, availableDouble, noOfDouble, "2");
+            ArrayList<Room> deluxeRooms = trybook(checkInDate, checkOutDate, availableDeluxe, noOfDeluxe, "3");
+
+            ArrayList<Room> bookedRooms = new ArrayList<>();
+            bookedRooms.addAll(singleRooms);
+            bookedRooms.addAll(doubleRooms);
+            bookedRooms.addAll(deluxeRooms);
+            Booking booking = new Booking();
+            User u = getUser(username, " ");
+            booking.setBookingID(Integer.toString(u.getBookings().size() + 1));
+            booking.addRooms(bookedRooms);
+            this.getUser(username, " ").getBookings().add(booking);
+        }
+    }
 
     public Database()
     {
@@ -269,13 +332,5 @@ public class Database
         setDoubleRoomPrice("NULL");
         setDeluxeRoomPrice("NULL");
     }
-    public void initialize()
-    {
-        // ADD USERS
-
-
-        // SET PRICES
-
-        // CHUTIYA BANANE K LIYE DAALA H
-    }
+    public void initialize(){}
 }

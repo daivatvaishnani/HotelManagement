@@ -16,12 +16,24 @@ public class User {
     private String phoneNo;
     private String cardNo;
     private ArrayList<Booking> bookings = new ArrayList<>();
+    private Date checkInDate;
+    private Date checkoutDate;
 
     public boolean hasABooking() {
         if(bookings.isEmpty()) {
             return false;
         }
         return true;
+    }
+
+    public boolean isEligibleForServices() {
+        if(this.hasABooking()) {
+            Date currDate = new Date();
+            if(this.checkInDate.after(currDate)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Booking> getBookings() {
@@ -31,10 +43,6 @@ public class User {
     public void setBookings(ArrayList<Booking> bookings) {
         this.bookings = bookings;
     }
-
-    private Date checkInDate;
-    private Date checkoutDate;
-
 
     public Date getCheckInDate() {
         return checkInDate;
