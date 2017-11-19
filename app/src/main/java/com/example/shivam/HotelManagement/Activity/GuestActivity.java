@@ -341,6 +341,7 @@ public class GuestActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_manage) {
+            startActivity(new Intent(GuestActivity.this, ChangeDetailsActivity.class));
 
         }else if (id == R.id.nav_feedback) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
