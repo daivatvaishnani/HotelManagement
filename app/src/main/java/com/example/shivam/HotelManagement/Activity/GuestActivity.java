@@ -38,6 +38,8 @@ public class GuestActivity extends AppCompatActivity
     Button laundry,food,house;
     int roomstat = 0;
     private ProgressDialog progressdialog;
+    static int indate,inmonth,inyear;
+    static int outdate,outmonth,outyear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,10 +176,6 @@ public class GuestActivity extends AppCompatActivity
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressdialog = new ProgressDialog(v.getContext());
-                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressdialog.setMessage("Checking Availability...");
-                progressdialog.show();
 
                 String guest = noofguest.getText().toString().trim();
                 String in = checkin.getText().toString();
@@ -185,17 +183,31 @@ public class GuestActivity extends AppCompatActivity
                 String nosingle = singleno.getText().toString().trim();
                 String nodouble = doubleno.getText().toString().trim();
                 String nodeluxe = deluxeno.getText().toString().trim();
-               // checkdate(in,out);
-                if(in.equals("")){
+
+
+               Boolean datestat = checkdate(in,out);
+               if(!datestat){
+                   Toast.makeText(GuestActivity.this, "enter dates correctly", Toast.LENGTH_SHORT).show();
+               }
+                else if(in.equals("")){
                     Toast.makeText(GuestActivity.this, "enter check-in date", Toast.LENGTH_SHORT).show();
                 }
-                if(out.equals("")){
+                else if(out.equals("")){
                     Toast.makeText(GuestActivity.this, "enter check-out date", Toast.LENGTH_SHORT).show();
                 }
-                if(guest.equals("")){
+                else if(guest.equals("")){
                     Toast.makeText(GuestActivity.this, "enter number of guests", Toast.LENGTH_SHORT).show();
                 }
+                else if(nosingle.equals("") && nodouble.equals("") && nodeluxe.equals("") ){
+                   Toast.makeText(GuestActivity.this, "enter number of rooms", Toast.LENGTH_SHORT).show();
+               }
+
                 else {
+                    progressdialog = new ProgressDialog(v.getContext());
+                    progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressdialog.setMessage("Checking Availability...");
+                    progressdialog.show();
+
                     new Thread(new Runnable() {
                         public void run() {
                             try {
@@ -371,5 +383,40 @@ public class GuestActivity extends AppCompatActivity
         food.setVisibility(View.VISIBLE);
         house.setVisibility(View.VISIBLE);
     }
-    //Boolean checkdate(String in, String out){}
+    Boolean checkdate(String in, String out){
+        int flag = 0;
+        if(in.length()==10){
+             inyear = Integer.parseInt(in.substring(6,10));
+             indate = Integer.parseInt(in.substring(0,2));
+             inmonth = Integer.parseInt(in.substring(3,5));
+        }
+        if(in.length()==9){
+            indate = Integer.parseInt(in.substring(0,1));
+            inmonth = Integer.parseInt(in.substring(2,4));
+            inyear = Integer.parseInt(in.substring(5,9));
+        }
+        if(out.length()==10){
+            outdate = Integer.parseInt(out.substring(0,2));
+            outmonth = Integer.parseInt(out.substring(3,5));
+            outyear = Integer.parseInt(out.substring(6,10));
+        }
+        if(out.length()==9){
+            outdate = Integer.parseInt(out.substring(0,1));
+            outmonth = Integer.parseInt(out.substring(2,4));
+            outyear = Integer.parseInt(out.substring(5,9));
+        }
+        System.out.println(indate + " " + inmonth + " " + inyear);
+        System.out.println(outdate + " " + outmonth + " " + outyear);
+
+        if(outyear >= inyear){
+            if(outmonth >= inmonth  ){
+                if(outdate >= indate)
+                    flag = 1;
+            }
+        }
+        System.out.println(flag);
+        if(flag == 1) return true;
+        else
+            return false;
+    }
 }
