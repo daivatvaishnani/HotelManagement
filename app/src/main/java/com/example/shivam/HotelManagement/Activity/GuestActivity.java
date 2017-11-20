@@ -295,7 +295,7 @@ public class GuestActivity extends AppCompatActivity
 
                 MainActivity.db.doBooking(user.getUserName(), checkInDate, checkOutDate, noSingle, noDouble, noDeluxe);
 
-                Booking b = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0);
+                Booking b = MainActivity.db.getActiveSession().getActiveUser().getLastBooking();
                 String info = "BookingID : " + b.getBookingID() + "\n";
                 ArrayList<Room> rooms = b.getRooms();
                 for(Room r : rooms) {

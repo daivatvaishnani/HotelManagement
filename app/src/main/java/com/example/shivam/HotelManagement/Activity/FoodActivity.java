@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.Adapters.CustomListAdapter;
 import com.example.shivam.HotelManagement.DataCollections.Item;
+import com.example.shivam.HotelManagement.DataCollections.Service;
+import com.example.shivam.HotelManagement.EdittextValues;
 import com.example.shivam.HotelManagement.ListItemModel;
 import com.example.shivam.HotelManagement.R;
 
@@ -34,7 +36,7 @@ public class FoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
         // To get all items pass no parameter
-        ArrayList<Item> itemsList = MainActivity.db.getItems("Food");
+        final ArrayList<Item> itemsList = MainActivity.db.getItems("Food");
         // To retrieve Food items list pass the parameter "Food"
         arrayListf = new ArrayList<>();
         //String[] items = itemsList.toArray(new String[0]);
@@ -61,12 +63,36 @@ public class FoodActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String all="";
-                for (int i=0; i<arrayListf.size(); i++){
-                    for (int j=0; j<arrayListf.get(i).getArrayList().size(); j++) {
-                        all += arrayListf.get(i).getArrayList().get(j).getValue() + "\n";
+                ArrayList<String> quantityofItems = new ArrayList<>();
+                for(ListItemModel m : arrayListf) {
+                    ArrayList<EdittextValues> modellist = m.getArrayList();
+                    if(modellist.isEmpty()) {
+                        quantityofItems.add("0");
+                    }
+                    else {
+                        quantityofItems.add(modellist.get(0).getValue());
                     }
                 }
+                String all = "";
+                String roomID = "1";
+                String roomType = "1";
+                MainActivity.db.AddServiceToBill(roomID, roomType, "Food", itemsList, quantityofItems);
+                try {
+                    Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getLastService();
+                    for(Item i : s.getItems()) {
+                        all += "Item : " + i.getItemName() + " ItemQuantity : " + i.getItemQuantity() + "\n";
+                    }
+                    all += "Total Service Amount : " + s.getServiceAmount() + "\n";
+                    Toast.makeText(FoodActivity.this, all, Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e) {
+                    Toast.makeText(FoodActivity.this, "No booking found!", Toast.LENGTH_SHORT).show();
+                }
+//                for (int i=0; i<arrayListf.size(); i++){
+//                    for (int j=0; j<arrayListf.get(i).getArrayList().size(); j++) {
+//                        all += arrayListf.get(i).getArrayList().get(j).getValue() + "\n";
+//                    }
+//                }
                 Toast.makeText(FoodActivity.this, all, Toast.LENGTH_LONG).show();
             }
         });

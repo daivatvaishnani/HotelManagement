@@ -82,17 +82,12 @@ public class LaundryActivity extends AppCompatActivity {
                         quantityOfItems.add(modelList.get(0).getValue());
                     }
                 }
-//                Toast.makeText(LaundryActivity.this, Integer.toString(quantityOfItems.size()), Toast.LENGTH_SHORT).show();
                 String all = "";
-//                for(int i = 0; i < quantityOfItems.size(); ++i) {
-//                    all += "ItemName : " + itemsList.get(i).getItemName() + ", ItemQuantity : " + quantityOfItems.get(i) + "\n";
-//                }
-//                Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
                 String roomID = "1";
                 String roomType = "1";
                 MainActivity.db.AddServiceToBill(roomID, roomType, "Laundry", itemsList, quantityOfItems);
                 try {
-                    Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getServices().get(0);
+                    Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getLastService();
                     for(Item i : s.getItems()) {
                         all += "Item : " + i.getItemName() + " ItemQuantity : " + i.getItemQuantity() + "\n";
                     }

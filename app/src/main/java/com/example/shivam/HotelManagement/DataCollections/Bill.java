@@ -19,6 +19,15 @@ public class Bill {
         return billAmount;
     }
 
+    public Service getLastService() {
+        if(services.isEmpty()) {
+            return null;
+        }
+        else {
+            return services.get(services.size() - 1);
+        }
+    }
+
     public void setBillAmount(String amount) {
         this.billAmount = amount;
     }

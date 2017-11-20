@@ -26,6 +26,15 @@ public class User {
         return true;
     }
 
+    public Booking getLastBooking() {
+        if(this.hasABooking()) {
+            return bookings.get(bookings.size() - 1);
+        }
+        else {
+            return null;
+        }
+    }
+
     public boolean isEligibleForServices() {
         if(this.hasABooking()) {
             Date currDate = new Date();
