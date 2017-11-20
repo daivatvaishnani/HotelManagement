@@ -82,20 +82,26 @@ public class LaundryActivity extends AppCompatActivity {
                         quantityOfItems.add(modelList.get(0).getValue());
                     }
                 }
-                Toast.makeText(LaundryActivity.this, Integer.toString(quantityOfItems.size()), Toast.LENGTH_SHORT);
-//                String all = "";
+//                Toast.makeText(LaundryActivity.this, Integer.toString(quantityOfItems.size()), Toast.LENGTH_SHORT).show();
+                String all = "";
 //                for(int i = 0; i < quantityOfItems.size(); ++i) {
-//                    all += "ItemName : " + itemsList.get(i).getItemName() + " ItemQuantity : " + quantityOfItems.get(i);
+//                    all += "ItemName : " + itemsList.get(i).getItemName() + ", ItemQuantity : " + quantityOfItems.get(i) + "\n";
 //                }
-//                String roomID = "1";
-//                String roomType = "1";
-//                MainActivity.db.addServiceToBill(roomID, roomType, "Laundry", itemsList, quantityOfItems);
-//                Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getServices().get(0);
-//                for(Item i : s.getItems()) {
-//                    all += "Item : " + i.getItemName() + " ItemQuantity : " + i.getItemQuantity() + "\n";
-//                }
-//                all += "Total Service Amount : " + s.getServiceAmount() + "\n";
-//                Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG);
+//                Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
+                String roomID = "1";
+                String roomType = "1";
+                MainActivity.db.AddServiceToBill(roomID, roomType, "Laundry", itemsList, quantityOfItems);
+                try {
+                    Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getServices().get(0);
+                    for(Item i : s.getItems()) {
+                        all += "Item : " + i.getItemName() + " ItemQuantity : " + i.getItemQuantity() + "\n";
+                    }
+                    all += "Total Service Amount : " + s.getServiceAmount() + "\n";
+                    Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e) {
+                    Toast.makeText(LaundryActivity.this, "No booking found!", Toast.LENGTH_SHORT).show();
+                }
 //                for(int i=0; i<arrayList.size(); i++){
 //                    for (int j=0; j<arrayList.get(i).getArrayList().size(); j++) {
 //                        all += arrayList.get(i).getArrayList().get(j).getValue() + "\n";

@@ -276,7 +276,7 @@ public class Database
         return null;
     }
 
-    public void addServiceToBill(String roomId, String roomType, String serviceType, ArrayList<Item> serviceItems, ArrayList<String> quantities) {
+    public void AddServiceToBill (String roomId, String roomType, String serviceType, ArrayList<Item> serviceItems, ArrayList<String> quantities) throws NullPointerException {
         Service s = new Service(roomId, roomType, serviceType);
         for(int i = 0; i < serviceItems.size(); ++i) {
             if(Integer.parseInt(quantities.get(i)) > 0) {
