@@ -19,6 +19,15 @@ public class Bill {
         return billAmount;
     }
 
+    public Service getLastService() {
+        if(services.isEmpty()) {
+            return null;
+        }
+        else {
+            return services.get(services.size() - 1);
+        }
+    }
+
     public void setBillAmount(String amount) {
         this.billAmount = amount;
     }
@@ -35,7 +44,7 @@ public class Bill {
         this.services.add(s);
     }
 
-    public void addServiceToBill(String roomId, String serviceType) {
-        this.services.add(new Service(roomId, serviceType));
+    public void addServiceToBill(String roomId, String roomType, String serviceType) {
+        this.services.add(new Service(roomId, roomType, serviceType));
     }
 }

@@ -50,9 +50,17 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public boolean isAvailabeFor(Date chekInDate, Date checkOutDate) {
-        if (hasAdvancedBooking) {
-            if (chekInDate.after(bookedTillDate) || checkOutDate.before(bookedFromDate)) {
+    public boolean isHasAdvancedBooking() {
+        return hasAdvancedBooking;
+    }
+
+    public void setHasAdvancedBooking(boolean hasAdvancedBooking) {
+        this.hasAdvancedBooking = hasAdvancedBooking;
+    }
+
+    public boolean isAvailabeFor(Date checkInDate, Date checkOutDate) {
+        if (this.hasAdvancedBooking) {
+            if (checkInDate.after(bookedTillDate) || checkOutDate.before(bookedFromDate)) {
                 return true;
             }
             else {

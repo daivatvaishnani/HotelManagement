@@ -1,16 +1,20 @@
 package com.example.shivam.HotelManagement.Activity;
 
 
+        import android.app.ActionBar;
         import android.app.AlertDialog;
         import android.content.DialogInterface;
+        import android.content.Intent;
         import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
         import android.view.LayoutInflater;
+        import android.view.MenuItem;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
         import android.widget.Toast;
+        import android.widget.Toolbar;
 
         import com.example.shivam.HotelManagement.DataCollections.User;
         import com.example.shivam.HotelManagement.R;
@@ -19,7 +23,7 @@ package com.example.shivam.HotelManagement.Activity;
 
 public class ChangeDetailsActivity extends AppCompatActivity {
 
-    Button btnUsername,btnPassword,btnEmail,btnPhoneNumber;
+    Button btnUsername, btnPassword, btnEmail, btnPhoneNumber;
     TextView textInfo;
     User activeUser;
     String newUsername, newEmail, newPwd, newPhno;
@@ -32,8 +36,6 @@ public class ChangeDetailsActivity extends AppCompatActivity {
         // Getting active user
         activeUser = MainActivity.db.getActiveSession().getActiveUser();
 
-
-
         btnUsername = (Button) findViewById(R.id.username);
         btnEmail = (Button) findViewById(R.id.email);
         btnPassword = (Button) findViewById(R.id.passwordc);
@@ -43,7 +45,7 @@ public class ChangeDetailsActivity extends AppCompatActivity {
         final ArrayList<User> users = MainActivity.db.getUsers();
         ArrayList<String> employees = new ArrayList<>();
         final ArrayList<String> employeeEmails = new ArrayList<>();
-        for(User u : users) {
+        for (User u : users) {
             employees.add(u.getUserName());
             employeeEmails.add(u.getEmailId());
         }
@@ -89,7 +91,7 @@ public class ChangeDetailsActivity extends AppCompatActivity {
             builder.setView(subView);
             AlertDialog alertDialog = builder.create();
 
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Save Changes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     textInfo.setText(subEditText.getText().toString());
@@ -106,14 +108,13 @@ public class ChangeDetailsActivity extends AppCompatActivity {
             });
 
             builder.show();
-        }
-        else if (key == 2) { //Password
+        } else if (key == 2) { //Password
             builder.setTitle("Change Password");
             builder.setMessage("Current Password : " + activeUser.getPwd());
             builder.setView(subView);
             AlertDialog alertDialog = builder.create();
 
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Save Changes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     textInfo.setText(subEditText.getText().toString());
@@ -130,14 +131,13 @@ public class ChangeDetailsActivity extends AppCompatActivity {
             });
 
             builder.show();
-        }
-        else if (key == 3) { //Email
+        } else if (key == 3) { //Email
             builder.setTitle("Change Email");
             builder.setMessage("Current Email : " + activeUser.getEmailId());
             builder.setView(subView);
             AlertDialog alertDialog = builder.create();
 
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Save Changes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     textInfo.setText(subEditText.getText().toString());
@@ -154,14 +154,13 @@ public class ChangeDetailsActivity extends AppCompatActivity {
             });
 
             builder.show();
-        }
-        else if (key == 4) { //PhoneNumber
+        } else if (key == 4) { //PhoneNumber
             builder.setTitle("Change Phone Number");
             builder.setMessage("Current Phone Number : " + activeUser.getPhoneNo());
             builder.setView(subView);
             AlertDialog alertDialog = builder.create();
 
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Save Changes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     textInfo.setText(subEditText.getText().toString());
@@ -179,7 +178,8 @@ public class ChangeDetailsActivity extends AppCompatActivity {
 
             builder.show();
         }
-
     }
+}
 
-    }
+
+

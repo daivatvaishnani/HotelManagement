@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class Booking {
     private String bookingID;
+    private ArrayList<Room> rooms = new ArrayList<>();
+    private Bill bill = new Bill();
 
     public String getBookingID() {
         return bookingID;
@@ -17,15 +19,16 @@ public class Booking {
         this.bookingID = bookingID;
     }
 
-    private ArrayList<Room> rooms = new ArrayList<>();
-    private Bill bill = new Bill();
-
     public ArrayList<Room> getRooms() {
         return rooms;
     }
 
     public void setRooms(ArrayList<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public void addRooms(ArrayList<Room> roomsList) {
+        this.rooms.addAll(roomsList);
     }
 
     public Bill getBill() {
