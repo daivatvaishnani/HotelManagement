@@ -368,9 +368,9 @@ public class Database
         this.rooms.add(new Room("9", "3"));
         this.rooms.add(new Room("10", "3"));
         // SET PRICES
-        setSingleRoomPrice("NULL");
-        setDoubleRoomPrice("NULL");
-        setDeluxeRoomPrice("NULL");
+        setSingleRoomPrice("0");
+        setDoubleRoomPrice("0");
+        setDeluxeRoomPrice("0");
     }
     public void initialize(){}
 }

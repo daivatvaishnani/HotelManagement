@@ -275,6 +275,9 @@ public class GuestActivity extends AppCompatActivity
                                 String nosingle = singleno.getText().toString().trim();
                                 String nodouble = doubleno.getText().toString().trim();
                                 String nodeluxe = deluxeno.getText().toString().trim();
+                                if(nosingle.length() < 1) {nosingle = "0";}
+                                if(nodouble.length() < 1) {nodouble = "0";}
+                                if(nodeluxe.length() < 1) {nodeluxe = "0";}
                                 int noSingle = Integer.parseInt(nosingle);
                                 int noDouble = Integer.parseInt(nodouble);
                                 int noDeluxe = Integer.parseInt(nodeluxe);
