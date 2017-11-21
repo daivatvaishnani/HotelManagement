@@ -73,6 +73,7 @@ public class SupervisorActivity extends AppCompatActivity {
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                MainActivity.db.getActiveSession().clearSession();
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
                 //finish();

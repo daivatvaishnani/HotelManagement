@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 //import com.example.shivam.HotelManagement.GuestActivity;
+import com.example.shivam.HotelManagement.DataCollections.Session;
+import com.example.shivam.HotelManagement.DataCollections.User;
 import com.example.shivam.HotelManagement.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -89,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
                 else {
                     progressDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                    MainActivity.db.setActiveSession(new Session(new User(rremail, rrpwd, "3", rrname, rrnumber)));
                     startActivity(new Intent(RegisterActivity.this, GuestActivity.class));
                 }
             }
