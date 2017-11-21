@@ -91,7 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
                 else {
                     progressDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                    MainActivity.db.setActiveSession(new Session(new User(rremail, rrpwd, "3", rrname, rrnumber)));
+                    User u = MainActivity.db.getUser(rremail);
+                    MainActivity.db.setActiveSession(new Session(u));
                     startActivity(new Intent(RegisterActivity.this, GuestActivity.class));
                 }
             }
