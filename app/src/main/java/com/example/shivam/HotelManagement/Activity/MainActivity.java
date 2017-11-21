@@ -183,8 +183,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void startSignIn() {
-        final String username = user.getText().toString();
-        final String pwd = pwrd.getText().toString();
+        final String username = user.getText().toString().trim();
+        final String pwd = pwrd.getText().toString().trim();
 
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(pwd)) {
             Toast.makeText(MainActivity.this, "Field Empty", Toast.LENGTH_SHORT).show();

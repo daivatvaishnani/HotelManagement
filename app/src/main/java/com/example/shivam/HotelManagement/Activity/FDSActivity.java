@@ -75,29 +75,6 @@ public class FDSActivity extends AppCompatActivity {
 
         checkavailable = (Button) findViewById(R.id.availablefds);
 
-        /*checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    DateDialog dialog = new DateDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"Datepicker");
-
-                }
-            }
-        });
-
-        checkout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    DateDialog dialog = new DateDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"Datepicker");
-
-                }
-            }
-        });*/
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

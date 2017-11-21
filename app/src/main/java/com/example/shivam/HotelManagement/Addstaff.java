@@ -95,6 +95,29 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                     Toast.makeText(Addstaff.this, "Invalid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
+        /*checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    DateDialog dialog = new DateDialog(v);
+                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    dialog.show(ft,"Datepicker");
+
+                }
+            }
+        });
+
+        checkout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    DateDialog dialog = new DateDialog(v);
+                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    dialog.show(ft,"Datepicker");
+
+                }
+            }
+        });*/
                 if(TextUtils.isEmpty(spwd)){
                     Toast.makeText(Addstaff.this, "Please enter password", Toast.LENGTH_SHORT).show();
                     return;

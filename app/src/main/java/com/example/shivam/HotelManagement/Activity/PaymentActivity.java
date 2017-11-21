@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.DataCollections.User;
 import com.example.shivam.HotelManagement.R;
@@ -41,14 +42,28 @@ public class PaymentActivity extends AppCompatActivity {
                 String card_no = cardno.getText().toString();
                 String cvv_no = cvv.getText().toString();
                 String expire_date = expire.getText().toString();
-
-                /*if(cvv_no.isEmpty()){
-
-                }*/
-                Intent i = new Intent(getApplicationContext(),
-                        GuestActivity.class);
-                          startActivity(i);
-
+                Boolean check = card_no.length()==16;
+                if(card_no.length()==0){
+                    Toast.makeText(PaymentActivity.this, "Please enter card no", Toast.LENGTH_SHORT).show();
+                }
+                else if(!check){
+                    Toast.makeText(PaymentActivity.this, "invalid card no", Toast.LENGTH_SHORT).show();
+                }
+                check = cvv_no.length()==3;
+                if(!check){
+                    Toast.makeText(PaymentActivity.this, "invalid cvv no", Toast.LENGTH_SHORT).show();
+                }
+                else if(card_no.length()==0){
+                    Toast.makeText(PaymentActivity.this, "Please enter cvv no", Toast.LENGTH_SHORT).show();
+                }
+                else if(expire_date.length()==0){
+                    Toast.makeText(PaymentActivity.this, "Please enter expire date", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent i = new Intent(getApplicationContext(),
+                            GuestActivity.class);
+                    startActivity(i);
+                }
             }
 
         });

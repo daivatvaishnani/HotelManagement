@@ -3,11 +3,13 @@ package com.example.shivam.HotelManagement.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,9 +20,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ import com.example.shivam.HotelManagement.R;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GuestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,6 +47,8 @@ public class GuestActivity extends AppCompatActivity
     CheckBox checksingle,checkdouble,checkdeluxe;
     EditText noofguest,noofrooms;
     Button laundry,food,house;
+    Spinner roomtype;
+    EditText roomno;
     int roomstat = 0;
     private ProgressDialog progressdialog;
     static int indate,inmonth,inyear;
@@ -59,6 +66,9 @@ public class GuestActivity extends AppCompatActivity
 
 
         final User user = MainActivity.db.getActiveSession().getActiveUser();
+
+        roomtype = (Spinner) findViewById(R.id.roomtype);
+        roomno = (EditText) findViewById(R.id.roomno);
 
         checkin = (EditText) findViewById(R.id.checkin);
         checkout = (EditText) findViewById(R.id.checkout);
@@ -82,48 +92,42 @@ public class GuestActivity extends AppCompatActivity
         food = (Button) findViewById(R.id.foodbutton);
         house = (Button) findViewById(R.id.housebutton);
 
+        List<String> categories = new ArrayList<String>();
+        categories.add("Single");
+        categories.add("Double");
+        categories.add("Deluxe");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        roomtype.setAdapter(dataAdapter);
+
         laundry.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
+                String room_type = roomtype.getSelectedItem().toString();
+                String room_no = roomno.getText().toString();
                 Intent myIntent = new Intent(GuestActivity.this,
                         LaundryActivity.class);
+                myIntent.putExtra("roomtype",room_type);
+                myIntent.putExtra("roomno",room_no);
                 startActivity(myIntent);
             }
         });
 
         food.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
+                String room_type = roomtype.getSelectedItem().toString();
+                String room_no = roomno.getText().toString();
                 Intent myIntent = new Intent(GuestActivity.this,
                         FoodActivity.class);
+                myIntent.putExtra("roomtype",room_type);
+                myIntent.putExtra("roomno",room_no);
                 startActivity(myIntent);
             }
         });
-        setgone(laundry,food,house);
+        setgone(laundry,food,house,roomtype,roomno);
         bookroom.setVisibility(View.INVISIBLE);
-
-
-        /*checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    DateDialog dialog = new DateDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"Datepicker");
-
-                }
-            }
-        });
-
-        checkout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    DateDialog dialog = new DateDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"Datepicker");
-
-                }
-            }
-        });*/
 
        checkin.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -333,8 +337,25 @@ public class GuestActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String[] TO = {"manager@gmail.com"};
+                String CC;
+                CC = user.getEmailId();
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.setType("text/plain");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FeedBack");
+
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                    //finish();
+
+                } catch (android.content.ActivityNotFoundException ex) {}
+               // emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
@@ -396,7 +417,8 @@ public class GuestActivity extends AppCompatActivity
         if (id == R.id.nav_roomservice) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
                     ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
-            setvisible(laundry,food,house);
+            setvisible(laundry,food,house,roomtype,roomno);
+
 
         } else if (id == R.id.nav_gallery) {
 
@@ -406,17 +428,18 @@ public class GuestActivity extends AppCompatActivity
         }else if (id == R.id.nav_feedback) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
                     ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
-            setgone(laundry,food,house);
+            setgone(laundry,food,house,roomtype,roomno);
             setgone(singleno,doubleno,deluxeno);
         }
         else if(id == R.id.nav_bookroom){
             setvisible(singleno,doubleno,deluxeno,checkin,checkout,noofguest
                     ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
 
-            setgone(laundry,food,house);
+            setgone(laundry,food,house,roomtype,roomno);
             setgone(singleno,doubleno,deluxeno);
 
         }
+        else if(id == R.id.nav_checkout){}
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -459,16 +482,20 @@ public class GuestActivity extends AppCompatActivity
         deluxe.setVisibility(View.INVISIBLE);
     }
 
-    public void setgone(Button laundry, Button food, Button house){
+    public void setgone(Button laundry, Button food, Button house, Spinner spin,EditText roomno){
         laundry.setVisibility(View.GONE);
         food.setVisibility(View.GONE);
         house.setVisibility(View.GONE);
+        spin.setVisibility(View.GONE);
+        roomno.setVisibility(View.GONE);
     }
 
-    public void setvisible(Button laundry, Button food, Button house){
+    public void setvisible(Button laundry, Button food, Button house, Spinner spin,EditText roomno){
         laundry.setVisibility(View.VISIBLE);
         food.setVisibility(View.VISIBLE);
         house.setVisibility(View.VISIBLE);
+        spin.setVisibility(View.VISIBLE);
+        roomno.setVisibility(View.VISIBLE);
     }
     Boolean checkdate(String in, String out){
         int flag = 0;

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".splashActivity"
+        <activity
+            android:name=".splashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,13 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity">
-
-        </activity>
+        <activity android:name=".Activity.MainActivity"></activity>
         <activity
             android:name=".Activity.ManagerActivity"
             android:label="@string/title_activity_manager"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <!--
         activity
             android:name=".Activity.ManagerActivity"
@@ -93,13 +92,10 @@
             android:name=".Activity.GuestActivity"
             android:label="@string/title_activity_guestactivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <!-- activity android:name=".Activity.LaundryActivity" -->
         <!-- /activity -->
-        <activity
-            android:name=".Activity.PaymentActivity"/>
-
-
+        <activity android:name=".Activity.PaymentActivity" />
     </application>
 
 </manifest>
