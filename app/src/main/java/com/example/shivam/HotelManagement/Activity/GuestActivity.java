@@ -441,6 +441,26 @@ public class GuestActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_checkout){
             Bill guestBill = MainActivity.db.checkOutUser(user.getUserName());
+            String billAmount = guestBill.getBillAmount();
+            ArrayList<String> printList = new ArrayList<>();
+            String cnt = "1";
+            for(Service s : guestBill.getServices()) {
+                String ad = "";
+                ad += "Service : " + cnt + "\n";
+                ad += "RoomID : " + s.getRoomID() + ", RoomType : " + printt(s.getRoomType()) + "\n";
+                ad += "ServiceType : " + s.getServiceType() + "\n";
+                for(Item i : s.getItems()) {
+                    ad += "\t" + "ItemName : " + i.getItemName() + ", ItemPrice : " + i.getItemPrice() + ", ItemQuantity : " + i.getItemQuantity() + "\n";
+                }
+                ad += "Service Amount : " + s.getServiceAmount() + "\n\n";
+                printList.add(ad);
+            }
+            String ad = "";
+            ad += "Total Bill Amount : " + billAmount + "\n\n";
+            printList.add(ad);
+
+            // Bhai ab bas printlist wale arraylist ko print kar dena...
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -560,6 +580,18 @@ public class GuestActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public String  printt(String t) {
+        if(t == "1") {
+            return "SingleRoom";
+        }
+        else if(t == "2") {
+            return "DoubleRoom";
+        }
+        else {
+            return "DeluxeRoom";
+        }
     }
 
 }
