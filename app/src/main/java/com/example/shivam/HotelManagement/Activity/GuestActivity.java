@@ -53,6 +53,7 @@ public class GuestActivity extends AppCompatActivity
     private ProgressDialog progressdialog;
     static int indate,inmonth,inyear;
     static int outdate,outmonth,outyear;
+    final User user = MainActivity.db.getActiveSession().getActiveUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,6 @@ public class GuestActivity extends AppCompatActivity
 
 
 
-        final User user = MainActivity.db.getActiveSession().getActiveUser();
 
         roomtype = (Spinner) findViewById(R.id.roomtype);
         roomno = (EditText) findViewById(R.id.roomno);
@@ -439,7 +439,9 @@ public class GuestActivity extends AppCompatActivity
             setgone(singleno,doubleno,deluxeno);
 
         }
-        else if(id == R.id.nav_checkout){}
+        else if(id == R.id.nav_checkout){
+            Bill guestBill = MainActivity.db.checkOutUser(user.getUserName());
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

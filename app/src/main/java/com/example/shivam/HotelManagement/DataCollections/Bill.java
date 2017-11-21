@@ -42,6 +42,9 @@ public class Bill {
 
     public void addServiceToBill(Service s) {
         this.services.add(s);
+        int amount = Integer.parseInt(s.getServiceAmount());
+        String billAmt = Integer.toString(Integer.parseInt(billAmount) + amount);
+        this.billAmount = billAmt;
     }
 
     public void addServiceToBill(String roomId, String roomType, String serviceType) {
