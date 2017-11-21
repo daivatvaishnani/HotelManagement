@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,11 +25,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shivam.HotelManagement.DataCollections.Booking;
 import com.example.shivam.HotelManagement.DataCollections.DateOperator;
+import com.example.shivam.HotelManagement.DataCollections.Room;
 import com.example.shivam.HotelManagement.DataCollections.User;
 import com.example.shivam.HotelManagement.DateDialog;
 import com.example.shivam.HotelManagement.R;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -37,12 +43,13 @@ import java.util.Date;
 public class FDSActivity extends AppCompatActivity {
 
     TextView usernavname,usernavid;
-    Button checkavailable;
+    Button checkavailable,bookroom;
     EditText singleno,doubleno,deluxeno;
     EditText checkin,checkout;
     CheckBox checksingle,checkdouble,checkdeluxe;
     EditText noofguest,noofrooms,guestname,guestemail,guestphone;
     //Button laundry,food,house;
+    int roomstat = 0;
     private ProgressDialog progressdialog;
 
     @Override
@@ -53,11 +60,14 @@ public class FDSActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
-        User user = MainActivity.db.getActiveSession().getActiveUser();
+        final User user = MainActivity.db.getActiveSession().getActiveUser();
 
         checkin = (EditText) findViewById(R.id.checkinfds);
         checkout = (EditText) findViewById(R.id.checkoutfds);
-
+/* progressdialog.setMessage("Checking Availability");
+                    progressdialog.show();
+                    Thread.sleep(2000);
+                    progressdialog.dismiss();*/
         guestname = (EditText) findViewById(R.id.guestname);
         guestemail = (EditText) findViewById(R.id.guestemail);
         guestphone = (EditText) findViewById(R.id.guestphone);
@@ -74,6 +84,7 @@ public class FDSActivity extends AppCompatActivity {
         checkdeluxe = (CheckBox) findViewById(R.id.userdeluxeroomfds);
 
         checkavailable = (Button) findViewById(R.id.availablefds);
+        bookroom = (Button) findViewById(R.id.bookroom);
 
         checkin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,15 +137,32 @@ public class FDSActivity extends AppCompatActivity {
                 }
             }
         });
+        final String[] guest_name = new String[1];
+        final String[] guest_email = new String[1];
+        final String[] guest_phone = new String[1];
+        final String[] guest = new String[1];
 
         checkavailable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String guest = noofguest.getText().toString().trim();
-                String guestname = noofguest.getText().toString().trim();
-                String guestemail = noofguest.getText().toString().trim();
-                String guestphone = noofguest.getText().toString().trim();
+                 guest[0] = noofguest.getText().toString().trim();
+                guest_name[0] = guestname.getText().toString().trim();
+                 guest_email[0] = guestemail.getText().toString().trim();
+                guest_phone[0] = guestphone.getText().toString().trim();
+
+                if(guest[0].equals("")){
+                    Toast.makeText(FDSActivity.this, "Enter the no of guest",Toast.LENGTH_SHORT).show();
+                }
+                else if(guest_name[0].equals("")){
+                    Toast.makeText(FDSActivity.this, "Enter the name",Toast.LENGTH_SHORT).show();
+                }
+                else if(guest_email[0].equals("")){
+                    Toast.makeText(FDSActivity.this, "Enter the email",Toast.LENGTH_SHORT).show();
+                }
+                else if(guest_phone[0].equals("")){
+                    Toast.makeText(FDSActivity.this, "Enter the phone no",Toast.LENGTH_SHORT).show();
+                }
 
                 String nosingle = singleno.getText().toString().trim();
                 String nodouble = doubleno.getText().toString().trim();
@@ -151,41 +179,120 @@ public class FDSActivity extends AppCompatActivity {
                     DateOperator dop = new DateOperator();
                     checkInDate = dop.stringToDate(checkIn, '-');
                     checkOutDate = dop.stringToDate(checkOut, '-');
-                    status = MainActivity.db.checkAvailablity(checkInDate, checkOutDate, nosingle, nodouble, nodeluxe);
-                    progressdialog.setMessage("Checking Availability");
-                    progressdialog.show();
-                    Thread.sleep(2000);
-                    progressdialog.dismiss();
+                    roomstat = MainActivity.db.checkAvailablity(checkInDate, checkOutDate, nosingle, nodouble, nodeluxe);
 
                 }catch(Exception e){
                     e.printStackTrace();
                 }
+                progressdialog = new ProgressDialog(v.getContext());
+                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressdialog.setMessage("Checking Availability...");
+                progressdialog.show();
 
-                if(status == 1) {
-                    Toast.makeText(FDSActivity.this, "SingleRooms are not available", Toast.LENGTH_SHORT).show();
-                }
-                else if(status == 2) {
-                    Toast.makeText(FDSActivity.this, "DoubleRooms are not available", Toast.LENGTH_SHORT).show();
-                }
-                else if(status == 3) {
-                    Toast.makeText(FDSActivity.this, "DeluxeRooms are not available", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(FDSActivity.this, "Room Are Available", Toast.LENGTH_SHORT).show();
-                }
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        progressdialog.dismiss();
+                        roomstat = 0;
+                    }
+                }).start();
 
-                try{
-                    progressdialog.setMessage("Proceeding to Payment Gateway");
-                    progressdialog.show();
-                    Thread.sleep(3000);
-                    progressdialog.dismiss();
-
-                }catch(Exception e){}
-
-                startActivity(new Intent(FDSActivity.this, PaymentActivity.class));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        roomstat = 0;
+                        if(roomstat == 1) {
+                            Toast.makeText(FDSActivity.this, "SingleRooms are  not Available",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(roomstat == 2) {
+                            Toast.makeText(FDSActivity.this, "DoubleRooms are not Available",Toast.LENGTH_SHORT).show();
+                        }
+                        else if(roomstat == 3) {
+                            Toast.makeText(FDSActivity.this, "DeluxeRooms are not Available",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(FDSActivity.this, "Rooms are Available",Toast.LENGTH_SHORT).show();
+                            bookroom.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }, 3000);
+                //startActivity(new Intent(FDSActivity.this, PaymentActivity.class));
 
             }
         });
+
+        bookroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pwd = initiateBooking(guest_name[0], guest_email[0]);
+               int stat =  MainActivity.db.registerUser(guest_email[0],pwd,"3",guest_name[0],guest_phone[0]);
+                SmsManager smsManager = SmsManager.getDefault();
+                String sms = "your password is :" +pwd;
+                try{
+                    smsManager.sendTextMessage(guest_phone[0], null, sms, null, null);
+                }catch(Exception e){}
+                DateOperator dop = new DateOperator();
+                String noOfGuest = noofguest.getText().toString();
+                Date checkInDate = new Date();
+                Date checkOutDate = new Date();
+                try {
+                    checkInDate = dop.stringToDate(checkin.getText().toString(), '-');
+                    checkOutDate = dop.stringToDate(checkout.getText().toString(), '-');
+                } catch (ParseException e) {
+                    Toast.makeText(FDSActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+                String noSingle = singleno.getText().toString();
+                String noDouble = doubleno.getText().toString();
+                String noDeluxe = deluxeno.getText().toString();
+
+                if(noSingle.length() < 1) {noSingle = "0";}
+                if(noDouble.length() < 1) {noDouble = "0";}
+                if(noDeluxe.length() < 1) {noDeluxe = "0";}
+
+                Toast.makeText(FDSActivity.this,guest_name[0], Toast.LENGTH_SHORT);
+
+                MainActivity.db.doBooking(guest_name[0], checkInDate, checkOutDate, noSingle, noDouble, noDeluxe);
+
+                Booking b = MainActivity.db.getUser(guest_email[0]).getLastBooking();
+                String info = "BookingID : " + b.getBookingID() + "\n";
+                ArrayList<Room> rooms = b.getRooms();
+                for(Room r : rooms) {
+                    info +=  "RoomID : " + r.getRoomID() + " RoomType : " + r.getRoomType() + "\n";
+                }
+                Toast.makeText(FDSActivity.this, info, Toast.LENGTH_LONG).show();
+//
+                progressdialog = new ProgressDialog(v.getContext());
+                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressdialog.setMessage("Proceeding to Payment Portal");
+                progressdialog.show();
+
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        progressdialog.dismiss();
+                    }
+                }).start();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(FDSActivity.this, PaymentActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }, 4000);
+            }
+        });
+
     }
     public void setgone(EditText single,EditText doub,EditText deluxe){
         single.setVisibility(View.INVISIBLE);
@@ -227,6 +334,7 @@ public class FDSActivity extends AppCompatActivity {
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                MainActivity.db.getActiveSession().clearSession();
                 finish();
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
@@ -242,15 +350,15 @@ public class FDSActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public String initiateBooking(String userName, String emailID, String phoneNo, Date checkIn, Date checkout, String noSingle, String noDouble, String noDeluxe) {
+    public String initiateBooking(String userName, String emailID) {
         String password = userName.substring(userName.length()/2, 3*userName.length()/4) + emailID.substring(emailID.length() / 2, 3*emailID.length()/4);
-        int status = MainActivity.db.registerUser(emailID, password, "3", userName, phoneNo);
+        /*int status = MainActivity.db.registerUser(emailID, password, "3", userName, phoneNo);
         if(status == 0) {
             Toast.makeText(FDSActivity.this, "User Already Registered!", Toast.LENGTH_SHORT);
         }
         else {
             MainActivity.db.doBooking(userName, checkIn, checkout, noSingle, noDouble, noDeluxe);
-        }
+        }*/
         return password;
     }
 

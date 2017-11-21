@@ -43,6 +43,7 @@
         android:layout_alignStart="@+id/textView"
         android:layout_below="@+id/textView"
         android:layout_marginTop="14dp"
+        android:inputType="number"
         android:background="@drawable/card_back"
         android:hint="xxxx-xxxx-xxxx-xxxx" />
 
@@ -62,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/cardno"
         android:layout_alignBottom="@+id/cardno"
+        android:inputType="number"
         android:layout_alignStart="@+id/textView2"
         android:background="@drawable/card_back"
         android:hint="xxx" />
@@ -83,6 +85,7 @@
         android:layout_alignStart="@+id/textView3"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="18dp"
+        android:inputType="number"
         android:background="@drawable/card_back"
         android:hint="xxx" />
 

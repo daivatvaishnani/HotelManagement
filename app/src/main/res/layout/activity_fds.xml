@@ -20,6 +20,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="center"
+        android:editable="false"
         android:hint="Check-In"
         android:textColor="#fff"
         android:textColorHint="#fff" />
@@ -35,6 +36,7 @@
         android:clickable="true"
         android:gravity="center"
         android:hint="Check-Out"
+        android:editable="false"
         android:textColor="#fff"
         android:textColorHint="#fff" />
 

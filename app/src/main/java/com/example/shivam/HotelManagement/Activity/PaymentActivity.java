@@ -1,7 +1,9 @@
 package com.example.shivam.HotelManagement.Activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import com.example.shivam.HotelManagement.R;
 public class PaymentActivity extends AppCompatActivity {
     EditText cardno,cvv,expire;
     Button confirm;
+    private ProgressDialog progressdialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +56,37 @@ public class PaymentActivity extends AppCompatActivity {
                 if(!check){
                     Toast.makeText(PaymentActivity.this, "invalid cvv no", Toast.LENGTH_SHORT).show();
                 }
-                else if(card_no.length()==0){
+               /* else if(card_no.length()==0){
                     Toast.makeText(PaymentActivity.this, "Please enter cvv no", Toast.LENGTH_SHORT).show();
-                }
+                }*/
                 else if(expire_date.length()==0){
                     Toast.makeText(PaymentActivity.this, "Please enter expire date", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Intent i = new Intent(getApplicationContext(),
-                            GuestActivity.class);
-                    startActivity(i);
+                    progressdialog = new ProgressDialog(v.getContext());
+                    progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressdialog.setMessage("Paying..");
+                    progressdialog.show();
+
+                    new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            progressdialog.dismiss();
+                        }
+                    }).start();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent(getApplicationContext(),
+                                    GuestActivity.class);
+                            startActivity(i);
+                        }
+                    }, 3000);
+
                 }
             }
 

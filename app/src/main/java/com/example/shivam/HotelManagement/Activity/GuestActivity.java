@@ -37,10 +37,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.microedition.khronos.egl.EGLDisplay;
+
 public class GuestActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView usernavname,usernavid;
+    EditText usernavname,usernavid;
     Button checkavailable,bookroom;
     EditText singleno,doubleno,deluxeno;
     EditText checkin,checkout;
@@ -48,7 +50,7 @@ public class GuestActivity extends AppCompatActivity
     EditText noofguest,noofrooms;
     Button laundry,food,house;
     Spinner roomtype;
-    EditText roomno;
+    EditText roomno,amount;
     int roomstat = 0;
     private ProgressDialog progressdialog;
     static int indate,inmonth,inyear;
@@ -64,8 +66,12 @@ public class GuestActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+      /*  usernavname = (EditText) findViewById(R.id.username);
+        usernavid = (EditText) findViewById(R.id.usernavid);
 
-
+        usernavname.setText(user.getUserName());
+        usernavid.setText(user.getEmailId());*/
+        amount = (EditText)findViewById(R.id.bill);
 
         roomtype = (Spinner) findViewById(R.id.roomtype);
         roomno = (EditText) findViewById(R.id.roomno);
@@ -80,6 +86,7 @@ public class GuestActivity extends AppCompatActivity
         deluxeno = (EditText) findViewById(R.id.deluxeno);
 
         setgone(singleno,doubleno,deluxeno);
+        amount.setVisibility(View.INVISIBLE);
 
         checksingle = (CheckBox) findViewById(R.id.usersingleroom);
         checkdouble = (CheckBox) findViewById(R.id.userdoubleroom);
@@ -191,8 +198,8 @@ public class GuestActivity extends AppCompatActivity
                 String in = checkin.getText().toString();
                 String out = checkout.getText().toString();
                 String nosingle = singleno.getText().toString().trim();
-                String nodouble = doubleno.getText().toString().trim();
-                String nodeluxe = deluxeno.getText().toString().trim();
+                 String nodouble = doubleno.getText().toString().trim();
+                 String nodeluxe = deluxeno.getText().toString().trim();
 
 
                Boolean datestat = checkdate(in,out);
@@ -228,7 +235,6 @@ public class GuestActivity extends AppCompatActivity
                     if(nodeluxe.length() < 1) {nodeluxe = "0";}
                     roomstat = MainActivity.db.checkAvailablity(checkInDate, checkOutDate, nosingle, nodouble, nodeluxe);
 
-
                     progressdialog = new ProgressDialog(v.getContext());
                     progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progressdialog.setMessage("Checking Availability...");
@@ -242,11 +248,12 @@ public class GuestActivity extends AppCompatActivity
                                 e.printStackTrace();
                             }
                             progressdialog.dismiss();
-                            roomstat = 0;
+                            //roomstat = 0;
                         }
                     }).start();
 
-                    new Handler().postDelayed(new Runnable() {
+                   final String finalNosingle = nosingle;
+                   new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             roomstat = 0;
@@ -261,7 +268,27 @@ public class GuestActivity extends AppCompatActivity
                             }
                             else {
                                 Toast.makeText(GuestActivity.this, "Rooms are Available",Toast.LENGTH_SHORT).show();
+                                //int noSingle = Integer.parseInt(nosingle);
+                                String guest = noofguest.getText().toString().trim();
+                                String in = checkin.getText().toString();
+                                String out = checkout.getText().toString();
+                                String nosingle = singleno.getText().toString().trim();
+                                String nodouble = doubleno.getText().toString().trim();
+                                String nodeluxe = deluxeno.getText().toString().trim();
+                                int noSingle = Integer.parseInt(nosingle);
+                                int noDouble = Integer.parseInt(nodouble);
+                                int noDeluxe = Integer.parseInt(nodeluxe);
+                                int singleRoomPrice = Integer.parseInt(MainActivity.db.getSingleRoomPrice());
+                                int doubleRoomPrice = Integer.parseInt(MainActivity.db.getDoubleRoomPrice());
+                                int deluxeRoomPrice = Integer.parseInt(MainActivity.db.getDeluxeRoomPrice());
+
+                                int bill = noSingle*singleRoomPrice + noDouble*doubleRoomPrice + noDeluxe*deluxeRoomPrice;
+
+                                String roombill = Integer.toString(bill);
+
                                 bookroom.setVisibility(View.VISIBLE);
+                                amount.setVisibility(View.VISIBLE);
+                                amount.setText(roombill);
                             }
                         }
                     }, 3000);
@@ -368,8 +395,8 @@ public class GuestActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        usernavname = (TextView)findViewById(R.id.usernavname);
-        usernavid = (TextView)findViewById(R.id.usernavid);
+        /*usernavname = (TextView)findViewById(R.id.usernavname);
+        usernavid = (TextView)findViewById(R.id.usernavid);*/
     }
 
     @Override
@@ -416,7 +443,7 @@ public class GuestActivity extends AppCompatActivity
 
         if (id == R.id.nav_roomservice) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
             setvisible(laundry,food,house,roomtype,roomno);
 
 
@@ -427,13 +454,13 @@ public class GuestActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_feedback) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
             setgone(laundry,food,house,roomtype,roomno);
             setgone(singleno,doubleno,deluxeno);
         }
         else if(id == R.id.nav_bookroom){
             setvisible(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
 
             setgone(laundry,food,house,roomtype,roomno);
             setgone(singleno,doubleno,deluxeno);
@@ -467,9 +494,9 @@ public class GuestActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void setgone(EditText single,EditText doub,EditText deluxe,EditText checkin,EditText checkout,
-                        EditText noguest,CheckBox checksingle,CheckBox checkdouble,CheckBox checkdeluxe
-            ,Button checkav,Button book){
+    public void setgone(EditText single, EditText doub, EditText deluxe, EditText checkin, EditText checkout,
+                        EditText noguest, CheckBox checksingle, CheckBox checkdouble, CheckBox checkdeluxe
+            , Button checkav, Button book, EditText bill){
         single.setVisibility(View.GONE);
         doub.setVisibility(View.GONE);
         deluxe.setVisibility(View.GONE);
@@ -481,11 +508,12 @@ public class GuestActivity extends AppCompatActivity
         checkdeluxe.setVisibility(View.GONE);
         checkav.setVisibility(View.GONE);
         book.setVisibility(View.GONE);
+        bill.setVisibility(View.GONE);
     }
 
     public void setvisible(EditText single,EditText doub,EditText deluxe,EditText checkin,EditText checkout,
                         EditText noguest,CheckBox checksingle,CheckBox checkdouble,CheckBox checkdeluxe
-            ,Button checkav,Button book){
+            ,Button checkav,Button book,EditText bill){
         single.setVisibility(View.VISIBLE);
         doub.setVisibility(View.VISIBLE);
         deluxe.setVisibility(View.VISIBLE);
@@ -497,6 +525,7 @@ public class GuestActivity extends AppCompatActivity
         checkdeluxe.setVisibility(View.VISIBLE);
         checkav.setVisibility(View.VISIBLE);
         book.setVisibility(View.INVISIBLE);
+        bill.setVisibility(View.INVISIBLE);
     }
     public void setgone(EditText single,EditText doub,EditText deluxe){
         single.setVisibility(View.INVISIBLE);
