@@ -250,6 +250,7 @@ public class FDSActivity extends AppCompatActivity {
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                MainActivity.db.getActiveSession().clearSession();
                 finish();
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);

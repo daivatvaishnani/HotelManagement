@@ -255,7 +255,12 @@ public class Database
             bookedRooms.addAll(deluxeRooms);
             Booking booking = new Booking();
             User u = getUser(username, " ");
-            booking.setBookingID(Integer.toString(u.getBookings().size() + 1));
+            if(u.hasABooking()) {
+                booking.setBookingID(Integer.toString(u.getBookings().size() + 1));
+            }
+            else {
+                booking.setBookingID("1");
+            }
             booking.addRooms(bookedRooms);
             this.getUser(username, " ").getBookings().add(booking);
         }
