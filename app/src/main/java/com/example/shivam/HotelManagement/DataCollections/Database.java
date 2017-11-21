@@ -291,6 +291,14 @@ public class Database
         this.getUserInRoom(roomId, roomType).getBookings().get(0).getBill().addServiceToBill(s);
     }
 
+    public Bill checkOutUser(String username) {
+        User u = this.getUser(username, " ");
+        if(u.hasABooking()) {
+            return u.getBookings().get(0).getBill();
+        }
+        return null;
+    }
+
     public Database()
     {
         // ADD USERS
