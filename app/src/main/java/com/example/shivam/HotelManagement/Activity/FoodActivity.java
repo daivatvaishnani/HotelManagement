@@ -76,8 +76,8 @@ public class FoodActivity extends AppCompatActivity {
                 String all = "";
                 String roomID = "1";
                 String roomType = "1";
-                MainActivity.db.AddServiceToBill(roomID, roomType, "Food", itemsList, quantityofItems);
                 try {
+                    MainActivity.db.AddServiceToBill(roomID, roomType, "Food", itemsList, quantityofItems);
                     Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getLastService();
                     for(Item i : s.getItems()) {
                         all += "Item : " + i.getItemName() + " ItemQuantity : " + i.getItemQuantity() + "\n";
