@@ -83,11 +83,13 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                 final String spwd = password.getText().toString();
                 final String semail = email.getText().toString();
                 final String snumber = phno.getText().toString();
-                String sual = spinner.getSelectedItem().toString();
+                String sual = "5";
                 if(access.equals("2")) {sual = "5";}
-                else if(sual.equals("FDS")) {sual = "4";}
-                else if(sual.equals("Supervisor")) {sual = "2";}
-
+                else {
+                    sual = spinner.getSelectedItem().toString();
+                    if(sual.equals("FDS")) {sual = "4";}
+                    if(sual.equals("Supervisor")) {sual = "2";}
+                }
                 if(TextUtils.isEmpty(sname)){
                     Toast.makeText(Addstaff.this, "Please enter username", Toast.LENGTH_SHORT).show();
                     return;
