@@ -113,6 +113,12 @@ public class GuestActivity extends AppCompatActivity
 
         roomtype.setAdapter(dataAdapter);
 
+        house.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+            Toast.makeText(GuestActivity.this, "HouseKeeping service is sent to your room!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         laundry.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 String room_type = roomtype.getSelectedItem().toString();
