@@ -299,7 +299,14 @@ public class FDSActivity extends AppCompatActivity {
         doub.setVisibility(View.INVISIBLE);
         deluxe.setVisibility(View.INVISIBLE);
     }
-    /*@Override
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds groupItem to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -319,8 +326,7 @@ public class FDSActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }*/
-    @Override
+    }    @Override
     public void onBackPressed() {
         /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
