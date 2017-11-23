@@ -58,6 +58,15 @@ public class LaundryActivity extends AppCompatActivity {
         adapter = new CustomListAdapter(LaundryActivity.this, arrayList);
         adapter.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         elv.setAdapter(adapter);
+        final String room_type,room_no;
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            room_type = null;
+            room_no =  null;
+        } else {
+            room_type = extras.getString("roomtype");
+            room_no = extras.getString("roomno");
+        }
 
         //final long mLastClickTime = 0;
         final Button btn = (Button)findViewById(R.id.show);
@@ -83,8 +92,8 @@ public class LaundryActivity extends AppCompatActivity {
                     }
                 }
                 String all = "";
-                String roomID = "1";
-                String roomType = "1";
+                String roomID = room_no;
+                String roomType = room_type;
                 try {
                     MainActivity.db.AddServiceToBill(roomID, roomType, "Laundry", itemsList, quantityOfItems);
                     Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getLastService();

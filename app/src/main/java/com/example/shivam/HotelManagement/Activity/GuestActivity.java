@@ -269,7 +269,7 @@ public class GuestActivity extends AppCompatActivity
                             else {
                                 Toast.makeText(GuestActivity.this, "Rooms are Available",Toast.LENGTH_SHORT).show();
                                 //int noSingle = Integer.parseInt(nosingle);
-                                String guest = noofguest.getText().toString().trim();
+                               /* String guest = noofguest.getText().toString().trim();
                                 String in = checkin.getText().toString();
                                 String out = checkout.getText().toString();
                                 String nosingle = singleno.getText().toString().trim();
@@ -287,11 +287,11 @@ public class GuestActivity extends AppCompatActivity
 
                                 int bill = noSingle*singleRoomPrice + noDouble*doubleRoomPrice + noDeluxe*deluxeRoomPrice;
 
-                                String roombill = Integer.toString(bill);
+                                String roombill = Integer.toString(bill);*/
 
                                 bookroom.setVisibility(View.VISIBLE);
-                                amount.setVisibility(View.VISIBLE);
-                                amount.setText(roombill);
+                                /*amount.setVisibility(View.VISIBLE);
+                                amount.setText(roombill);*/
                             }
                         }
                     }, 3000);

@@ -96,7 +96,7 @@ public class ManagerActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.db.getActiveSession().clearSession();
-                Toast.makeText(ManagerActivity.this, "hiiiiiiiiiii", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(ManagerActivity.this, "hiiiiiiiiiii", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
                 finish();

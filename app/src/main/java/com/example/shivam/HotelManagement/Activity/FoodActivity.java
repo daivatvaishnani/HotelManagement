@@ -58,6 +58,15 @@ public class FoodActivity extends AppCompatActivity {
         adapterf = new CustomListAdapter(FoodActivity.this, arrayListf);
         adapterf.setInflater((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         elvf.setAdapter(adapterf);
+        final String room_type,room_no;
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            room_type = null;
+            room_no =  null;
+        } else {
+            room_type = extras.getString("roomtype");
+            room_no = extras.getString("roomno");
+        }
 
         Button btn = (Button)findViewById(R.id.showfood);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +83,8 @@ public class FoodActivity extends AppCompatActivity {
                     }
                 }
                 String all = "";
-                String roomID = "1";
-                String roomType = "1";
+                String roomID = room_no;
+                String roomType = room_type;
                 try {
                     MainActivity.db.AddServiceToBill(roomID, roomType, "Food", itemsList, quantityofItems);
                     Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getLastService();
