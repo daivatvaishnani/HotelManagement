@@ -11,6 +11,7 @@ import android.view.View;
 import com.example.shivam.HotelManagement.Activity.MainActivity;
 import com.example.shivam.HotelManagement.Activity.ManagerActivity;
 import com.example.shivam.HotelManagement.Activity.RegisterActivity;
+import com.example.shivam.HotelManagement.Activity.SupervisorActivity;
 import com.example.shivam.HotelManagement.DataCollections.*;
 
 import android.view.WindowManager;
@@ -52,9 +53,9 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
         password = (EditText) findViewById(R.id.spassword);
         add = (Button) findViewById(R.id.sadd);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
 
-        String access =  MainActivity.db.getActiveSession().getActiveUser().getUserAccessLevel();
+        final String access =  MainActivity.db.getActiveSession().getActiveUser().getUserAccessLevel();
 
         if(access.equals("1")){
             spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
@@ -82,6 +83,10 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                 final String spwd = password.getText().toString();
                 final String semail = email.getText().toString();
                 final String snumber = phno.getText().toString();
+                String sual = spinner.getSelectedItem().toString();
+                if(access.equals("2")) {sual = "5";}
+                else if(sual.equals("FDS")) {sual = "4";}
+                else if(sual.equals("Supervisor")) {sual = "2";}
 
                 if(TextUtils.isEmpty(sname)){
                     Toast.makeText(Addstaff.this, "Please enter username", Toast.LENGTH_SHORT).show();
@@ -130,24 +135,21 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                     Toast.makeText(Addstaff.this, "Please enter phone no", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(stafftype == "FDS"){
-                    //add fds to database
-                    status = MainActivity.db.registerUser(semail, spwd, "4", sname, snumber);
-                }
                 else {
-                    status = MainActivity.db.registerUser(semail, spwd, "2", sname, snumber);
-                    //add supervisor to datbase
+                    int stat = MainActivity.db.registerUser(semail, spwd, sual, sname, snumber);
+                    if (stat == 0) {
+                        Toast.makeText(Addstaff.this, "User already registred!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Addstaff.this, "staff has been added", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                if(status == 0) {
-                    Toast.makeText(Addstaff.this, "User already exists", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(Addstaff.this, "staff has been added", Toast.LENGTH_SHORT).show();
-                }
-
                 finish();
-                startActivity(new Intent(Addstaff.this, ManagerActivity.class));
-
+                if(access.equals("1")) {
+                    startActivity(new Intent(Addstaff.this, ManagerActivity.class));
+                }
+                else {
+                    startActivity(new Intent(Addstaff.this, SupervisorActivity.class));
+                }
             }
         });
 

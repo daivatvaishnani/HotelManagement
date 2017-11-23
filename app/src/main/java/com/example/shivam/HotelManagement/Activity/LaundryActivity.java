@@ -1,13 +1,16 @@
 package com.example.shivam.HotelManagement.Activity;
 
 
+import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.DataCollections.Item;
@@ -73,14 +76,7 @@ public class LaundryActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //btn.setEnabled(false);
-                // mis-clicking prevention, using threshold of 1000 ms
-                /*if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                    return;
-                }
-                mLastClickTime = SystemClock.elapsedRealtime(); */
 
-                // do your magic here
                 ArrayList<String> quantityOfItems = new ArrayList<>();
                 for(ListItemModel m : arrayList) {
                     ArrayList<EdittextValues> modelList = m.getArrayList();

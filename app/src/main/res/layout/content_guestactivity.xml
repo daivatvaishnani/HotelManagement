@@ -21,7 +21,7 @@
         android:editable="false"
         android:inputType="none"
         android:clickable="true"
-        android:hint=" check-in"
+        android:hint="Check-In"
         android:textColorHint="#fff"
         android:textColor="#fff"
 
@@ -38,7 +38,7 @@
         android:editable="false"
         android:inputType="none"
         android:textColorHint="#fff"
-        android:hint="check-out"
+        android:hint="Check-Out"
         android:textColor="#fff"
         />
 

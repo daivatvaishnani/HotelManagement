@@ -79,7 +79,8 @@
             android:label="@string/title_activity_employeedetails"
             android:theme="@style/AppTheme.NoActionBar" />
         -->
-        <activity android:name=".Activity.FDSActivity" />
+        <activity android:name=".Activity.FDSActivity"
+            android:label="@string/title_activity_fds"/>
         <activity
             android:name=".employeedetails"
             android:label="@string/title_activity_employeedetails"

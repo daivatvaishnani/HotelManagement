@@ -3,6 +3,7 @@ package com.example.shivam.HotelManagement.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,11 +20,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -488,6 +491,8 @@ public class GuestActivity extends AppCompatActivity
             String ad = "";
             ad += "Total Bill Amount : " + billAmount + "\n\n";
             printList.add(ad);
+
+
 
             // Bhai ab bas printlist wale arraylist ko print kar dena...
 
