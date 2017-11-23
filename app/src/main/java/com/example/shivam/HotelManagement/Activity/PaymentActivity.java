@@ -102,6 +102,7 @@ public class PaymentActivity extends AppCompatActivity {
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(PaymentActivity.this, GuestActivity.class));
                 finish();
             }
         });

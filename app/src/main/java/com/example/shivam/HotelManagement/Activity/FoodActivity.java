@@ -82,9 +82,23 @@ public class FoodActivity extends AppCompatActivity {
                         quantityofItems.add(modellist.get(0).getValue());
                     }
                 }
+                final String room_type,room_no;
+                Bundle extras = getIntent().getExtras();
+                if(extras == null) {
+                    room_type = null;
+                    room_no =  null;
+                } else {
+                    room_type = extras.getString("roomtype");
+                    room_no = extras.getString("roomno");
+                    System.out.println(room_no);
+                    System.out.println(room_type);
+                }
                 String all = "";
                 String roomID = room_no;
                 String roomType = room_type;
+                if(room_type.equals("Single")){roomType = "1";}
+                else if(room_type.equals("Double")){ roomType = "2";}
+                else if(room_type.equals("Deluxe")){roomType = "3";}
                 try {
                     MainActivity.db.AddServiceToBill(roomID, roomType, "Food", itemsList, quantityofItems);
                     Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getLastService();
