@@ -159,8 +159,10 @@ public class ManagerActivity extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                 //finish();
+
+                MainActivity.db.getActiveSession().clearSession();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
             }
         });
         builder.setNegativeButton("No",new DialogInterface.OnClickListener() {
