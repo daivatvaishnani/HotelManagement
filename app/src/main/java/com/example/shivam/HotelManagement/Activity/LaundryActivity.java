@@ -121,7 +121,7 @@ public class LaundryActivity extends AppCompatActivity {
                     Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
                 }
                 catch (Exception e) {
-                    Toast.makeText(LaundryActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LaundryActivity.this, "Room Booking not found!", Toast.LENGTH_LONG).show();
                 }
 //                for(int i=0; i<arrayList.size(); i++){
 //                    for (int j=0; j<arrayList.get(i).getArrayList().size(); j++) {
