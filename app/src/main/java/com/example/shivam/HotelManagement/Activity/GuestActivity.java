@@ -55,6 +55,7 @@ public class GuestActivity extends AppCompatActivity
     Spinner roomtype;
     EditText roomno,amount;
     int roomstat = 0;
+    ListView listview;
     private ProgressDialog progressdialog;
     static int indate,inmonth,inyear;
     static int outdate,outmonth,outyear;
@@ -102,6 +103,8 @@ public class GuestActivity extends AppCompatActivity
         food = (Button) findViewById(R.id.foodbutton);
         house = (Button) findViewById(R.id.housebutton);
 
+        listview  = (ListView)findViewById(R.id.bill_list);
+
         List<String> categories = new ArrayList<String>();
         categories.add("Single");
         categories.add("Double");
@@ -112,12 +115,6 @@ public class GuestActivity extends AppCompatActivity
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         roomtype.setAdapter(dataAdapter);
-
-        house.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-            Toast.makeText(GuestActivity.this, "HouseKeeping service is sent to your room!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         laundry.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
@@ -278,7 +275,7 @@ public class GuestActivity extends AppCompatActivity
                             else {
                                 Toast.makeText(GuestActivity.this, "Rooms are Available",Toast.LENGTH_SHORT).show();
                                 //int noSingle = Integer.parseInt(nosingle);
-                               /* String guest = noofguest.getText().toString().trim();
+                                String guest = noofguest.getText().toString().trim();
                                 String in = checkin.getText().toString();
                                 String out = checkout.getText().toString();
                                 String nosingle = singleno.getText().toString().trim();
@@ -296,7 +293,7 @@ public class GuestActivity extends AppCompatActivity
 
                                 int bill = noSingle*singleRoomPrice + noDouble*doubleRoomPrice + noDeluxe*deluxeRoomPrice;
 
-                                String roombill = Integer.toString(bill);*/
+                                String roombill = Integer.toString(bill);
 
                                 bookroom.setVisibility(View.VISIBLE);
                                 /*amount.setVisibility(View.VISIBLE);
@@ -457,7 +454,7 @@ public class GuestActivity extends AppCompatActivity
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
                     ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
             setvisible(laundry,food,house,roomtype,roomno);
-
+            listview.setVisibility(View.GONE);
 
         } else if (id == R.id.nav_gallery) {
 
@@ -473,12 +470,16 @@ public class GuestActivity extends AppCompatActivity
         else if(id == R.id.nav_bookroom){
             setvisible(singleno,doubleno,deluxeno,checkin,checkout,noofguest
                     ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
-
+            listview.setVisibility(View.GONE);
             setgone(laundry,food,house,roomtype,roomno);
             setgone(singleno,doubleno,deluxeno);
 
         }
         else if(id == R.id.nav_checkout){
+            setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
+            setgone(laundry,food,house,roomtype,roomno);
+            setgone(singleno,doubleno,deluxeno);
             Bill guestBill = MainActivity.db.checkOutUser(user.getUserName());
             String billAmount = guestBill.getBillAmount();
             ArrayList<String> printList = new ArrayList<>();
@@ -497,10 +498,23 @@ public class GuestActivity extends AppCompatActivity
             String ad = "";
             ad += "Total Bill Amount : " + billAmount + "\n\n";
             printList.add(ad);
+            listview.setVisibility(View.VISIBLE);
+            ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,printList){
 
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View view =super.getView(position, convertView, parent);
 
+                    TextView textView=(TextView) view.findViewById(android.R.id.text1);
 
-            // Bhai ab bas printlist wale arraylist ko print kar dena...
+            /*YOUR CHOICE OF COLOR*/
+                    textView.setTextColor(Color.WHITE);
+
+                    return view;
+                }
+            };
+
+            listview.setAdapter(listViewAdapter);
 
         }
 
@@ -598,6 +612,29 @@ public class GuestActivity extends AppCompatActivity
         if(flag == 1) return true;
         else
             return false;
+    }
+    public int roombill(String in,String out){
+        int flag = 0;
+        if(in.length()==10){
+            inyear = Integer.parseInt(in.substring(6,10));
+            indate = Integer.parseInt(in.substring(0,2));
+            inmonth = Integer.parseInt(in.substring(3,5));
+        }
+        if(in.length()==9){
+            indate = Integer.parseInt(in.substring(0,1));
+            inmonth = Integer.parseInt(in.substring(2,4));
+            inyear = Integer.parseInt(in.substring(5,9));
+        }
+        if(out.length()==10){
+            outdate = Integer.parseInt(out.substring(0,2));
+            outmonth = Integer.parseInt(out.substring(3,5));
+            outyear = Integer.parseInt(out.substring(6,10));
+        }
+        if(out.length()==9){
+            outdate = Integer.parseInt(out.substring(0,1));
+            outmonth = Integer.parseInt(out.substring(2,4));
+            outyear = Integer.parseInt(out.substring(5,9));
+        }
     }
 
     @Override

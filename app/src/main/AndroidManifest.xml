@@ -26,7 +26,8 @@
         <activity
             android:name=".Activity.ManagerActivity"
             android:label="@string/title_activity_manager"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            />
         <!--
         activity
             android:name=".Activity.ManagerActivity"
@@ -47,17 +48,27 @@
         <!-- activity android:name=".Activity.RegisterActivity" / -->
         <activity
             android:name=".Activity.RegisterActivity"
-
-            />
+            android:parentActivityName=".Activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivam.HotelManagement.Activity.MainActivity" />
+        </activity>
         <activity
             android:name=".Activity.FoodActivity"
             android:label="@string/title_activity_food"
-            />
-
+            android:parentActivityName=".Activity.ManagerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivam.HotelManagement.Activity.ManagerActivity" />
+        </activity>
         <activity
             android:name=".Activity.LaundryActivity"
             android:label="@string/title_activity_laundry"
-            />
+            android:parentActivityName=".Activity.ManagerActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.shivam.HotelManagement.Activity.ManagerActivity" />
+        </activity>
         <!-- activity android:name=".Activity.GuestActivity" / -->
         <!--
         <activity
@@ -69,8 +80,7 @@
             android:label="@string/title_activity_employeedetails"
             android:theme="@style/AppTheme.NoActionBar" />
         -->
-        <activity android:name=".Activity.FDSActivity"
-            android:label="@string/title_activity_fds"/>
+        <activity android:name=".Activity.FDSActivity" />
         <activity
             android:name=".employeedetails"
             android:label="@string/title_activity_employeedetails"

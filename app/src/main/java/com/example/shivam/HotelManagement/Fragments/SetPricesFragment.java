@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shivam.HotelManagement.Activity.DateActivity;
+import com.example.shivam.HotelManagement.Activity.GuestActivity;
 import com.example.shivam.HotelManagement.Activity.MainActivity;
 import com.example.shivam.HotelManagement.R;
 
@@ -33,6 +34,8 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
     TextView start,end;
     int year_x,month_x,day_x;
     int year_y,month_y,day_y;
+    static int indate,inmonth,inyear;
+    static int outdate,outmonth,outyear;
     static final int DIALOG_ID = 0;
     @Nullable
     @Override
@@ -83,6 +86,13 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
         setPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String in = start.getText().toString();
+                String out = end.getText().toString();
+
+                Boolean datestat = checkdate(in,out);
+                if(!datestat){
+                    Toast.makeText(getActivity(), "enter dates correctly", Toast.LENGTH_SHORT).show();
+                }
                 if(singleP.getText().toString().equals("")){
                     Toast.makeText(getActivity().getApplicationContext(), "enter price for single room", Toast.LENGTH_SHORT).show();
                 }
@@ -119,7 +129,7 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
         month_x = month + 1;
         day_x = dayOfMonth;
         year_y = year;
-        month_y = month;
+        month_y = month + 1;
         day_y = dayOfMonth;
 
         String x = start.getText().toString();
@@ -132,7 +142,43 @@ public class SetPricesFragment extends Fragment implements DatePickerDialog.OnDa
         {
             end.setText(day_y + "/" + month_y + "/" + year_y) ;
         }
+    }
 
+    Boolean checkdate(String in, String out){
+        int flag = 0;
+        if(in.length()==10){
+            inyear = Integer.parseInt(in.substring(6,10));
+            indate = Integer.parseInt(in.substring(0,2));
+            inmonth = Integer.parseInt(in.substring(3,5));
+        }
+        if(in.length()==9){
+            indate = Integer.parseInt(in.substring(0,1));
+            inmonth = Integer.parseInt(in.substring(2,4));
+            inyear = Integer.parseInt(in.substring(5,9));
+        }
+        if(out.length()==10){
+            outdate = Integer.parseInt(out.substring(0,2));
+            outmonth = Integer.parseInt(out.substring(3,5));
+            outyear = Integer.parseInt(out.substring(6,10));
+        }
+        if(out.length()==9){
+            outdate = Integer.parseInt(out.substring(0,1));
+            outmonth = Integer.parseInt(out.substring(2,4));
+            outyear = Integer.parseInt(out.substring(5,9));
+        }
+        System.out.println(indate + " " + inmonth + " " + inyear);
+        System.out.println(outdate + " " + outmonth + " " + outyear);
 
+        if(outyear>inyear) flag = 1;
+        else if(outyear==inyear){
+            if(outmonth>inmonth) flag=1;
+            else if(outmonth==inmonth){
+                if(outdate>=indate) flag=1;
+            }
+        }
+        System.out.println(flag);
+        if(flag == 1) return true;
+        else
+            return false;
     }
 }
