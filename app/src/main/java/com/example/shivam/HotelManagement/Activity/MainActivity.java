@@ -3,6 +3,7 @@ package com.example.shivam.HotelManagement.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Firebase mRef;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
+    private ProgressDialog progressdialog;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
@@ -65,15 +67,9 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e) {
            Toast.makeText(MainActivity.this,e.toString(), Toast.LENGTH_LONG).show();
 
-//            Log.d("x", e.toString());
+//
         }
-        // mRef = new Firebase("https://hotel-management-a47d3.firebaseio.com/");
 
-        // mAuth = FirebaseAuth.getInstance();
-
-        //  getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-        //   Firebase.setAndroidContext(getApplicationContext());
         login = (Button) findViewById(R.id.login);
         register = (Button) findViewById(R.id.register);
         user = (EditText) findViewById(R.id.username);
@@ -81,79 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         progressDialog = new ProgressDialog(this);
-
-      /*  mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth)
-            {
-                if (firebaseAuth.getCurrentUser() != null)
-                {
-                    startActivity(new Intent(MainActivity.this,ManagerActivity.class));
-                }
-            }
-        };*/
-
-
-        //System.out.println(email);
-
-
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent in = new Intent(MainActivity.this,ManagerActivity.class);
-//                startActivity(in);
-//                    if(TextUtils.isEmpty(email)){
-//                        Toast.makeText(MainActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//                if(TextUtils.isEmpty(pwd)){
-//                    Toast.makeText(MainActivity.this, "Please enter password", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                progressdialog.setMessage("Logging in");
-//                progressdialog.show();
-//                mAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if(!task.isSuccessful()){
-//                            progressdialog.setMessage("sign in problem");
-//                            progressdialog.dismiss();
-//                            //Toast.makeText(MainActivity.this, "sign in problem",Toast.LENGTH_SHORT);
-//                        }
-//                        if(task.isSuccessful()){
-//                            String type = Dbhelper.login(email,pwd);
-//                            if(type == "Manager"){
-//                                progressdialog.dismiss();
-//                                finish();
-//                                Intent in = new Intent(MainActivity.this,ManagerActivity.class);
-//                                startActivity(in);
-//                            }
-//                            else if(type =="Supervisor"){
-//                                progressdialog.dismiss();
-//                                finish();
-//                                Intent in = new Intent(MainActivity.this,SupervisorActivity.class);
-//                                startActivity(in);
-//                            }
-//                            else if(type == "Guest"){
-//                                progressdialog.dismiss();
-//                                finish();
-//                                Intent in = new Intent(MainActivity.this,GuestActivity.class);
-//                                //run query fetch user details
-//                                User user = new User();
-//                                in.putExtra("user", (Parcelable) user);
-//                                startActivity(in);
-//                            }
-//                        }
-//
-//                    }
-//                });
-//
-//               else {
-//                    progressdialog.dismiss();
-//                    Toast.makeText(MainActivity.this, "Enter correct information", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
 
         register.setOnClickListener(new View.OnClickListener(){
 
@@ -190,43 +113,59 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Field Empty", Toast.LENGTH_SHORT).show();
         }
         else {
-            progressDialog.setMessage("Logging in User...");
-            progressDialog.show();
-            User u = db.getUser(username, "");
-            if (u == null) {
-                Toast.makeText(MainActivity.this, "USER DOESN'T EXIST", Toast.LENGTH_SHORT).show();
-            }
-            else if (u.getPwd().equals(pwd)) {
-                // Set active session
-                if(!db.getActiveSession().isActive())
-                    db.setActiveSession(new Session(u));
-                if (u.getUserAccessLevel().equals("1")) {
-                    Toast.makeText(MainActivity.this, "YOU ARE MANAGER", Toast.LENGTH_SHORT).show();
-                    // MANAGER ACTIVITY
-                    finish();
-                    startActivity(new Intent(MainActivity.this, ManagerActivity.class));
+            progressdialog = new ProgressDialog(this);
+            progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressdialog.setMessage("Logging In...");
+            progressdialog.show();
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    progressdialog.dismiss();
                 }
-                if (u.getUserAccessLevel().equals("2")) {
-                    Toast.makeText(MainActivity.this, "YOU ARE SUPERVISOR", Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(new Intent(MainActivity.this, SupervisorActivity.class));
+            }).start();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    User u = db.getUser(username, "");
+                    if (u == null) {
+                        Toast.makeText(MainActivity.this, "USER DOESN'T EXIST", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (u.getPwd().equals(pwd)) {
+                        // Set active session
+                        if(!db.getActiveSession().isActive())
+                            db.setActiveSession(new Session(u));
+                        if (u.getUserAccessLevel().equals("1")) {
+                            Toast.makeText(MainActivity.this, "YOU ARE MANAGER", Toast.LENGTH_SHORT).show();
+                            // MANAGER ACTIVITY
+                            finish();
+                            startActivity(new Intent(MainActivity.this, ManagerActivity.class));
+                        }
+                        if (u.getUserAccessLevel().equals("2")) {
+                            Toast.makeText(MainActivity.this, "YOU ARE SUPERVISOR", Toast.LENGTH_SHORT).show();
+                            finish();
+                            startActivity(new Intent(MainActivity.this, SupervisorActivity.class));
 
-                }
-                if (u.getUserAccessLevel().equals("3")) {
-                    Toast.makeText(MainActivity.this, "YOU ARE GUEST", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, GuestActivity.class));
+                        }
+                        if (u.getUserAccessLevel().equals("3")) {
+                            Toast.makeText(MainActivity.this, "YOU ARE GUEST", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, GuestActivity.class));
 
 
+                        }
+                        if (u.getUserAccessLevel().equals("4")) {
+                            Toast.makeText(MainActivity.this, "YOU ARE FDS", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, FDSActivity.class));
+                        }
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Wrong Password...", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                if (u.getUserAccessLevel().equals("4")) {
-                    Toast.makeText(MainActivity.this, "YOU ARE FDS", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, FDSActivity.class));
-                }
-            }
-            else {
-                Toast.makeText(MainActivity.this, "Wrong Password...", Toast.LENGTH_SHORT).show();
-            }
-            progressDialog.dismiss();
+            }, 2000);
         }
     }
 

@@ -479,46 +479,49 @@ public class GuestActivity extends AppCompatActivity
 
         }
         else if(id == R.id.nav_checkout){
-            setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount,total);
-            setgone(laundry,food,house,roomtype,roomno);
-            setgone(singleno,doubleno,deluxeno);
-            Bill guestBill = MainActivity.db.checkOutUser(user.getUserName());
-            String billAmount = guestBill.getBillAmount();
-            ArrayList<String> printList = new ArrayList<>();
-            String cnt = "1";
-            for(Service s : guestBill.getServices()) {
-                String ad = "";
-                ad += "Service : " + cnt + "\n";
-                ad += "RoomID : " + s.getRoomID() + ", RoomType : " + printt(s.getRoomType()) + "\n";
-                ad += "ServiceType : " + s.getServiceType() + "\n";
-                for(Item i : s.getItems()) {
-                    ad += "\t" + "ItemName : " + i.getItemName() + ", ItemPrice : " + i.getItemPrice() + ", ItemQuantity : " + i.getItemQuantity() + "\n";
+            try {
+                setgone(singleno, doubleno, deluxeno, checkin, checkout, noofguest
+                        , checksingle, checkdouble, checkdeluxe, checkavailable, bookroom, amount, total);
+                setgone(laundry, food, house, roomtype, roomno);
+                setgone(singleno, doubleno, deluxeno);
+                Bill guestBill = MainActivity.db.checkOutUser(user.getUserName());
+                String billAmount = guestBill.getBillAmount();
+                ArrayList<String> printList = new ArrayList<>();
+                String cnt = "1";
+                for (Service s : guestBill.getServices()) {
+                    String ad = "";
+                    ad += "Service : " + cnt + "\n";
+                    ad += "RoomID : " + s.getRoomID() + ", RoomType : " + printt(s.getRoomType()) + "\n";
+                    ad += "ServiceType : " + s.getServiceType() + "\n";
+                    for (Item i : s.getItems()) {
+                        ad += "\t" + "ItemName : " + i.getItemName() + ", ItemPrice : " + i.getItemPrice() + ", ItemQuantity : " + i.getItemQuantity() + "\n";
+                    }
+                    ad += "Service Amount : " + s.getServiceAmount() + "\n\n";
+                    printList.add(ad);
                 }
-                ad += "Service Amount : " + s.getServiceAmount() + "\n\n";
+                String ad = "";
+                ad += "Total Bill Amount : " + billAmount + "\n\n";
                 printList.add(ad);
-            }
-            String ad = "";
-            ad += "Total Bill Amount : " + billAmount + "\n\n";
-            printList.add(ad);
-            listview.setVisibility(View.VISIBLE);
-            ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,printList){
+                listview.setVisibility(View.VISIBLE);
+                ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, printList) {
 
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    View view =super.getView(position, convertView, parent);
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent) {
+                        View view = super.getView(position, convertView, parent);
 
-                    TextView textView=(TextView) view.findViewById(android.R.id.text1);
+                        TextView textView = (TextView) view.findViewById(android.R.id.text1);
 
             /*YOUR CHOICE OF COLOR*/
-                    textView.setTextColor(Color.WHITE);
+                        textView.setTextColor(Color.WHITE);
 
-                    return view;
-                }
-            };
+                        return view;
+                    }
+                };
 
-            listview.setAdapter(listViewAdapter);
-
+                listview.setAdapter(listViewAdapter);
+            }catch (Exception e){
+                Toast.makeText(GuestActivity.this, "No Booking found", Toast.LENGTH_SHORT).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
