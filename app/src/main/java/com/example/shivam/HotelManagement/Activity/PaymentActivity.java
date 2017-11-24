@@ -81,9 +81,17 @@ public class PaymentActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent i = new Intent(getApplicationContext(),
-                                    GuestActivity.class);
-                            startActivity(i);
+                            User u = MainActivity.db.getActiveSession().getActiveUser();
+                            if(u.getUserAccessLevel().equals("3")) {
+                                Intent i = new Intent(getApplicationContext(),
+                                        GuestActivity.class);
+                                startActivity(i);
+                            }
+                            else {
+                                Intent i = new Intent(getApplicationContext(),
+                                        FDSActivity.class);
+                                startActivity(i);
+                            }
                         }
                     }, 3000);
 
