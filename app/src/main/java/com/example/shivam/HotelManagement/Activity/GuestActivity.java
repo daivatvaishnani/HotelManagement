@@ -142,6 +142,12 @@ public class GuestActivity extends AppCompatActivity
                 startActivity(myIntent);
             }
         });
+        house.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                Toast.makeText(GuestActivity.this, "House keeping will be there shortly", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         setgone(laundry,food,house,roomtype,roomno);
         bookroom.setVisibility(View.INVISIBLE);
 
@@ -464,11 +470,6 @@ public class GuestActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             startActivity(new Intent(GuestActivity.this, ChangeDetailsActivity.class));
 
-        }else if (id == R.id.nav_feedback) {
-            setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount,total);
-            setgone(laundry,food,house,roomtype,roomno);
-            setgone(singleno,doubleno,deluxeno);
         }
         else if(id == R.id.nav_bookroom){
             setvisible(singleno,doubleno,deluxeno,checkin,checkout,noofguest
