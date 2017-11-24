@@ -215,6 +215,14 @@
         android:layout_height="match_parent"
         android:background="#ffff"
         android:visibility="gone"/>
+    <TextView
+        android:id="@+id/totalbill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Amount :"
+        android:layout_marginBottom="20dp"
+        android:layout_alignTop="@id/bill"
+        android:textColor="#fff"/>
 
     <EditText
         android:id="@+id/bill"

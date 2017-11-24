@@ -54,6 +54,7 @@ public class GuestActivity extends AppCompatActivity
     Button laundry,food,house;
     Spinner roomtype;
     EditText roomno,amount;
+    TextView total;
     int roomstat = 0;
     ListView listview;
     private ProgressDialog progressdialog;
@@ -76,6 +77,7 @@ public class GuestActivity extends AppCompatActivity
         usernavname.setText(user.getUserName());
         usernavid.setText(user.getEmailId());*/
         amount = (EditText)findViewById(R.id.bill);
+        total = (TextView) findViewById(R.id.totalbill);
 
         roomtype = (Spinner) findViewById(R.id.roomtype);
         roomno = (EditText) findViewById(R.id.roomno);
@@ -91,6 +93,7 @@ public class GuestActivity extends AppCompatActivity
 
         setgone(singleno,doubleno,deluxeno);
         amount.setVisibility(View.INVISIBLE);
+        total.setVisibility(View.INVISIBLE);
 
         checksingle = (CheckBox) findViewById(R.id.usersingleroom);
         checkdouble = (CheckBox) findViewById(R.id.userdoubleroom);
@@ -278,6 +281,7 @@ public class GuestActivity extends AppCompatActivity
                                 String guest = noofguest.getText().toString().trim();
                                 String in = checkin.getText().toString();
                                 String out = checkout.getText().toString();
+                                int total_days = roomdays(in,out);
                                 String nosingle = singleno.getText().toString().trim();
                                 String nodouble = doubleno.getText().toString().trim();
                                 String nodeluxe = deluxeno.getText().toString().trim();
@@ -291,19 +295,18 @@ public class GuestActivity extends AppCompatActivity
                                 int doubleRoomPrice = Integer.parseInt(MainActivity.db.getDoubleRoomPrice());
                                 int deluxeRoomPrice = Integer.parseInt(MainActivity.db.getDeluxeRoomPrice());
 
-                                int bill = noSingle*singleRoomPrice + noDouble*doubleRoomPrice + noDeluxe*deluxeRoomPrice;
-
-                                String roombill = Integer.toString(bill);
+                                int bill = (noSingle*singleRoomPrice + noDouble*doubleRoomPrice + noDeluxe*deluxeRoomPrice) * total_days;
+                                System.out.println(bill);
+                                String roombill = "$" + Integer.toString(bill);
 
                                 bookroom.setVisibility(View.VISIBLE);
-                                /*amount.setVisibility(View.VISIBLE);
-                                amount.setText(roombill);*/
+                                amount.setVisibility(View.VISIBLE);
+                                total.setVisibility(View.VISIBLE);
+                                amount.setText(roombill);
                             }
                         }
                     }, 3000);
                 }
-
-
             }
         });
 
@@ -452,7 +455,7 @@ public class GuestActivity extends AppCompatActivity
 
         if (id == R.id.nav_roomservice) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount,total);
             setvisible(laundry,food,house,roomtype,roomno);
             listview.setVisibility(View.GONE);
 
@@ -463,13 +466,13 @@ public class GuestActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_feedback) {
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount,total);
             setgone(laundry,food,house,roomtype,roomno);
             setgone(singleno,doubleno,deluxeno);
         }
         else if(id == R.id.nav_bookroom){
             setvisible(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount,total);
             listview.setVisibility(View.GONE);
             setgone(laundry,food,house,roomtype,roomno);
             setgone(singleno,doubleno,deluxeno);
@@ -477,7 +480,7 @@ public class GuestActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_checkout){
             setgone(singleno,doubleno,deluxeno,checkin,checkout,noofguest
-                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount);
+                    ,checksingle,checkdouble,checkdeluxe,checkavailable,bookroom,amount,total);
             setgone(laundry,food,house,roomtype,roomno);
             setgone(singleno,doubleno,deluxeno);
             Bill guestBill = MainActivity.db.checkOutUser(user.getUserName());
@@ -524,7 +527,7 @@ public class GuestActivity extends AppCompatActivity
     }
     public void setgone(EditText single, EditText doub, EditText deluxe, EditText checkin, EditText checkout,
                         EditText noguest, CheckBox checksingle, CheckBox checkdouble, CheckBox checkdeluxe
-            , Button checkav, Button book, EditText bill){
+            , Button checkav, Button book, EditText bill,TextView total){
         single.setVisibility(View.GONE);
         doub.setVisibility(View.GONE);
         deluxe.setVisibility(View.GONE);
@@ -537,11 +540,12 @@ public class GuestActivity extends AppCompatActivity
         checkav.setVisibility(View.GONE);
         book.setVisibility(View.GONE);
         bill.setVisibility(View.GONE);
+        total.setVisibility(View.GONE);
     }
 
     public void setvisible(EditText single,EditText doub,EditText deluxe,EditText checkin,EditText checkout,
                         EditText noguest,CheckBox checksingle,CheckBox checkdouble,CheckBox checkdeluxe
-            ,Button checkav,Button book,EditText bill){
+            ,Button checkav,Button book,EditText bill,TextView total){
         single.setVisibility(View.VISIBLE);
         doub.setVisibility(View.VISIBLE);
         deluxe.setVisibility(View.VISIBLE);
@@ -554,6 +558,7 @@ public class GuestActivity extends AppCompatActivity
         checkav.setVisibility(View.VISIBLE);
         book.setVisibility(View.INVISIBLE);
         bill.setVisibility(View.INVISIBLE);
+        total.setVisibility(View.INVISIBLE);
     }
     public void setgone(EditText single,EditText doub,EditText deluxe){
         single.setVisibility(View.INVISIBLE);
@@ -613,8 +618,7 @@ public class GuestActivity extends AppCompatActivity
         else
             return false;
     }
-    public int roombill(String in,String out){
-        int flag = 0;
+    public int roomdays(String in,String out){
         if(in.length()==10){
             inyear = Integer.parseInt(in.substring(6,10));
             indate = Integer.parseInt(in.substring(0,2));
@@ -635,6 +639,17 @@ public class GuestActivity extends AppCompatActivity
             outmonth = Integer.parseInt(out.substring(2,4));
             outyear = Integer.parseInt(out.substring(5,9));
         }
+        int total_days;
+        if(outmonth>inmonth){
+            int month_diff = outmonth - inmonth;
+            int day_diff = outdate - indate;
+            total_days = (day_diff) + (month_diff * 30);
+        }
+        else {
+            int day_diff = outdate - indate;
+            total_days = day_diff;
+        }
+        return total_days;
     }
 
     @Override
