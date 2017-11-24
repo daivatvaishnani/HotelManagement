@@ -105,14 +105,11 @@ public class LaundryActivity extends AppCompatActivity {
                 if(room_type.equals("Single")){roomType = "1";}
                 else if(room_type.equals("Double")){ roomType = "2";}
                 else if(room_type.equals("Deluxe")){roomType = "3";}
-                System.out.println(roomID);
-                System.out.println(roomType);
+
                 try {
                     MainActivity.db.AddServiceToBill(roomID, roomType, "Laundry", itemsList, quantityOfItems);
                     User user = MainActivity.db.getActiveSession().getActiveUser();
-                    System.out.println("hiiiiiiiiii");
-                    System.out.println(user.getEmailId());
-                    System.out.println(user.getUserName());
+
                     Service s = MainActivity.db.getActiveSession().getActiveUser().getBookings().get(0).getBill().getLastService();
                     for(Item i : s.getItems()) {
                         all += "Item : " + i.getItemName() + " ItemQuantity : " + i.getItemQuantity() + "\n";
@@ -121,7 +118,7 @@ public class LaundryActivity extends AppCompatActivity {
                     Toast.makeText(LaundryActivity.this, all, Toast.LENGTH_LONG).show();
                 }
                 catch (Exception e) {
-                    Toast.makeText(LaundryActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LaundryActivity.this, "No Bookings Found", Toast.LENGTH_LONG).show();
                 }
 //                for(int i=0; i<arrayList.size(); i++){
 //                    for (int j=0; j<arrayList.get(i).getArrayList().size(); j++) {
