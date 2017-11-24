@@ -48,6 +48,10 @@ public class FDSActivity extends AppCompatActivity {
     EditText checkin,checkout;
     CheckBox checksingle,checkdouble,checkdeluxe;
     EditText noofguest,noofrooms,guestname,guestemail,guestphone;
+    EditText amount;
+    TextView total;
+    static int indate,inmonth,inyear;
+    static int outdate,outmonth,outyear;
     //Button laundry,food,house;
     int roomstat = 0;
     private ProgressDialog progressdialog;
@@ -59,6 +63,10 @@ public class FDSActivity extends AppCompatActivity {
         // getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
+        amount = (EditText) findViewById(R.id.bill);
+        total = (TextView) findViewById(R.id.totalbill);
+        amount.setVisibility(View.INVISIBLE);
+        total.setVisibility(View.INVISIBLE);
 
         final User user = MainActivity.db.getActiveSession().getActiveUser();
 
@@ -163,63 +171,86 @@ public class FDSActivity extends AppCompatActivity {
                 else if(guest_phone[0].equals("")){
                     Toast.makeText(FDSActivity.this, "Enter the phone no",Toast.LENGTH_SHORT).show();
                 }
-
-                String nosingle = singleno.getText().toString().trim();
-                String nodouble = doubleno.getText().toString().trim();
-                String nodeluxe = deluxeno.getText().toString().trim();
-                String checkIn = checkin.getText().toString();
-                String checkOut = checkout.getText().toString();
-
-                Date checkInDate = new Date();
-                Date checkOutDate = new Date();
-                int status = -1;
-
-                try{
+                else {
+                    String nosingle = singleno.getText().toString().trim();
+                    String nodouble = doubleno.getText().toString().trim();
+                    String nodeluxe = deluxeno.getText().toString().trim();
+                    String checkIn = checkin.getText().toString();
+                    String checkOut = checkout.getText().toString();
 
                     DateOperator dop = new DateOperator();
-                    checkInDate = dop.stringToDate(checkIn, '-');
-                    checkOutDate = dop.stringToDate(checkOut, '-');
+                    Date checkInDate = new Date();
+                    Date checkOutDate = new Date();
+                    try {
+                        checkInDate = dop.stringToDate(checkIn, '-');
+                        checkOutDate = dop.stringToDate(checkOut, '-');
+                    }
+                    catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if(nosingle.length() < 1) {nosingle = "0";}
+                    if(nodouble.length() < 1) {nodouble = "0";}
+                    if(nodeluxe.length() < 1) {nodeluxe = "0";}
                     roomstat = MainActivity.db.checkAvailablity(checkInDate, checkOutDate, nosingle, nodouble, nodeluxe);
 
-                }catch(Exception e){
-                    e.printStackTrace();
+                    progressdialog = new ProgressDialog(v.getContext());
+                    progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressdialog.setMessage("Checking Availability...");
+                    progressdialog.show();
+
+                    new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            progressdialog.dismiss();
+                            roomstat = 0;
+                        }
+                    }).start();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            roomstat = 0;
+                            if (roomstat == 1) {
+                                Toast.makeText(FDSActivity.this, "SingleRooms are  not Available", Toast.LENGTH_SHORT).show();
+                            } else if (roomstat == 2) {
+                                Toast.makeText(FDSActivity.this, "DoubleRooms are not Available", Toast.LENGTH_SHORT).show();
+                            } else if (roomstat == 3) {
+                                Toast.makeText(FDSActivity.this, "DeluxeRooms are not Available", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(FDSActivity.this, "Rooms are Available",Toast.LENGTH_SHORT).show();
+                                //int noSingle = Integer.parseInt(nosingle);
+                                String guest = noofguest.getText().toString().trim();
+                                String in = checkin.getText().toString();
+                                String out = checkout.getText().toString();
+                                int total_days = roomdays(in,out);
+                                String nosingle = singleno.getText().toString().trim();
+                                String nodouble = doubleno.getText().toString().trim();
+                                String nodeluxe = deluxeno.getText().toString().trim();
+                                if(nosingle.length() < 1) {nosingle = "0";}
+                                if(nodouble.length() < 1) {nodouble = "0";}
+                                if(nodeluxe.length() < 1) {nodeluxe = "0";}
+                                int noSingle = Integer.parseInt(nosingle);
+                                int noDouble = Integer.parseInt(nodouble);
+                                int noDeluxe = Integer.parseInt(nodeluxe);
+                                int singleRoomPrice = Integer.parseInt(MainActivity.db.getSingleRoomPrice());
+                                int doubleRoomPrice = Integer.parseInt(MainActivity.db.getDoubleRoomPrice());
+                                int deluxeRoomPrice = Integer.parseInt(MainActivity.db.getDeluxeRoomPrice());
+
+                                int bill = (noSingle*singleRoomPrice + noDouble*doubleRoomPrice + noDeluxe*deluxeRoomPrice) * total_days;
+                                System.out.println(bill);
+                                String roombill = "$" + Integer.toString(bill);
+                                bookroom.setVisibility(View.VISIBLE);
+                                amount.setVisibility(View.VISIBLE);
+                                total.setVisibility(View.VISIBLE);
+                                amount.setText(roombill);
+                            }
+                        }
+                    }, 3000);
                 }
-                progressdialog = new ProgressDialog(v.getContext());
-                progressdialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                progressdialog.setMessage("Checking Availability...");
-                progressdialog.show();
-
-                new Thread(new Runnable() {
-                    public void run() {
-                        try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        progressdialog.dismiss();
-                        roomstat = 0;
-                    }
-                }).start();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        roomstat = 0;
-                        if(roomstat == 1) {
-                            Toast.makeText(FDSActivity.this, "SingleRooms are  not Available",Toast.LENGTH_SHORT).show();
-                        }
-                        else if(roomstat == 2) {
-                            Toast.makeText(FDSActivity.this, "DoubleRooms are not Available",Toast.LENGTH_SHORT).show();
-                        }
-                        else if(roomstat == 3) {
-                            Toast.makeText(FDSActivity.this, "DeluxeRooms are not Available",Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(FDSActivity.this, "Rooms are Available",Toast.LENGTH_SHORT).show();
-                            bookroom.setVisibility(View.VISIBLE);
-                        }
-                    }
-                }, 3000);
                 //startActivity(new Intent(FDSActivity.this, PaymentActivity.class));
 
             }
@@ -368,4 +399,37 @@ public class FDSActivity extends AppCompatActivity {
         return password;
     }
 
+    public int roomdays(String in,String out){
+        if(in.length()==10){
+            inyear = Integer.parseInt(in.substring(6,10));
+            indate = Integer.parseInt(in.substring(0,2));
+            inmonth = Integer.parseInt(in.substring(3,5));
+        }
+        if(in.length()==9){
+            indate = Integer.parseInt(in.substring(0,1));
+            inmonth = Integer.parseInt(in.substring(2,4));
+            inyear = Integer.parseInt(in.substring(5,9));
+        }
+        if(out.length()==10){
+            outdate = Integer.parseInt(out.substring(0,2));
+            outmonth = Integer.parseInt(out.substring(3,5));
+            outyear = Integer.parseInt(out.substring(6,10));
+        }
+        if(out.length()==9){
+            outdate = Integer.parseInt(out.substring(0,1));
+            outmonth = Integer.parseInt(out.substring(2,4));
+            outyear = Integer.parseInt(out.substring(5,9));
+        }
+        int total_days;
+        if(outmonth>inmonth){
+            int month_diff = outmonth - inmonth;
+            int day_diff = outdate - indate;
+            total_days = (day_diff) + (month_diff * 30);
+        }
+        else {
+            int day_diff = outdate - indate;
+            total_days = day_diff;
+        }
+        return total_days;
+    }
 }
