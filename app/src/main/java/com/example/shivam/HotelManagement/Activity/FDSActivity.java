@@ -389,13 +389,7 @@ public class FDSActivity extends AppCompatActivity {
 
     public String initiateBooking(String userName, String emailID) {
         String password = userName.substring(userName.length()/2, 3*userName.length()/4) + emailID.substring(emailID.length() / 2, 3*emailID.length()/4);
-        /*int status = MainActivity.db.registerUser(emailID, password, "3", userName, phoneNo);
-        if(status == 0) {
-            Toast.makeText(FDSActivity.this, "User Already Registered!", Toast.LENGTH_SHORT);
-        }
-        else {
-            MainActivity.db.doBooking(userName, checkIn, checkout, noSingle, noDouble, noDeluxe);
-        }*/
+
         return password;
     }
 

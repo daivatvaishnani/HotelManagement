@@ -64,6 +64,7 @@
         <activity
             android:name=".Activity.LaundryActivity"
             android:label="@string/title_activity_laundry"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".Activity.ManagerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

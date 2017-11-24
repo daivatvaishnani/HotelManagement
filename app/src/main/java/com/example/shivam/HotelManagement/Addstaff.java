@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -74,7 +75,6 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
             spinner.setVisibility(View.GONE);
         }
 
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,29 +102,6 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                     Toast.makeText(Addstaff.this, "Invalid email", Toast.LENGTH_SHORT).show();
                     return;
                 }
-        /*checkin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    DateDialog dialog = new DateDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"Datepicker");
-
-                }
-            }
-        });
-
-        checkout.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    DateDialog dialog = new DateDialog(v);
-                    android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    dialog.show(ft,"Datepicker");
-
-                }
-            }
-        });*/
                 if(TextUtils.isEmpty(spwd)){
                     Toast.makeText(Addstaff.this, "Please enter password", Toast.LENGTH_SHORT).show();
                     return;
@@ -143,6 +120,12 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
                         Toast.makeText(Addstaff.this, "User already registred!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(Addstaff.this, "staff has been added", Toast.LENGTH_SHORT).show();
+                        String pwd = initiateBooking(sname,semail);
+                        SmsManager smsManager = SmsManager.getDefault();
+                        String sms = "Your password is :" +pwd;
+                        try{
+                            smsManager.sendTextMessage(snumber, null, sms, null, null);
+                        }catch(Exception e){}
                     }
                 }
                 finish();
@@ -216,6 +199,10 @@ public class Addstaff extends Activity implements AdapterView.OnItemSelectedList
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    
+    public String initiateBooking(String userName, String emailID) {
+        String password = userName.substring(userName.length()/2, 3*userName.length()/4) + emailID.substring(emailID.length() / 2, 3*emailID.length()/4);
+
+        return password;
+    }
     
 }
